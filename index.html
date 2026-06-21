@@ -210,6 +210,76 @@
         .driver-line:last-child { border-bottom: none; }
         .driver-name { color: #fff; font-weight: 500; }
         .driver-status { color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; }
+        /* STILE TABELLA CLASSIFICA COMPLETA */
+        .leaderboard-wrapper {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid #1f2c3f;
+            padding: 20px;
+            margin-bottom: 60px;
+            overflow-x: auto; /* Permette lo sblocco dello scorrimento su mobile */
+        }
+
+        .f1-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .f1-table th {
+            background-color: #0b0f19;
+            color: var(--text-muted);
+            padding: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #1f2c3f;
+        }
+
+        .f1-table td {
+            padding: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #fff;
+            vertical-align: middle;
+        }
+
+        .f1-table tr:last-child td { border-bottom: none; }
+        
+        /* Animazione al passaggio del mouse sulla riga piloti */
+        .f1-table tr:hover td { background-color: rgba(255, 255, 255, 0.02); }
+
+        .pos-badge {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 6px;
+            background: #1f2c3f;
+        }
+
+        /* Colori speciali per i primi 3 sul podio */
+        .pos-1 { background: #ffb703; color: #000; }
+        .pos-2 { background: #b8c0c8; color: #000; }
+        .pos-3 { background: #cd7f32; color: #fff; }
+
+        .team-indicator {
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border-radius: 2px;
+        }
+        
+        .points-column {
+            font-weight: bold;
+            color: var(--accent-cyan) !important;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -242,6 +312,66 @@
                 <h3>Community Attiva</h3>
                 <p>Un gruppo unito di appassionati con cui scambiare assetti, consigli di guida e commentare la vera Formula 1.</p>
             </div>
+        </div>
+        <h2 class="section-title">Classifica Generale <span>Piloti</span></h2>
+        
+        <div class="leaderboard-wrapper">
+            <table class="f1-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60px; text-align: center;">POS</th>
+                        <th>PILOTA</th>
+                        <th>SCUDERIA</th>
+                        <th style="text-align: center; width: 80px;">GARE</th>
+                        <th style="text-align: right; width: 100px;">PUNTI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;"><span class="pos-badge pos-1">1</span></td>
+                        <td style="font-weight: bold;">Pilota_1</td>
+                        <td><span class="team-indicator" style="background: #dc0000;"></span>Ferrari</td>
+                        <td style="text-align: center; color: var(--text-muted);">0 / 24</td>
+                        <td class="points-column">0</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><span class="pos-badge pos-2">2</span></td>
+                        <td style="font-weight: bold;">Pilota_3</td>
+                        <td><span class="team-indicator" style="background: #0c162c;"></span>Red Bull</td>
+                        <td style="text-align: center; color: var(--text-muted);">0 / 24</td>
+                        <td class="points-column">0</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><span class="pos-badge pos-3">3</span></td>
+                        <td style="font-weight: bold;">Pilota_7</td>
+                        <td><span class="team-indicator" style="background: #ff8700;"></span>McLaren</td>
+                        <td style="text-align: center; color: var(--text-muted);">0 / 24</td>
+                        <td class="points-column">0</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><span class="pos-badge">4</span></td>
+                        <td style="font-weight: bold;">Pilota_5</td>
+                        <td><span class="team-indicator" style="background: #00a398;"></span>Mercedes</td>
+                        <td style="text-align: center; color: var(--text-muted);">0 / 24</td>
+                        <td class="points-column">0</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><span class="pos-badge">5</span></td>
+                        <td style="font-weight: bold;">Pilota_9</td>
+                        <td><span class="team-indicator" style="background: #00594f;"></span>Aston Martin</td>
+                        <td style="text-align: center; color: var(--text-muted);">0 / 24</td>
+                        <td class="points-column">0</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="text-align: center;"><span class="pos-badge">6</span></td>
+                        <td style="font-weight: bold;">Pilota_11</td>
+                        <td><span class="team-indicator" style="background: #ff4c94;"></span>Alpine</td>
+                        <td style="text-align: center; color: var(--text-muted);">0 / 24</td>
+                        <td class="points-column">0</td>
+                    </tr>
+                    </tbody>
+            </table>
         </div>
 <h2 class="section-title">La Nostra <span>Griglia Ufficiale</span></h2>
         
