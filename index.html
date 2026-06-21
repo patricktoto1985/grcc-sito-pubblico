@@ -280,6 +280,69 @@
             color: var(--accent-cyan) !important;
             text-align: right;
         }
+        /* SCHEDA PROSSIMO GP / COUNTDOWN */
+        .next-race-box {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a2436 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 255, 209, 0.2);
+            padding: 30px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .race-info-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .race-flag {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .race-details h4 {
+            margin: 0;
+            color: var(--f1-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+        }
+
+        .race-details h3 {
+            margin: 5px 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .race-details p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .race-schedule {
+            background: rgba(11, 15, 25, 0.6);
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 1px solid #1f2c3f;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .schedule-time {
+            color: var(--accent-cyan);
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -295,6 +358,22 @@
     </div>
 
     <div class="container">
+        
+        <div class="next-race-box">
+            <div class="race-info-left">
+                <div class="race-flag">🇮🇹</div>
+                <div class="race-details">
+                    <h4>Prossimo Appuntamento</h4>
+                    <h3>Gran Premio di Monza</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Autodromo Nazionale Monza - Round 1</p>
+                </div>
+            </div>
+            
+            <div class="race-schedule">
+                <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px;">Semaforo Verde</div>
+                <div class="schedule-time">Lunedì @ 21:15</div>
+            </div>
+        </div>
 
         <div class="grid-info">
             <div class="info-card">
