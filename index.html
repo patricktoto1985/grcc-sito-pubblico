@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRCC F1 ESPORT | Official Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --f1-red: #e10600;
+            --dark-bg: #0b0f19;
+            --card-bg: #131a26;
+            --accent-cyan: #00ffd1;
+            --text-light: #ffffff;
+            --text-muted: #8fa0b5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* 1. HERO SECTION (Impatto iniziale) */
+        .hero {
+            position: relative;
+            padding: 80px 20px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(225, 6, 0, 0.15) 0%, var(--dark-bg) 70%);
+            border-bottom: 2px solid #1f2c3f;
+        }
+
+        .hero img {
+            max-width: 180px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 209, 0.3));
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--f1-red);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 15px auto 30px auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: 0.2s transform, 0.2s background;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-discord { background-color: #5865F2; color: white; }
+        .btn-discord:hover { background-color: #4752c4; }
+        .btn-regolamento { background-color: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .btn-regolamento:hover { background-color: var(--accent-cyan); color: #000; }
+
+        /* CONTENITORE CONTENUTI */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 2. CARATTERISTICHE (Griglia Info) */
+        .grid-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .info-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #1f2c3f;
+            text-align: center;
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* SEZIONI CON TITOLO */
+        .section-title {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.8rem;
+            margin-bottom: 35px;
+            color: var(--text-light);
+        }
+        .section-title span { color: var(--f1-red); }
+
+        /* 3. FORM DI ISCRIZIONE */
+        .join-box {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid #1f2c3f;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label { display: block; margin-top: 15px; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; }
+        select, input, textarea {
+            width: 100%; padding: 12px; margin-top: 6px; background: #0b0f19; border: 1px solid #1f2c3f; color: #fff; border-radius: 8px; box-sizing: border-box; font-family: inherit;
+        }
+        select:focus, input:focus, textarea:focus { border-color: var(--accent-cyan); outline: none; }
+        
+        .submit-btn {
+            background: var(--f1-red); color: white; border: none; padding: 14px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.2s; width: 100%; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .submit-btn:hover { background: #b80500; }
+
+        /* FOOTER SOCIAL */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #1f2c3f;
+            margin-top: 60px;
+            color: #56667a;
+            font-size: 0.85rem;
+        }
+        .footer-socials { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; }
+        .footer-socials a { text-decoration: none; font-size: 1.3rem; transition: 0.2s; }
+        .footer-socials a:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <img src="logo.png" alt="GRCC Logo" onerror="this.style.display='none'">
+        <h1>GRCC <span>F1 ESPORT</span></h1>
+        <p>Benvenuto sul sito ufficiale della community. Gare competitive, piloti corretti, dirette streaming e massima adrenalina su ruote scoperte.</p>
+        <div class="cta-buttons">
+            <a href="https://discord.gg/pC7H63yU" target="_blank" class="btn btn-discord"><i class="fab fa-discord"></i> Entra nel Discord</a>
+            <a href="#" class="btn btn-regolamento"><i class="fas fa-book"></i> Leggi il Regolamento</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="grid-info">
+            <div class="info-card">
+                <i class="fas fa-trophy" style="color: #ffb703;"></i>
+                <h3>Campionati F1</h3>
+                <p>Gare organizzate a round settimanali con classifiche piloti e costruttori sempre aggiornate in tempo reale.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-broadcast-tower" style="color: var(--f1-red);"></i>
+                <h3>Dirette Live</h3>
+                <p>I Gran Premi più importanti vengono trasmessi in streaming sui nostri canali ufficiali con commento audio dal vivo.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-users" style="color: var(--accent-cyan);"></i>
+                <h3>Community Attiva</h3>
+                <p>Un gruppo unito di appassionati con cui scambiare assetti, consigli di guida e commentare la vera Formula 1.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Invia la tua <span>Candidatura</span></h2>
+        <div class="join-box">
+            <p style="margin: 0 0 15px 0; color: var(--text-muted); text-align: center; font-size: 0.9rem;">
+                Compila il modulo per segnalare il tuo interesse. Verrai ricontattato sul nostro server Discord dai commissari.
+            </p>
+            
+            <form action="#" method="POST">
+                <label for="gamertag">Nome / Gamertag in gioco:</label>
+                <input type="text" id="gamertag" placeholder="Es. TotòF1" required>
+
+                <label for="platform">Piattaforma principale:</label>
+                <select id="platform" required>
+                    <option value="PC">PC</option>
+                    <option value="PS5">PlayStation 5</option>
+                    <option value="XBOX">Xbox Series X/S</option>
+                </select>
+
+                <label for="discordId">Il tuo Tag Discord (es. utente#0000 o nomeutente):</label>
+                <input type="text" id="discordId" placeholder="Es. patricktoto1985" required>
+
+                <label for="experience">Breve esperienza sul Simracing (Opzionale):</label>
+                <textarea id="experience" rows="3" placeholder="Hai già corso in altri campionati? Usi volante o pad?"></textarea>
+
+                <button type="submit" class="submit-btn">Invia Candidatura 🏎️</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/profile.php?id=61552370532570" target="_blank" style="color: #1877F2;"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.twitch.tv/grccf1esport" target="_blank" style="color: #a970ff;"><i class="fab fa-twitch"></i></a>
+            <a href="https://www.tiktok.com/@grccf1esport?_r=1&_t=ZN_97Fxm3hYo8E" target="_blank" style="color: #00f2fe;"><i class="fab fa-tiktok"></i></a>
+            <a href="https://discord.gg/pC7H63yU" target="_blank" style="color: #5865F2;"><i class="fab fa-discord"></i></a>
+        </div>
+        <p style="margin: 0; letter-spacing: 1px;">PRODUCED BY <span style="color: var(--accent-cyan); font-weight: bold;">TOTO'F1</span></p>
+    </footer>
+
+</body>
+</html>
