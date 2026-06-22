@@ -359,6 +359,45 @@
             display: flex;
             align-items: center;
         }
+        /* --- STILI PER I LOGHI GEOMETRICI DEI PILOTI --- */
+        .driver-name-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pilot-logo-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        /* Forma 1: Ali minimali (Stile Hamilton) */
+        .logo-wings {
+            clip-path: polygon(0% 20%, 20% 0%, 50% 40%, 80% 0%, 100% 20%, 50% 100%);
+        }
+
+        /* Forma 2: Freccia futuristica */
+        .logo-arrow {
+            clip-path: polygon(0% 0%, 50% 40%, 100% 0%, 100% 30%, 50% 100%, 0% 30%);
+        }
+
+        /* Forma 3: Scudo Corazzato */
+        .logo-shield {
+            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 70%, 50% 100%, 0% 70%, 0% 20%);
+        }
+
+        /* Forma 4: Rombo Dynamic */
+        .logo-diamond {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
     </style>
 </head>
 <body>
@@ -625,13 +664,19 @@
         <div class="teams-grid">
             
             <div class="team-card" style="border-top-color: #dc0000;">
-                <div class="team-name">🔴 Scuderia Ferrari</div>
+                <div class="team-name">🔴 Ferrari HP</div>
                 <div class="driver-line">
-                    <span class="driver-name">SICKMIRKO</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-wings" style="background: linear-gradient(135deg, #dc0000, #ffffff);">1</div>
+                        <span class="driver-name">SICKMIRKO</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">MIKYPOWER</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-arrow" style="background: linear-gradient(135deg, #dc0000, #111111);">25</div>
+                        <span class="driver-name">MIKYPOWER</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
@@ -639,11 +684,17 @@
             <div class="team-card" style="border-top-color: #0c162c;">
                 <div class="team-name">🔵 Red Bull Racing</div>
                 <div class="driver-line">
-                    <span class="driver-name">RAO-783</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-shield" style="background: linear-gradient(135deg, #0c162c, #ffb703);">3</div>
+                        <span class="driver-name">BENE20DOMENICO</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">BENE20DOMENICO</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-diamond" style="background: linear-gradient(135deg, #0c162c, #ffffff);">8</div>
+                        <span class="driver-name">RAO-783</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
@@ -651,23 +702,35 @@
             <div class="team-card" style="border-top-color: #00a398;">
                 <div class="team-name">🟢 Mercedes-AMG</div>
                 <div class="driver-line">
-                    <span class="driver-name">SALVOTD91</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-wings" style="background: linear-gradient(135deg, #00a398, #ffffff);">6</div>
+                        <span class="driver-name">SALVOTD91</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">MKI-110</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-arrow" style="background: linear-gradient(135deg, #00a398, #111111);">28</div>
+                        <span class="driver-name">MKI-110</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
 
             <div class="team-card" style="border-top-color: #ff8700;">
-                <div class="team-name">🟠 McLaren F1</div>
+                <div class="team-name">🟠 McLaren F1 Team</div>
                 <div class="driver-line">
-                    <span class="driver-name">FRA3123</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-shield" style="background: linear-gradient(135deg, #ff8700, #ffffff);">17</div>
+                        <span class="driver-name">LRT_KURAMA</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">LRT_KURAMA</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-wings" style="background: linear-gradient(135deg, #ff8700, #000000);">31</div>
+                        <span class="driver-name">FRA3123</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
@@ -675,11 +738,17 @@
             <div class="team-card" style="border-top-color: #00594f;">
                 <div class="team-name">🟢 Aston Martin</div>
                 <div class="driver-line">
-                    <span class="driver-name">GIUMEND29</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-diamond" style="background: linear-gradient(135deg, #00594f, #cedc00);">29</div>
+                        <span class="driver-name">GIUMEND29</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">LIVLONELY</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-arrow" style="background: linear-gradient(135deg, #00594f, #ffffff);">69</div>
+                        <span class="driver-name">LIVLONELY</span>
+                    </span>
                     <span class="driver-status">Riserva</span>
                 </div>
             </div>
@@ -687,11 +756,17 @@
             <div class="team-card" style="border-top-color: #ff4c94;">
                 <div class="team-name">🌸 Alpine F1 Team</div>
                 <div class="driver-line">
-                    <span class="driver-name">CONDE785</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-wings" style="background: linear-gradient(135deg, #ff4c94, #21439c);">82</div>
+                        <span class="driver-name">PEPPEFLE_IRT</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">PEPPEFLE_IRT</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-shield" style="background: linear-gradient(135deg, #ff4c94, #000000);">85</div>
+                        <span class="driver-name">CONDE785</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
@@ -699,23 +774,35 @@
             <div class="team-card" style="border-top-color: #ea1d2d;">
                 <div class="team-name">⚪ Haas F1 Team</div>
                 <div class="driver-line">
-                    <span class="driver-name">BRA_FOSY89</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-arrow" style="background: linear-gradient(135deg, #ea1d2d, #ffffff);">73</div>
+                        <span class="driver-name">DAVIARCO1999</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">DAVIARCO1999</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-diamond" style="background: linear-gradient(135deg, #ea1d2d, #111111);">97</div>
+                        <span class="driver-name">BRA_FOSY89</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
 
             <div class="team-card" style="border-top-color: #002f6c;">
-                <div class="team-name">🔵 Visa Cash App RB</div>
+                <div class="team-name">🔵 Racing Bulls</div>
                 <div class="driver-line">
-                    <span class="driver-name">GRCC F1 VITTORIO</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-shield" style="background: linear-gradient(135deg, #002f6c, #ffffff);">26</div>
+                        <span class="driver-name">GRCC F1 VITTORIO</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">LILLUPAZZU</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-wings" style="background: linear-gradient(135deg, #002f6c, #ff1e27);">84</div>
+                        <span class="driver-name">LILLUPAZZU</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
@@ -723,35 +810,46 @@
             <div class="team-card" style="border-top-color: #041e42;">
                 <div class="team-name">🔵 Williams Racing</div>
                 <div class="driver-line">
-                    <span class="driver-name">ICEANT16</span>
-                    <span class="driver-status">Titolare</span>
-                </div>
-                <div class="driver-line">
-                    <span class="driver-name">Pilota</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-arrow" style="background: linear-gradient(135deg, #041e42, #00a398);">35</div>
+                        <span class="driver-name">ICEANT16</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
 
-            <div class="team-card" style="border-top-color: #000000;">
-                <div class="team-name">⚫ Audi F1 Team</div>
+            <div class="team-card" style="border-top-color: #ffffff;">
+                <div class="team-name">⚫ Audi Sport</div>
                 <div class="driver-line">
-                    <span class="driver-name">TOTO'F1</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-shield" style="background: linear-gradient(135deg, #111111, #f50537);">24</div>
+                        <span class="driver-name">DANIELE251191</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">DANIELE251191</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-diamond" style="background: linear-gradient(135deg, #111111, #ffffff);">40</div>
+                        <span class="driver-name">TOTO'F1</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
 
             <div class="team-card" style="border-top-color: #ffcd00;">
-                <div class="team-name">🟡 Cadillac F1 Team</div>
+                <div class="team-name">🟡 Cadillac Racing</div>
                 <div class="driver-line">
-                    <span class="driver-name">NXS_ODI</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-wings" style="background: linear-gradient(135deg, #ffcd00, #000000);">12</div>
+                        <span class="driver-name">NXS_ODI</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
                 <div class="driver-line">
-                    <span class="driver-name">KEIDIKID2</span>
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon logo-arrow" style="background: linear-gradient(135deg, #ffcd00, #ffffff);">19</div>
+                        <span class="driver-name">KEIDIKID2</span>
+                    </span>
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
