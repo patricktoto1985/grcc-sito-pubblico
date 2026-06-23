@@ -482,6 +482,132 @@
 
         </div>
     </section>
+    <style>
+        .candidatura-section {
+            max-width: 700px;
+            margin: 60px auto 40px auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 4px solid var(--accent);
+            text-align: center;
+        }
+
+        .candidatura-title {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .candidatura-title span {
+            color: #ff1e27; /* Colore rosso aggressivo per evidenziare "CANDIDATURA" */
+        }
+
+        .candidatura-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .candidatura-form {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+        }
+
+        .form-control {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(255, 183, 3, 0.2);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #ff1e27 0%, #cc0006 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 24px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 30, 39, 0.4);
+        }
+    </style>
+
+    <section class="candidatura-section">
+        <h2 class="candidatura-title">Invia la tua <span>Candidatura</span></h2>
+        <p class="candidatura-subtitle">Vuoi dimostrare il tuo valore in pista? Compila il modulo sottostante ed entra a far parte del campionato GRCC F1 ESPORTS.</p>
+        
+        <form class="candidatura-form" action="https://formspree.io/f/maqgwavj" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome e Cognome</label>
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Es. Mario Rossi" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gamertag">Gamertag (PSN / ID)</label>
+                <input type="text" id="gamertag" name="gamertag" class="form-control" placeholder="Es. SICKMIRKO" required>
+            </div>
+
+            <div class="form-group">
+                <label for="scuderia">Scuderia Preferita</label>
+                <select id="scuderia" name="scuderia" class="form-control" required>
+                    <option value="" disabled selected>Seleziona una scuderia...</option>
+                    <option value="ferrari">Scuderia Ferrari</option>
+                    <option value="redbull">Red Bull Racing</option>
+                    <option value="mercedes">Mercedes-AMG</option>
+                    <option value="mclaren">McLaren F1</option>
+                    <option value="aston">Aston Martin</option>
+                    <option value="alpine">Alpine F1 Team</option>
+                    <option value="haas">Haas F1 Team</option>
+                    <option value="visa">Visa Cash App RB</option>
+                    <option value="williams">Williams Racing</option>
+                    <option value="audi">Audi F1 Team</option>
+                    <option value="cadillac">Cadillac F1 Team</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Invia Candidatura <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
+        </form>
+    </section>
 
     </div>
 </body>
