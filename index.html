@@ -162,6 +162,170 @@
             </div>
         </section>
         <style>
+            .commentator-section {
+            max-width: 900px;
+            margin: 50px auto 0 auto;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-right: 5px solid #ff1e27; /* Taglio rosso racing sulla destra */
+        }
+
+        .commentator-badge {
+            background: #ff1e27;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .commentator-badge .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.4; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        .commentator-content {
+            flex: 1;
+        }
+
+        .commentator-name {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0 0 15px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .commentator-name span {
+            color: var(--accent);
+        }
+
+        .commentator-text {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .commentator-text strong {
+            color: #fff;
+        }
+
+        .commentator-quote {
+            font-style: italic;
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+
+        .social-stream-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-stream {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-stream:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-twitch {
+            background: #6441a5;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(100, 65, 165, 0.3);
+        }
+
+        .btn-youtube {
+            background: #ff0000;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Ottimizzazione per smartphone */
+        @media (max-width: 768px) {
+            .commentator-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+                border-right: none;
+                border-bottom: 5px solid #ff1e27;
+            }
+            .commentator-quote {
+                border-left: none;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 10px 0;
+            }
+            .social-stream-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <section class="commentator-section">
+        <div style="font-size: 4rem; color: var(--accent); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-microphone-alt"></i>
+        </div>
+
+        <div class="commentator-content">
+            <div class="commentator-badge">
+                <div class="live-dot"></div> La Voce Ufficiale
+            </div>
+            <h2 class="commentator-name">Gianluca <span>Mafe</span></h2>
+            
+            <p class="commentator-text">
+                Non c'è spettacolo senza una voce pronta a raccontarlo. Ogni staccata al limite, ogni strategia sul filo dei millesimi e i momenti chiave del campionato <strong>GRCC F1 ESPORTS</strong> passano attraverso il microfono e il talento di <strong>Gianluca Mafe</strong>. 
+            </p>
+            
+            <p class="commentator-text">
+                Con una narrazione avvincente, competenza tecnica e una passione travolgente, Gianluca trasforma ogni singola sessione di gara in un vero e proprio Gran Premio televisivo. È lui a dare ritmo alle battaglie in pista, analizzando i sorpassi più aggressivi e tenendo gli spettatori incollati allo schermo dal semaforo verde fino alla bandiera a scacchi.
+            </p>
+
+            <p class="commentator-quote">
+                "Spegnete i motori della vita quotidiana e accendete la passione: il semaforo sta per spegnersi!"
+            </p>
+
+            <div class="social-stream-buttons">
+                <a href="https://www.twitch.tv/grccf1esport" target="_blank" class="btn-stream btn-twitch">
+                    <i class="fab fa-twitch"></i> Segui su Twitch
+                </a>
+                
+            </div>
+        </div>
+    </section>
     .teams-section {
         max-width: 1200px;
         margin: 50px auto 0 auto;
