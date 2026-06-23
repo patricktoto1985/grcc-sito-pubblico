@@ -503,7 +503,7 @@
         }
 
         .candidatura-title span {
-            color: #ff1e27; /* Colore rosso aggressivo per evidenziare "CANDIDATURA" */
+            color: #ff1e27;
         }
 
         .candidatura-subtitle {
@@ -518,6 +518,15 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
         }
 
         .form-group {
@@ -550,6 +559,11 @@
             box-shadow: 0 0 10px rgba(255, 183, 3, 0.2);
         }
 
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
         .btn-submit {
             background: linear-gradient(135deg, #ff1e27 0%, #cc0006 100%);
             color: #fff;
@@ -570,6 +584,14 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 30, 39, 0.4);
         }
+
+        /* Responsive per i telefoni */
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
     </style>
 
     <section class="candidatura-section">
@@ -577,14 +599,34 @@
         <p class="candidatura-subtitle">Vuoi dimostrare il tuo valore in pista? Compila il modulo sottostante ed entra a far parte del campionato GRCC F1 ESPORTS.</p>
         
         <form class="candidatura-form" action="https://formspree.io/f/maqgwavj" method="POST">
-            <div class="form-group">
-                <label for="nome">Nome e Cognome</label>
-                <input type="text" id="nome" name="nome" class="form-control" placeholder="Es. Mario Rossi" required>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nome">Nome e Cognome</label>
+                    <input type="text" id="nome" name="nome" class="form-control" placeholder="Es. Mario Rossi" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gamertag">Gamertag (PSN / ID)</label>
+                    <input type="text" id="gamertag" name="gamertag" class="form-control" placeholder="Es. SICKMIRKO" required>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="gamertag">Gamertag (PSN / ID)</label>
-                <input type="text" id="gamertag" name="gamertag" class="form-control" placeholder="Es. SICKMIRKO" required>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="piattaforma">Piattaforma</label>
+                    <select id="piattaforma" name="piattaforma" class="form-control" required>
+                        <option value="" disabled selected>Scegli la piattaforma...</option>
+                        <option value="PS5">PlayStation 5</option>
+                        <option value="Xbox">Xbox Series X/S</option>
+                        <option value="PC">PC</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="difficolta">Difficoltà IA abituale (50-110)</label>
+                    <input type="number" id="difficolta" name="difficolta" class="form-control" min="50" max="110" placeholder="Es. 95" required>
+                </div>
             </div>
 
             <div class="form-group">
@@ -603,6 +645,11 @@
                     <option value="audi">Audi F1 Team</option>
                     <option value="cadillac">Cadillac F1 Team</option>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="esperienze">Hai già partecipato ad altri campionati? Se sì, quali?</label>
+                <textarea id="esperienze" name="esperienze" class="form-control" placeholder="Es. Sì, ho corso due stagioni nel campionato XYZ, oppure No, è la mia prima esperienza..." required></textarea>
             </div>
 
             <button type="submit" class="btn-submit">Invia Candidatura <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
