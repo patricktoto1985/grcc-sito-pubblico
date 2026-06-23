@@ -19,13 +19,16 @@
         }
 
         .grcc-body-wrapper {
-            background-color: var(--bg-main);
-            color: var(--text-light);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            padding: 40px 20px;
-            margin: 0;
-            box-sizing: border-box;
-        }
+        /* Sfondo con collage/immagine F1 + sfumatura scura per non coprire i testi */
+        background: linear-gradient(rgba(11, 15, 23, 0.9), rgba(11, 15, 23, 0.93)), 
+                    url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1920') no-repeat center center fixed;
+        background-size: cover;
+        color: var(--text-light);
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        padding: 40px 20px;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
         /* ========================================== */
         /* HERO BANNER (IMPATTO INIZIALE)             */
