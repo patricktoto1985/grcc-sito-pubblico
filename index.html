@@ -161,6 +161,234 @@
                 <div class="member-tag staff">Totò <span class="role-label">Web Designer</span></div>
             </div>
         </section>
+        <style>
+    .teams-section {
+        max-width: 1200px;
+        margin: 50px auto 0 auto;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+    }
+
+    .section-title span {
+        color: var(--accent);
+    }
+
+    .teams-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        box-sizing: border-box;
+    }
+
+    .team-card {
+        background: var(--bg-card);
+        border-radius: 14px;
+        border-top: 4px solid #fff;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(255, 183, 3, 0.1);
+    }
+
+    .team-name {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-transform: uppercase;
+    }
+
+    .driver-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .driver-line:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .driver-name-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .pilot-logo-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 0.85rem;
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .driver-name {
+        color: #f1f5f9;
+        font-weight: 600;
+        font-size: 1.05rem;
+    }
+
+    .driver-status {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4px 10px;
+        border-radius: 20px;
+        color: #94a3b8;
+    }
+</style>
+
+    <section class="teams-section">
+        <h2 class="section-title">Schieramento <span>Piloti & Scuderie</span></h2>
+        
+        <div class="teams-grid">
+            
+            <div class="team-card" style="border-top-color: #dc0000;">
+                <div class="team-name">
+                    <i class="fas fa-car-side" style="color: #dc0000;"></i> Ferrari HP
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #dc0000, #ffffff);">1</div>
+                        <span class="driver-name">SICKMIRKO</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #dc0000, #111111);">25</div>
+                        <span class="driver-name">MIKYPOWER</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+            </div>
+
+            <div class="team-card" style="border-top-color: #0c162c;">
+                <div class="team-name">
+                    <i class="fas fa-bolt" style="color: #ffb703;"></i> Red Bull Racing
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #0c162c, #ffb703);">3</div>
+                        <span class="driver-name">BENE20DOMENICO</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #0c162c, #ffffff);">8</div>
+                        <span class="driver-name">RAO-783</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+            </div>
+
+            <div class="team-card" style="border-top-color: #002f6c;">
+                <div class="team-name">
+                    <i class="fas fa-trophy" style="color: #002f6c;"></i> Racing Bulls
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #002f6c, #ffffff);">26</div>
+                        <span class="driver-name">VITTORIO</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #002f6c, #ff1e27);">84</div>
+                        <span class="driver-name">LILLUPAZZU</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+            </div>
+
+            <div class="team-card" style="border-top-color: #ff4c94;">
+                <div class="team-name">
+                    <i class="fas fa-wind" style="color: #ff4c94;"></i> Alpine F1 Team
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #ff4c94, #21439c);">82</div>
+                        <span class="driver-name">BEPPE</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #ff4c94, #000000);">85</div>
+                        <span class="driver-name">CONDE785</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+            </div>
+
+            <div class="team-card" style="border-top-color: #ffffff;">
+                <div class="team-name">
+                    <i class="fas fa-circle-notch" style="color: #ffffff;"></i> Audi Sport
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #111111, #f50537);">24</div>
+                        <span class="driver-name">DANIELE251191</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #111111, #ffffff);">40</div>
+                        <span class="driver-name">TOTÒ</span>
+                    </span>
+                    <span class="driver-status">Web Designer / Driver</span>
+                </div>
+            </div>
+
+            <div class="team-card" style="border-top-color: #041e42;">
+                <div class="team-name">
+                    <i class="fas fa-road" style="color: #00a398;"></i> Williams Racing
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #041e42, #00a398);">35</div>
+                        <span class="driver-name">ANTONIO</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+                <div class="driver-line">
+                    <span class="driver-name-wrapper">
+                        <div class="pilot-logo-icon" style="background: linear-gradient(135deg, #041e42, #ffffff);">7</div>
+                        <span class="driver-name">ANDREA</span>
+                    </span>
+                    <span class="driver-status">Titolare</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     </div>
 </body>
