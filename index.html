@@ -326,105 +326,94 @@
             </div>
         </div>
     </section>
-    .teams-section {
-        max-width: 1200px;
-        margin: 50px auto 0 auto;
-    }
-
-    .section-title {
-        font-size: 2.2rem;
-        font-weight: 900;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 30px;
-        letter-spacing: 1px;
-    }
-
-    .section-title span {
-        color: var(--accent);
-    }
-
-    .teams-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
-        box-sizing: border-box;
-    }
-
-    .team-card {
-        background: var(--bg-card);
-        border-radius: 14px;
-        border-top: 4px solid #fff;
-        padding: 25px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .team-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(255, 183, 3, 0.1);
-    }
-
-    .team-name {
-        font-size: 1.3rem;
-        font-weight: 800;
-        color: #fff;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-transform: uppercase;
-    }
-
-    .driver-line {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .driver-line:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-
-    .driver-name-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .pilot-logo-icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 900;
-        font-size: 0.85rem;
-        color: #fff;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .driver-name {
-        color: #f1f5f9;
-        font-weight: 600;
-        font-size: 1.05rem;
-    }
-
-    .driver-status {
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 4px 10px;
-        border-radius: 20px;
-        color: #94a3b8;
-    }
-</style>
+    <style>
+        .teams-section { 
+            max-width: 1200px; 
+            margin: 50px auto 0 auto; 
+        }
+        .section-title { 
+            font-size: 2.2rem; 
+            font-weight: 900; 
+            text-align: center; 
+            text-transform: uppercase; 
+            margin-bottom: 30px; 
+            letter-spacing: 1px; 
+        }
+        .section-title span { 
+            color: var(--accent); 
+        }
+        .teams-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            box-sizing: border-box; 
+        }
+        .team-card { 
+            background: var(--bg-card); 
+            border-radius: 14px; 
+            border-top: 4px solid #fff; 
+            padding: 25px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .team-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(255, 183, 3, 0.1); 
+        }
+        .team-name { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            color: #fff; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            text-transform: uppercase; 
+        }
+        .driver-line { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 12px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+        .driver-line:last-child { 
+            border-bottom: none; 
+            padding-bottom: 0; 
+        }
+        .driver-name-wrapper { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+        .pilot-logo-icon { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 900; 
+            font-size: 0.85rem; 
+            color: #fff; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+        }
+        .driver-name { 
+            color: #f1f5f9; 
+            font-weight: 600; 
+            font-size: 1.05rem; 
+        }
+        .driver-status { 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            color: #94a3b8; 
+        }
+    </style>
 
     <section class="teams-section">
         <h2 class="section-title">Schieramento <span>Piloti & Scuderie</span></h2>
@@ -433,7 +422,7 @@
             
             <div class="team-card" style="border-top-color: #dc0000;">
                 <div class="team-name">
-                    <i class="fas fa-car-side" style="color: #dc0000;"></i> Scuderia Ferrari
+                    <i class="fas fa-car-side" style="color: #dc0000;"></i> Ferrari HP
                 </div>
                 <div class="driver-line">
                     <span class="driver-name-wrapper">
@@ -493,7 +482,7 @@
 
             <div class="team-card" style="border-top-color: #ff8700;">
                 <div class="team-name">
-                    <i class="fas fa-flag-checkered" style="color: #ff8700;"></i> McLaren F1
+                    <i class="fas fa-flag-checkered" style="color: #ff8700;"></i> McLaren F1 Team
                 </div>
                 <div class="driver-line">
                     <span class="driver-name-wrapper">
@@ -573,7 +562,7 @@
 
             <div class="team-card" style="border-top-color: #002f6c;">
                 <div class="team-name">
-                    <i class="fas fa-trophy" style="color: #002f6c;"></i> Visa Cash App RB
+                    <i class="fas fa-trophy" style="color: #002f6c;"></i> Racing Bulls
                 </div>
                 <div class="driver-line">
                     <span class="driver-name-wrapper">
@@ -606,7 +595,7 @@
 
             <div class="team-card" style="border-top-color: #ffffff;">
                 <div class="team-name">
-                    <i class="fas fa-circle-notch" style="color: #ffffff;"></i> Audi F1 Team
+                    <i class="fas fa-circle-notch" style="color: #ffffff;"></i> Audi Sport
                 </div>
                 <div class="driver-line">
                     <span class="driver-name-wrapper">
@@ -626,7 +615,7 @@
 
             <div class="team-card" style="border-top-color: #ffcd00;">
                 <div class="team-name">
-                    <i class="fas fa-crown" style="color: #ffcd00;"></i> Cadillac F1 Team
+                    <i class="fas fa-crown" style="color: #ffcd00;"></i> Cadillac Racing
                 </div>
                 <div class="driver-line">
                     <span class="driver-name-wrapper">
