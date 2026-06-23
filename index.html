@@ -15,22 +15,7 @@
             --text-light: #ffffff;
             --text-muted: #8fa0b5;
         }
-        /* STILE PER I LOGHI UFFICIALI DEI TEAM */
-        .team-logo-official {
-            height: 20px; /* Altezza fissa per uniformarli tutti */
-            width: auto;   /* Mantiene le proporzioni originali */
-            margin-right: 12px; /* Spazio tra logo e testo */
-            vertical-align: middle; /* Allinea il logo al centro del testo */
-            object-fit: contain; /* Assicura che l'immagine non si deformi */
-            
-            /* Aggiunge una leggera ombra bianca per farli risaltare sullo sfondo scuro */
-            filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));
-        }
-
-        /* Correzione per Cadillac che è molto orizzontale */
-        .team-logo-official.cadillac {
-            height: 16px;
-        }
+        
 
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
@@ -702,10 +687,10 @@
         </div>
 <h2 class="section-title">La Nostra <span>Griglia Ufficiale</span></h2>
         
-        <div class="teams-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px; width: 100%; max-width: 1200px; margin: 0 auto; box-sizing: border-box;">
+        <div class="teams-grid">
             
-            <div class="team-card" style="border-top: 3px solid #dc0000; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #dc0000;">
+                <div class="team-name">
                     <i class="fas fa-car-side" style="color: #dc0000;"></i> Ferrari HP
                 </div>
                 <div class="driver-line">
@@ -724,8 +709,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #0c162c; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #0c162c;">
+                <div class="team-name">
                     <i class="fas fa-bolt" style="color: #ffb703;"></i> Red Bull Racing
                 </div>
                 <div class="driver-line">
@@ -744,8 +729,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #00a398; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #00a398;">
+                <div class="team-name">
                     <i class="fas fa-star" style="color: #00a398;"></i> Mercedes-AMG
                 </div>
                 <div class="driver-line">
@@ -764,8 +749,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #ff8700; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #ff8700;">
+                <div class="team-name">
                     <i class="fas fa-flag-checkered" style="color: #ff8700;"></i> McLaren F1 Team
                 </div>
                 <div class="driver-line">
@@ -784,8 +769,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #00594f; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #00594f;">
+                <div class="team-name">
                     <i class="fas fa-shield-alt" style="color: #cedc00;"></i> Aston Martin
                 </div>
                 <div class="driver-line">
@@ -804,8 +789,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #ff4c94; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #ff4c94;">
+                <div class="team-name">
                     <i class="fas fa-wind" style="color: #ff4c94;"></i> Alpine F1 Team
                 </div>
                 <div class="driver-line">
@@ -824,8 +809,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #ea1d2d; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #ea1d2d;">
+                <div class="team-name">
                     <i class="fas fa-columns" style="color: #ea1d2d;"></i> Haas F1 Team
                 </div>
                 <div class="driver-line">
@@ -844,8 +829,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #002f6c; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #002f6c;">
+                <div class="team-name">
                     <i class="fas fa-trophy" style="color: #002f6c;"></i> Racing Bulls
                 </div>
                 <div class="driver-line">
@@ -864,8 +849,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #041e42; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #041e42;">
+                <div class="team-name">
                     <i class="fas fa-road" style="color: #00a398;"></i> Williams Racing
                 </div>
                 <div class="driver-line">
@@ -877,8 +862,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #ffffff; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #ffffff;">
+                <div class="team-name">
                     <i class="fas fa-circle-notch" style="color: #ffffff;"></i> Audi Sport
                 </div>
                 <div class="driver-line">
@@ -897,8 +882,8 @@
                 </div>
             </div>
 
-            <div class="team-card" style="border-top: 3px solid #ffcd00; background: #131a26; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <div style="display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 15px;">
+            <div class="team-card" style="border-top-color: #ffcd00;">
+                <div class="team-name">
                     <i class="fas fa-crown" style="color: #ffcd00;"></i> Cadillac Racing
                 </div>
                 <div class="driver-line">
@@ -916,6 +901,8 @@
                     <span class="driver-status">Titolare</span>
                 </div>
             </div>
+
+        </div>
 
         </div> <h2 class="section-title">Invia la tua <span>Candidatura</span></h2>
 
