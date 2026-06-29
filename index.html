@@ -330,7 +330,7 @@
         </div>
     </section>
     <style>
-        /* --- GRIGLIA PILOTI COMPATTA --- */
+        /* --- GRIGLIA PILOTI VERTICALE MODERNA --- */
         .teams-section { 
             max-width: 1200px; 
             margin: 40px auto 0 auto; 
@@ -352,55 +352,56 @@
         .teams-grid { 
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
             box-sizing: border-box; 
         }
 
         .team-block {
             background: rgba(15, 23, 42, 0.6);
             border-radius: 12px;
-            padding: 15px 20px;
+            padding: 20px;
             border-left: 5px solid #fff; 
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         .team-block-title {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: #fff;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
+        /* Configurazione griglia a colonne verticali */
         .drivers-subgrid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
         }
 
-        /* Card Orizzontale Ultra-Compatta */
+        /* Card Verticale di ogni Pilota */
         .driver-card {
             background: #111a2e;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
-            height: 75px; /* Altezza fissa e ridotta */
+            flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
         }
         .driver-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
         }
 
-        /* Foto Orizzontale a Sinistra */
+        /* Box Foto Verticale */
         .driver-image-box {
             position: relative;
-            width: 120px; /* Più larga che alta per foto panoramiche */
-            height: 100%;
+            width: 100%;
+            height: 240px; /* Altezza bilanciata: foto grande ma non allunga troppo il sito */
             background: #1e293b;
             flex-shrink: 0;
         }
@@ -411,28 +412,29 @@
             display: block;
         }
 
-        /* Numero Pilota nell'angolo della foto */
+        /* Numero di Gara nell'Angolo della Foto */
         .driver-card-number {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(0, 0, 0, 0.8);
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.85);
             color: #fff;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 900;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 5px;
             border: 1px solid var(--accent);
+            z-index: 2;
         }
 
-        /* Informazioni Pilota a Destra */
+        /* Informazioni sotto la Foto */
         .driver-card-info {
-            flex-grow: 1;
-            padding: 10px 15px;
+            padding: 12px 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: #151f32;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
         .driver-info-left {
             display: flex;
@@ -444,6 +446,7 @@
             font-size: 1rem;
             font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
         .driver-card-status {
             font-size: 0.65rem;
@@ -457,14 +460,14 @@
             color: #a370f7;
             font-size: 1.1rem;
             transition: color 0.2s, transform 0.2s;
-            padding: 5px;
+            padding: 4px;
         }
         .driver-card .driver-twitch-link:hover {
             color: #bf94ff;
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
-        /* --- RIPRISTINO E BLINDATURA SEZIONE CANDIDATURA --- */
+        /* --- BLINDATURA SEZIONE CANDIDATURA --- */
         .candidatura-container {
             max-width: 750px;
             margin: 50px auto 40px auto;
@@ -707,7 +710,7 @@
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="img/LIVLONELY.png" class="driver-large-photo" alt="LIVLONELY">
+                            <img src="PROVA_FOTO_LIVLONELY.jpg" class="driver-large-photo" alt="LIVLONELY">
                             <div class="driver-card-number" style="border-color: #cedc00;">69</div>
                         </div>
                         <div class="driver-card-info">
@@ -834,7 +837,9 @@
                         </div>
                     </div>
                     <div class="driver-card" style="opacity: 0.5;">
-                        <div class="driver-image-box" style="display:flex; align-items:center; justify-content:center; color:#475569;"><i class="fas fa-user-plus" style="font-size:1.5rem;"></i></div>
+                        <div class="driver-image-box" style="display:flex; align-items:center; justify-content:center; color:#475569;">
+                            <i class="fas fa-user-plus" style="font-size:2.5rem;"></i>
+                        </div>
                         <div class="driver-card-info">
                             <div class="driver-info-left">
                                 <div class="driver-card-name" style="color:#64748b;">SEDILIBERO</div>
