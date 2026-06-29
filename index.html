@@ -330,6 +330,7 @@
         </div>
     </section>
     <style>
+        /* --- GRIGLIA GENERALE SEZIONE --- */
         .teams-section { 
             max-width: 1200px; 
             margin: 40px auto 0 auto; 
@@ -355,7 +356,7 @@
             box-sizing: border-box; 
         }
 
-        /* Blocco Contenitore Scuderia */
+        /* Contenitore della Scuderia */
         .team-block {
             background: rgba(15, 23, 42, 0.4) !important;
             border-radius: 16px !important;
@@ -375,7 +376,7 @@
             gap: 10px !important;
         }
 
-        /* Forza la disposizione a griglia verticale delle figurine */
+        /* Layout a colonne verticali (Griglia) */
         .drivers-subgrid {
             display: grid !important;
             grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)) !important;
@@ -383,7 +384,7 @@
             width: 100% !important;
         }
 
-        /* FIGURINA VERTICALE AD IMPATTO */
+        /* --- LA FIGURINA VERTICALE (STILE RICHIESTO) --- */
         .driver-card {
             position: relative !important;
             background: #111a2e !important;
@@ -401,7 +402,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
         }
 
-        /* Area Mezzo Busto */
+        /* Box contenitore foto */
         .driver-image-box {
             position: relative !important;
             width: 100% !important;
@@ -416,7 +417,7 @@
             display: block !important;
         }
 
-        /* Numero di Gara in alto a destra sulla foto */
+        /* Numero in alto a destra sulla foto */
         .driver-card-number {
             position: absolute !important;
             top: 12px !important;
@@ -431,7 +432,7 @@
             z-index: 2 !important;
         }
 
-        /* Footer Info Nero */
+        /* Fascia scura informazioni in basso */
         .driver-card-info {
             height: 70px !important;
             padding: 0 15px !important;
@@ -466,20 +467,96 @@
             font-size: 1rem !important;
         }
 
-        /* --- BLINDATURA SEZIONE CANDIDATURA --- */
-        .candidatura-container { max-width: 750px; margin: 50px auto 40px auto; padding: 0 15px; box-sizing: border-box; }
-        .candidatura-box { background: #111a2e !important; border-radius: 16px !important; padding: 35px !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; border-bottom: 4px solid var(--accent) !important; text-align: center !important; }
-        .candidatura-box h2 { font-size: 1.8rem !important; font-weight: 900 !important; text-transform: uppercase !important; margin-bottom: 10px !important; color: #fff !important; }
-        .candidatura-box h2 span { color: #ff1e27 !important; }
-        .candidatura-box p { color: #94a3b8 !important; font-size: 0.95rem !important; margin-bottom: 25px !important; }
-        .candidatura-form { text-align: left !important; display: flex !important; flex-direction: column !important; gap: 15px !important; }
-        .form-grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 15px !important; }
-        .form-group { display: flex !important; flex-direction: column !important; gap: 6px !important; }
-        .form-group label { font-size: 0.8rem !important; font-weight: 700 !important; text-transform: uppercase !important; color: #cbd5e1 !important; }
-        .form-control { background: #1e293b !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; border-radius: 6px !important; padding: 10px 14px !important; color: #fff !important; width: 100% !important; box-sizing: border-box !important; }
-        textarea.form-control { resize: vertical !important; min-height: 70px !important; font-family: inherit !important; }
-        .btn-submit { background: linear-gradient(135deg, #ff1e27 0%, #cc0006 100%) !important; color: #fff !important; border: none !important; border-radius: 6px !important; padding: 12px 20px !important; font-size: 1rem !important; font-weight: 800 !important; text-transform: uppercase !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; }
-        @media (max-width: 600px) { .form-grid-2 { grid-template-columns: 1fr !important; } }
+        /* --- SEZIONE FORM CANDIDATURA REALE BLINDATA --- */
+        .candidatura-container { 
+            max-width: 750px; 
+            margin: 50px auto 40px auto; 
+            padding: 0 15px; 
+            box-sizing: border-box; 
+        }
+        .candidatura-box { 
+            background: #111a2e !important; 
+            border-radius: 16px !important; 
+            padding: 35px !important; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; 
+            border-bottom: 4px solid var(--accent) !important; 
+            text-align: center !important; 
+        }
+        .candidatura-box h2 { 
+            font-size: 1.8rem !important; 
+            font-weight: 900 !important; 
+            text-transform: uppercase !important; 
+            margin-bottom: 10px !important; 
+            color: #fff !important; 
+        }
+        .candidatura-box h2 span { 
+            color: #ff1e27 !important; 
+        }
+        .candidatura-box p { 
+            color: #94a3b8 !important; 
+            font-size: 0.95rem !important; 
+            margin-bottom: 25px !important; 
+        }
+        .candidatura-form { 
+            text-align: left !important; 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 15px !important; 
+        }
+        .form-grid-2 { 
+            display: grid !important; 
+            grid-template-columns: 1fr 1fr !important; 
+            gap: 15px !important; 
+        }
+        .form-group { 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 6px !important; 
+        }
+        .form-group label { 
+            font-size: 0.8rem !important; 
+            font-weight: 700 !important; 
+            text-transform: uppercase !important; 
+            color: #cbd5e1 !important; 
+        }
+        .form-control { 
+            background: #1e293b !important; 
+            border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+            border-radius: 6px !important; 
+            padding: 10px 14px !important; 
+            color: #fff !important; 
+            width: 100% !important; 
+            box-sizing: border-box !important; 
+            font-size: 0.95rem !important;
+        }
+        select.form-control {
+            height: 42px !important;
+            cursor: pointer !important;
+        }
+        textarea.form-control { 
+            resize: vertical !important; 
+            min-height: 90px !important; 
+            font-family: inherit !important; 
+        }
+        .btn-submit { 
+            background: linear-gradient(135deg, #ff1e27 0%, #cc0006 100%) !important; 
+            color: #fff !important; 
+            border: none !important; 
+            border-radius: 6px !important; 
+            padding: 12px 20px !important; 
+            font-size: 1rem !important; 
+            font-weight: 800 !important; 
+            text-transform: uppercase !important; 
+            cursor: pointer !important; 
+            display: flex !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+            gap: 8px !important; 
+            margin-top: 10px !important;
+        }
+        @media (max-width: 600px) { 
+            .form-grid-2 { grid-template-columns: 1fr !important; } 
+        }
     </style>
 
     <section class="teams-section">
@@ -856,7 +933,7 @@
                         <input type="text" id="gamertag" name="gamertag" class="form-control" placeholder="Es. SICKMIRKO" required>
                     </div>
                 </div>
-                
+
                 <div class="form-grid-2">
                     <div class="form-group">
                         <label for="piattaforma">Piattaforma</label>
@@ -872,7 +949,7 @@
                         <input type="number" id="difficolta" name="difficolta" class="form-control" min="50" max="110" placeholder="Es. 95" required>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="scuderia">Scuderia Preferita</label>
                     <select id="scuderia" name="scuderia" class="form-control" required>
@@ -890,12 +967,12 @@
                         <option value="cadillac">Cadillac Racing</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="esperienze">Hai già partecipato ad altri campionati? Se sì, quali?</label>
                     <textarea id="esperienze" name="esperienze" class="form-control" placeholder="Es. Ho corso due stagioni nel campionato XYZ, o No..." required></textarea>
                 </div>
-                
+
                 <button type="submit" class="btn-submit">Invia Candidatura <i class="fas fa-paper-plane"></i></button>
             </form>
         </section>
