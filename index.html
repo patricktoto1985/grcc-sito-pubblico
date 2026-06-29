@@ -330,7 +330,6 @@
         </div>
     </section>
     <style>
-        /* --- SEZIONE SCHIERAMENTO --- */
         .teams-section { 
             max-width: 1200px; 
             margin: 40px auto 0 auto; 
@@ -350,225 +349,137 @@
         }
         
         .teams-grid { 
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 25px !important;
             box-sizing: border-box; 
         }
 
-        /* Blocco Scuderia */
+        /* Blocco Contenitore Scuderia */
         .team-block {
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 23, 42, 0.4) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            display: block !important;
         }
         .team-block-title {
-            font-size: 1.3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 0.5px;
+            font-size: 1.3rem !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            margin-bottom: 20px !important;
+            color: #fff !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
         }
 
-        /* Griglia delle figurine */
+        /* Forza la disposizione a griglia verticale delle figurine */
         .drivers-subgrid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 20px;
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)) !important;
+            gap: 20px !important;
+            width: 100% !important;
         }
 
-        /* --- STILE CARD "FIGURINA" COMPLETA --- */
+        /* FIGURINA VERTICALE AD IMPATTO */
         .driver-card {
-            position: relative;
-            background: #111a2e;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 310px; /* Altezza perfetta stile figurina dello screenshot */
-            border: 2px solid #fff; /* Il colore viene sovrascritto in linea per ogni scuderia */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative !important;
+            background: #111a2e !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            height: 310px !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
+            transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+            box-sizing: border-box !important;
         }
         .driver-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(-5px) !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
         }
 
-        /* Area Foto (Sfondo della figurina) */
+        /* Area Mezzo Busto */
         .driver-image-box {
-            position: relative;
-            width: 100%;
-            height: 240px; /* Spazio per il mezzo busto */
-            background: #1a2436; 
-            overflow: hidden;
+            position: relative !important;
+            width: 100% !important;
+            height: 240px !important;
+            background: #1a2436 !important; 
         }
         .driver-large-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top; /* Tiene la testa del pilota sempre ben visibile */
-            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center top !important;
+            display: block !important;
         }
 
-        /* Badge Numero di Gara in Alto a Destra */
+        /* Numero di Gara in alto a destra sulla foto */
         .driver-card-number {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(15, 23, 42, 0.85);
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 900;
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            z-index: 2;
-            min-width: 20px;
-            text-align: center;
+            position: absolute !important;
+            top: 12px !important;
+            right: 12px !important;
+            background: rgba(15, 23, 42, 0.9) !important;
+            color: #fff !important;
+            font-size: 0.85rem !important;
+            font-weight: 900 !important;
+            padding: 4px 8px !important;
+            border-radius: 6px !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            z-index: 2 !important;
         }
 
-        /* Blocco Info Nero in Basso */
+        /* Footer Info Nero */
         .driver-card-info {
-            height: 70px;
-            padding: 0 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #0f1626; /* Sfondo scuro unificato */
-            box-sizing: border-box;
+            height: 70px !important;
+            padding: 0 15px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            background: #0f1626 !important;
+            box-sizing: border-box !important;
+            margin-top: auto !important;
         }
         .driver-info-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            display: flex !important;
+            flex-direction: column !important;
         }
         .driver-card-name {
-            color: #fff;
-            font-size: 0.95rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1.2;
+            color: #fff !important;
+            font-size: 0.95rem !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
         }
         .driver-card-status {
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #64748b; /* Testo grigio chiaro del sottotitolo */
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+            font-size: 0.65rem !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            color: #64748b !important;
+            margin-top: 2px !important;
         }
 
-        /* Icona Twitch viola piccola a destra */
         .driver-card .driver-twitch-link {
-            color: #a370f7;
-            font-size: 1rem;
-            transition: color 0.2s, transform 0.2s;
-            display: flex;
-            align-items: center;
-        }
-        .driver-card .driver-twitch-link:hover {
-            color: #bf94ff;
-            transform: scale(1.1);
+            color: #a370f7 !important;
+            font-size: 1rem !important;
         }
 
         /* --- BLINDATURA SEZIONE CANDIDATURA --- */
-        .candidatura-container {
-            max-width: 750px;
-            margin: 50px auto 40px auto;
-            padding: 0 15px;
-            box-sizing: border-box;
-        }
-        .candidatura-box { 
-            background: #111a2e !important; 
-            border-radius: 16px !important; 
-            padding: 35px !important; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; 
-            border-bottom: 4px solid var(--accent) !important; 
-            text-align: center !important;
-        }
-        .candidatura-box h2 { 
-            font-size: 1.8rem !important; 
-            font-weight: 900 !important; 
-            text-transform: uppercase !important; 
-            margin-bottom: 10px !important; 
-            letter-spacing: 1px !important;
-            color: #fff !important;
-        }
-        .candidatura-box h2 span { 
-            color: #ff1e27 !important; 
-        }
-        .candidatura-box p { 
-            color: #94a3b8 !important; 
-            font-size: 0.95rem !important; 
-            margin-bottom: 25px !important; 
-            line-height: 1.5 !important; 
-        }
-        .candidatura-form { 
-            text-align: left !important; 
-            display: flex !important; 
-            flex-direction: column !important; 
-            gap: 15px !important; 
-        }
-        .form-grid-2 { 
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 15px !important;
-        }
-        .form-group { 
-            display: flex !important; 
-            flex-direction: column !important; 
-            gap: 6px !important; 
-        }
-        .form-group label { 
-            font-size: 0.8rem !important; 
-            font-weight: 700 !important; 
-            text-transform: uppercase !important; 
-            letter-spacing: 0.5px !important; 
-            color: #cbd5e1 !important; 
-        }
-        .form-control { 
-            background: #1e293b !important; 
-            border: 1px solid rgba(255, 255, 255, 0.1) !important; 
-            border-radius: 6px !important; 
-            padding: 10px 14px !important; 
-            color: #fff !important; 
-            font-size: 0.95rem !important; 
-            width: 100% !important;
-            box-sizing: border-box !important;
-        }
-        textarea.form-control { 
-            resize: vertical !important; 
-            min-height: 70px !important; 
-            font-family: inherit !important; 
-        }
-        .btn-submit { 
-            background: linear-gradient(135deg, #ff1e27 0%, #cc0006 100%) !important; 
-            color: #fff !important; 
-            border: none !important; 
-            border-radius: 6px !important; 
-            padding: 12px 20px !important; 
-            font-size: 1rem !important; 
-            font-weight: 800 !important; 
-            text-transform: uppercase !important; 
-            cursor: pointer !important; 
-            text-align: center !important; 
-            margin-top: 5px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 8px !important;
-        }
-        @media (max-width: 600px) { 
-            .form-grid-2 { grid-template-columns: 1fr !important; gap: 15px !important; } 
-        }
+        .candidatura-container { max-width: 750px; margin: 50px auto 40px auto; padding: 0 15px; box-sizing: border-box; }
+        .candidatura-box { background: #111a2e !important; border-radius: 16px !important; padding: 35px !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; border-bottom: 4px solid var(--accent) !important; text-align: center !important; }
+        .candidatura-box h2 { font-size: 1.8rem !important; font-weight: 900 !important; text-transform: uppercase !important; margin-bottom: 10px !important; color: #fff !important; }
+        .candidatura-box h2 span { color: #ff1e27 !important; }
+        .candidatura-box p { color: #94a3b8 !important; font-size: 0.95rem !important; margin-bottom: 25px !important; }
+        .candidatura-form { text-align: left !important; display: flex !important; flex-direction: column !important; gap: 15px !important; }
+        .form-grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 15px !important; }
+        .form-group { display: flex !important; flex-direction: column !important; gap: 6px !important; }
+        .form-group label { font-size: 0.8rem !important; font-weight: 700 !important; text-transform: uppercase !important; color: #cbd5e1 !important; }
+        .form-control { background: #1e293b !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; border-radius: 6px !important; padding: 10px 14px !important; color: #fff !important; width: 100% !important; box-sizing: border-box !important; }
+        textarea.form-control { resize: vertical !important; min-height: 70px !important; font-family: inherit !important; }
+        .btn-submit { background: linear-gradient(135deg, #ff1e27 0%, #cc0006 100%) !important; color: #fff !important; border: none !important; border-radius: 6px !important; padding: 12px 20px !important; font-size: 1rem !important; font-weight: 800 !important; text-transform: uppercase !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important; }
+        @media (max-width: 600px) { .form-grid-2 { grid-template-columns: 1fr !important; } }
     </style>
 
     <section class="teams-section">
@@ -579,7 +490,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-car-side" style="color: #dc0000;"></i> Ferrari HP</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #dc0000;">
+                    <div class="driver-card" style="border: 2px solid #dc0000 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="SICKMIRKO">
                             <div class="driver-card-number">1</div>
@@ -592,7 +503,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #dc0000;">
+                    <div class="driver-card" style="border: 2px solid #dc0000 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="MIKYPOWER">
                             <div class="driver-card-number">25</div>
@@ -611,7 +522,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-bolt" style="color: #ffb703;"></i> Red Bull Racing</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #ffb703;">
+                    <div class="driver-card" style="border: 2px solid #ffb703 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="BENE20DOMENICO">
                             <div class="driver-card-number">3</div>
@@ -624,7 +535,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #ffb703;">
+                    <div class="driver-card" style="border: 2px solid #ffb703 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="RAO-783">
                             <div class="driver-card-number">8</div>
@@ -643,7 +554,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-star" style="color: #00a398;"></i> Mercedes-AMG</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #00a398;">
+                    <div class="driver-card" style="border: 2px solid #00a398 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="SALVOTD91">
                             <div class="driver-card-number">6</div>
@@ -656,7 +567,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #00a398;">
+                    <div class="driver-card" style="border: 2px solid #00a398 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="MKI-110">
                             <div class="driver-card-number">28</div>
@@ -675,7 +586,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-flag-checkered" style="color: #ff8700;"></i> McLaren F1 Team</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #ff8700;">
+                    <div class="driver-card" style="border: 2px solid #ff8700 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="LRT_KURAMA">
                             <div class="driver-card-number">17</div>
@@ -688,7 +599,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #ff8700;">
+                    <div class="driver-card" style="border: 2px solid #ff8700 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="FRA3123">
                             <div class="driver-card-number">31</div>
@@ -707,7 +618,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-shield-alt" style="color: #cedc00;"></i> Aston Martin</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #cedc00;">
+                    <div class="driver-card" style="border: 2px solid #cedc00 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="GIUMEND29">
                             <div class="driver-card-number">29</div>
@@ -720,7 +631,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #cedc00;">
+                    <div class="driver-card" style="border: 2px solid #cedc00 !important;">
                         <div class="driver-image-box">
                             <img src="img/livlonely.png" class="driver-large-photo" alt="LIVLONELY">
                             <div class="driver-card-number">69</div>
@@ -739,7 +650,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-wind" style="color: #ff4c94;"></i> Alpine F1 Team</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #ff4c94;">
+                    <div class="driver-card" style="border: 2px solid #ff4c94 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="PEPPEFLE_IRT">
                             <div class="driver-card-number">82</div>
@@ -752,7 +663,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #ff4c94;">
+                    <div class="driver-card" style="border: 2px solid #ff4c94 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="CONDE785">
                             <div class="driver-card-number">85</div>
@@ -771,7 +682,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-columns" style="color: #ea1d2d;"></i> Haas F1 Team</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #ea1d2d;">
+                    <div class="driver-card" style="border: 2px solid #ea1d2d !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="DAVIARCO1999">
                             <div class="driver-card-number">73</div>
@@ -784,7 +695,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #ea1d2d;">
+                    <div class="driver-card" style="border: 2px solid #ea1d2d !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="BRA_FOSY89">
                             <div class="driver-card-number">97</div>
@@ -803,7 +714,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-trophy" style="color: #002f6c;"></i> Racing Bulls</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #002f6c;">
+                    <div class="driver-card" style="border: 2px solid #002f6c !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="GRCC F1 VITTORIO">
                             <div class="driver-card-number">26</div>
@@ -816,7 +727,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #002f6c;">
+                    <div class="driver-card" style="border: 2px solid #002f6c !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="LILLUPAZZU">
                             <div class="driver-card-number">84</div>
@@ -835,7 +746,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-road" style="color: #041e42;"></i> Williams Racing</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #041e42;">
+                    <div class="driver-card" style="border: 2px solid #041e42 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="ICEANT16">
                             <div class="driver-card-number">35</div>
@@ -848,13 +759,13 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #475569; opacity: 0.5;">
-                        <div class="driver-image-box" style="display:flex; align-items:center; justify-content:center; color:#475569;">
+                    <div class="driver-card" style="border: 2px dashed #475569 !important; opacity: 0.6;">
+                        <div class="driver-image-box" style="display:flex; align-items:center; justify-content:center; color:#475569; background:#0f172a;">
                             <i class="fas fa-user-plus" style="font-size:2.5rem;"></i>
                         </div>
                         <div class="driver-card-info">
                             <div class="driver-info-left">
-                                <div class="driver-card-name" style="color:#64748b;">SEDILIBERO</div>
+                                <div class="driver-card-name" style="color:#64748b;">SEDILE LIBERO</div>
                                 <div class="driver-card-status">Da Assegnare</div>
                             </div>
                         </div>
@@ -865,7 +776,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-circle-notch" style="color: #ffffff;"></i> Audi Sport</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #f50537;">
+                    <div class="driver-card" style="border: 2px solid #f50537 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="DANIELE251191">
                             <div class="driver-card-number">24</div>
@@ -878,7 +789,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #f50537;">
+                    <div class="driver-card" style="border: 2px solid #f50537 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="TOTO'F1">
                             <div class="driver-card-number">40</div>
@@ -897,7 +808,7 @@
             <div class="team-block">
                 <div class="team-block-title"><i class="fas fa-crown" style="color: #ffcd00;"></i> Cadillac Racing</div>
                 <div class="drivers-subgrid">
-                    <div class="driver-card" style="border-color: #ffcd00;">
+                    <div class="driver-card" style="border: 2px solid #ffcd00 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="NXS_ODI">
                             <div class="driver-card-number">12</div>
@@ -910,7 +821,7 @@
                             <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="border-color: #ffcd00;">
+                    <div class="driver-card" style="border: 2px solid #ffcd00 !important;">
                         <div class="driver-image-box">
                             <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="KEIDIKID2">
                             <div class="driver-card-number">19</div>
