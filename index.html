@@ -330,17 +330,20 @@
         </div>
     </section>
     <style>
+        /* --- GRIGLIA PILOTI COMPATTA --- */
         .teams-section { 
             max-width: 1200px; 
-            margin: 50px auto 0 auto; 
+            margin: 40px auto 0 auto; 
+            padding: 0 15px;
         }
         .section-title { 
-            font-size: 2.2rem; 
+            font-size: 2rem; 
             font-weight: 900; 
             text-align: center; 
             text-transform: uppercase; 
-            margin-bottom: 30px; 
+            margin-bottom: 25px; 
             letter-spacing: 1px; 
+            color: #fff;
         }
         .section-title span { 
             color: var(--accent); 
@@ -349,22 +352,22 @@
         .teams-grid { 
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 20px;
             box-sizing: border-box; 
         }
 
         .team-block {
             background: rgba(15, 23, 42, 0.6);
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 12px;
+            padding: 15px 20px;
             border-left: 5px solid #fff; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         .team-block-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             color: #fff;
             display: flex;
             align-items: center;
@@ -373,30 +376,33 @@
 
         .drivers-subgrid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
         }
 
+        /* Card Orizzontale Ultra-Compatta */
         .driver-card {
-            background: var(--bg-card);
-            border-radius: 12px;
+            background: #111a2e;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
             display: flex;
-            flex-direction: column;
+            height: 75px; /* Altezza fissa e ridotta */
             border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
         .driver-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 183, 3, 0.15);
+            transform: translateY(-2px);
         }
 
+        /* Foto Orizzontale a Sinistra */
         .driver-image-box {
             position: relative;
-            width: 100%;
-            height: 300px; 
+            width: 120px; /* Più larga che alta per foto panoramiche */
+            height: 100%;
             background: #1e293b;
+            flex-shrink: 0;
         }
         .driver-large-photo {
             width: 100%;
@@ -405,38 +411,42 @@
             display: block;
         }
 
+        /* Numero Pilota nell'angolo della foto */
         .driver-card-number {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 5px;
+            right: 5px;
             background: rgba(0, 0, 0, 0.8);
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 0.75rem;
             font-weight: 900;
-            padding: 4px 10px;
-            border-radius: 6px;
-            border: 2px solid var(--accent);
-            backdrop-filter: blur(4px);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--accent);
         }
 
+        /* Informazioni Pilota a Destra */
         .driver-card-info {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            background: #151f32;
-        }
-        .driver-card-name {
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-transform: uppercase;
+            flex-grow: 1;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: #151f32;
+        }
+        .driver-info-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .driver-card-name {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
         }
         .driver-card-status {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
             color: #94a3b8;
@@ -447,14 +457,102 @@
             color: #a370f7;
             font-size: 1.1rem;
             transition: color 0.2s, transform 0.2s;
+            padding: 5px;
         }
         .driver-card .driver-twitch-link:hover {
             color: #bf94ff;
             transform: scale(1.1);
         }
 
-        @media (max-width: 600px) {
-            .driver-image-box { height: 320px; }
+        /* --- RIPRISTINO E BLINDATURA SEZIONE CANDIDATURA --- */
+        .candidatura-container {
+            max-width: 750px;
+            margin: 50px auto 40px auto;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+        .candidatura-box { 
+            background: #111a2e !important; 
+            border-radius: 16px !important; 
+            padding: 35px !important; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; 
+            border-bottom: 4px solid var(--accent) !important; 
+            text-align: center !important;
+        }
+        .candidatura-box h2 { 
+            font-size: 1.8rem !important; 
+            font-weight: 900 !important; 
+            text-transform: uppercase !important; 
+            margin-bottom: 10px !important; 
+            letter-spacing: 1px !important;
+            color: #fff !important;
+        }
+        .candidatura-box h2 span { 
+            color: #ff1e27 !important; 
+        }
+        .candidatura-box p { 
+            color: #94a3b8 !important; 
+            font-size: 0.95rem !important; 
+            margin-bottom: 25px !important; 
+            line-height: 1.5 !important; 
+        }
+        .candidatura-form { 
+            text-align: left !important; 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 15px !important; 
+        }
+        .form-grid-2 { 
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 15px !important;
+        }
+        .form-group { 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 6px !important; 
+        }
+        .form-group label { 
+            font-size: 0.8rem !important; 
+            font-weight: 700 !important; 
+            text-transform: uppercase !important; 
+            letter-spacing: 0.5px !important; 
+            color: #cbd5e1 !important; 
+        }
+        .form-control { 
+            background: #1e293b !important; 
+            border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+            border-radius: 6px !important; 
+            padding: 10px 14px !important; 
+            color: #fff !important; 
+            font-size: 0.95rem !important; 
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        textarea.form-control { 
+            resize: vertical !important; 
+            min-height: 70px !important; 
+            font-family: inherit !important; 
+        }
+        .btn-submit { 
+            background: linear-gradient(135deg, #ff1e27 0%, #cc0006 100%) !important; 
+            color: #fff !important; 
+            border: none !important; 
+            border-radius: 6px !important; 
+            padding: 12px 20px !important; 
+            font-size: 1rem !important; 
+            font-weight: 800 !important; 
+            text-transform: uppercase !important; 
+            cursor: pointer !important; 
+            text-align: center !important; 
+            margin-top: 5px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+        }
+        @media (max-width: 600px) { 
+            .form-grid-2 { grid-template-columns: 1fr !important; gap: 15px !important; } 
         }
     </style>
 
@@ -468,48 +566,60 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="SICKMIRKO">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="SICKMIRKO">
                             <div class="driver-card-number" style="border-color: #dc0000;">1</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">SICKMIRKO <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">SICKMIRKO</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="MIKYPOWER">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="MIKYPOWER">
                             <div class="driver-card-number" style="border-color: #dc0000;">25</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">MIKYPOWER <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">MIKYPOWER</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="team-block" style="border-left-color: #0c162c;">
+            <div class="team-block" style="border-left-color: #ffb703;">
                 <div class="team-block-title"><i class="fas fa-bolt" style="color: #ffb703;"></i> Red Bull Racing</div>
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="BENE20DOMENICO">
-                            <div class="driver-card-number" style="border-color: #ffb703; color: #ffb703;">3</div>
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="BENE20DOMENICO">
+                            <div class="driver-card-number" style="border-color: #ffb703;">3</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">BENE20DOMENICO <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">BENE20DOMENICO</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="RAO-783">
-                            <div class="driver-card-number" style="border-color: #ffb703; color: #ffb703;">8</div>
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="RAO-783">
+                            <div class="driver-card-number" style="border-color: #ffb703;">8</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">RAO-783 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">RAO-783</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
@@ -520,22 +630,28 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="SALVOTD91">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="SALVOTD91">
                             <div class="driver-card-number" style="border-color: #00a398;">6</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">SALVOTD91 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">SALVOTD91</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="MKI-110">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="MKI-110">
                             <div class="driver-card-number" style="border-color: #00a398;">28</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">MKI-110 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">MKI-110</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
@@ -546,48 +662,60 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="LRT_KURAMA">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="LRT_KURAMA">
                             <div class="driver-card-number" style="border-color: #ff8700;">17</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">LRT_KURAMA <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">LRT_KURAMA</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="FRA3123">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="FRA3123">
                             <div class="driver-card-number" style="border-color: #ff8700;">31</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">FRA3123 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">FRA3123</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="team-block" style="border-left-color: #00594f;">
+            <div class="team-block" style="border-left-color: #cedc00;">
                 <div class="team-block-title"><i class="fas fa-shield-alt" style="color: #cedc00;"></i> Aston Martin</div>
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="GIUMEND29">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="GIUMEND29">
                             <div class="driver-card-number" style="border-color: #cedc00;">29</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">GIUMEND29 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">GIUMEND29</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="LIVLONELY">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="LIVLONELY">
                             <div class="driver-card-number" style="border-color: #cedc00;">69</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">LIVLONELY <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">LIVLONELY</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
@@ -598,22 +726,28 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="PEPPEFLE_IRT">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="PEPPEFLE_IRT">
                             <div class="driver-card-number" style="border-color: #ff4c94;">82</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">PEPPEFLE_IRT <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">PEPPEFLE_IRT</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="CONDE785">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="CONDE785">
                             <div class="driver-card-number" style="border-color: #ff4c94;">85</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">CONDE785 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">CONDE785</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
@@ -624,22 +758,28 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="DAVIARCO1999">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="DAVIARCO1999">
                             <div class="driver-card-number" style="border-color: #ea1d2d;">73</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">DAVIARCO1999 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">DAVIARCO1999</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="BRA_FOSY89">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="BRA_FOSY89">
                             <div class="driver-card-number" style="border-color: #ea1d2d;">97</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">BRA_FOSY89 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">BRA_FOSY89</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
@@ -650,47 +790,56 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="GRCC F1 VITTORIO">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="GRCC F1 VITTORIO">
                             <div class="driver-card-number" style="border-color: #002f6c;">26</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">GRCC F1 VITTORIO <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">GRCC F1 VITTORIO</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="LILLUPAZZU">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="LILLUPAZZU">
                             <div class="driver-card-number" style="border-color: #002f6c;">84</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">LILLUPAZZU <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">LILLUPAZZU</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="team-block" style="border-left-color: #041e42;">
-                <div class="team-block-title"><i class="fas fa-road" style="color: #00a398;"></i> Williams Racing</div>
+                <div class="team-block-title"><i class="fas fa-road" style="color: #041e42;"></i> Williams Racing</div>
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="ICEANT16">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="ICEANT16">
                             <div class="driver-card-number" style="border-color: #041e42;">35</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">ICEANT16 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">ICEANT16</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
-                    <div class="driver-card" style="opacity: 0.6;">
-                        <div class="driver-image-box">
-                            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#475569; font-size:4rem;"><i class="fas fa-user-plus"></i></div>
-                        </div>
+                    <div class="driver-card" style="opacity: 0.5;">
+                        <div class="driver-image-box" style="display:flex; align-items:center; justify-content:center; color:#475569;"><i class="fas fa-user-plus" style="font-size:1.5rem;"></i></div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">DA ASSEGNARE</div>
-                            <div class="driver-card-status">Sedile Libero</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name" style="color:#64748b;">SEDILIBERO</div>
+                                <div class="driver-card-status">Da Assegnare</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -701,22 +850,28 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="DANIELE251191">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="DANIELE251191">
                             <div class="driver-card-number" style="border-color: #f50537;">24</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">DANIELE251191 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">DANIELE251191</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="TOTO'F1">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="TOTO'F1">
                             <div class="driver-card-number" style="border-color: #f50537;">40</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">TOTO'F1 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">TOTO'F1</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
@@ -727,22 +882,28 @@
                 <div class="drivers-subgrid">
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="NXS_ODI">
-                            <div class="driver-card-number" style="border-color: #ffcd00; color: #ffcd00;">12</div>
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="NXS_ODI">
+                            <div class="driver-card-number" style="border-color: #ffcd00;">12</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">NXS_ODI <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">NXS_ODI</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                     <div class="driver-card">
                         <div class="driver-image-box">
-                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600" class="driver-large-photo" alt="KEIDIKID2">
-                            <div class="driver-card-number" style="border-color: #ffcd00; color: #ffcd00;">19</div>
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=400" class="driver-large-photo" alt="KEIDIKID2">
+                            <div class="driver-card-number" style="border-color: #ffcd00;">19</div>
                         </div>
                         <div class="driver-card-info">
-                            <div class="driver-card-name">KEIDIKID2 <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a></div>
-                            <div class="driver-card-status">Pilota Titolare</div>
+                            <div class="driver-info-left">
+                                <div class="driver-card-name">KEIDIKID2</div>
+                                <div class="driver-card-status">Pilota Titolare</div>
+                            </div>
+                            <a href="#" target="_blank" class="driver-twitch-link"><i class="fab fa-twitch"></i></a>
                         </div>
                     </div>
                 </div>
@@ -751,60 +912,65 @@
         </div>
     </section>
 
-    <section class="candidatura-section">
-        <h2 class="candidatura-title">Invia la tua <span>Candidatura</span></h2>
-        <p class="candidatura-subtitle">Vuoi dmostrare il tuo valore in pista? Compila il modulo sottostante ed entra a far parte del campionato GRCC F1 ESPORTS.</p>
-        <form class="candidatura-form" action="#" method="POST">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nome">Nome e Cognome</label>
-                    <input type="text" id="nome" name="nome" class="form-control" placeholder="Es. Mario Rossi" required>
+    <div class="candidatura-container">
+        <section class="candidatura-box">
+            <h2>Invia la tua <span>Candidatura</span></h2>
+            <p>Vuoi dimostrare il tuo valore in pista? Compila il modulo sottostante ed entra a far parte del campionato GRCC F1 ESPORTS.</p>
+            
+            <form class="candidatura-form" action="#" method="POST">
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="nome">Nome e Cognome</label>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Es. Mario Rossi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gamertag">Gamertag (PSN / ID)</label>
+                        <input type="text" id="gamertag" name="gamertag" class="form-control" placeholder="Es. SICKMIRKO" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="gamertag">Gamertag (PSN / ID)</label>
-                    <input type="text" id="gamertag" name="gamertag" class="form-control" placeholder="Es. SICKMIRKO" required>
+                
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="piattaforma">Piattaforma</label>
+                        <select id="piattaforma" name="piattaforma" class="form-control" required>
+                            <option value="" disabled selected>Scegli la piattaforma...</option>
+                            <option value="PS5">PlayStation 5</option>
+                            <option value="Xbox">Xbox Series X/S</option>
+                            <option value="PC">PC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="difficolta">Difficoltà IA abituale (50-110)</label>
+                        <input type="number" id="difficolta" name="difficolta" class="form-control" min="50" max="110" placeholder="Es. 95" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
+                
                 <div class="form-group">
-                    <label for="piattaforma">Piattaforma</label>
-                    <select id="piattaforma" name="piattaforma" class="form-control" required>
-                        <option value="" disabled selected>Scegli la piattaforma...</option>
-                        <option value="PS5">PlayStation 5</option>
-                        <option value="Xbox">Xbox Series X/S</option>
-                        <option value="PC">PC</option>
+                    <label for="scuderia">Scuderia Preferita</label>
+                    <select id="scuderia" name="scuderia" class="form-control" required>
+                        <option value="" disabled selected>Seleziona una scuderia...</option>
+                        <option value="ferrari">Ferrari HP</option>
+                        <option value="redbull">Red Bull Racing</option>
+                        <option value="mercedes">Mercedes-AMG</option>
+                        <option value="mclaren">McLaren F1 Team</option>
+                        <option value="aston">Aston Martin</option>
+                        <option value="alpine">Alpine F1 Team</option>
+                        <option value="haas">Haas F1 Team</option>
+                        <option value="visa">Racing Bulls</option>
+                        <option value="williams">Williams Racing</option>
+                        <option value="audi">Audi Sport</option>
+                        <option value="cadillac">Cadillac Racing</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
-                    <label for="difficolta">Difficoltà IA abituale (50-110)</label>
-                    <input type="number" id="difficolta" name="difficolta" class="form-control" min="50" max="110" placeholder="Es. 95" required>
+                    <label for="esperienze">Hai già partecipato ad altri campionati? Se sì, quali?</label>
+                    <textarea id="esperienze" name="esperienze" class="form-control" placeholder="Es. Ho corso due stagioni nel campionato XYZ, o No..." required></textarea>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="scuderia">Scuderia Preferita</label>
-                <select id="scuderia" name="scuderia" class="form-control" required>
-                    <option value="" disabled selected>Seleziona una scuderia...</option>
-                    <option value="ferrari">Ferrari HP</option>
-                    <option value="redbull">Red Bull Racing</option>
-                    <option value="mercedes">Mercedes-AMG</option>
-                    <option value="mclaren">McLaren F1 Team</option>
-                    <option value="aston">Aston Martin</option>
-                    <option value="alpine">Alpine F1 Team</option>
-                    <option value="haas">Haas F1 Team</option>
-                    <option value="visa">Racing Bulls</option>
-                    <option value="williams">Williams Racing</option>
-                    <option value="audi">Audi Sport</option>
-                    <option value="cadillac">Cadillac Racing</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="esperienze">Hai già partecipato ad altri campionati? Se sì, quali?</label>
-                <textarea id="esperienze" name="esperienze" class="form-control" placeholder="Es. Ho corso due stagioni nel campionato XYZ..." required></textarea>
-            </div>
-            <button type="submit" class="btn-submit">Invia Candidatura <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
-        </form>
-    </section>
-
+                
+                <button type="submit" class="btn-submit">Invia Candidatura <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </section>
     </div>
 </body>
 </html>
