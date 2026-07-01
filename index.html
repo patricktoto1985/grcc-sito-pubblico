@@ -413,6 +413,21 @@
     overflow: hidden !important;
 }
 
+/* --- REGOLAZIONE NUMERO PILOTA --- */
+.driver-card-number {
+    position: absolute !important;
+    top: 15px !important;       /* Distanza dall'alto */
+    right: 15px !important;     /* Spostato all'interno dal bordo destro per non essere tagliato */
+    background: rgba(15, 23, 42, 0.9) !important; /* Sfondo scuro per massima leggibilità */
+    color: #fff !important;
+    font-size: 0.85rem !important;
+    font-weight: 900 !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    z-index: 10 !important;     /* Lo porta in primo piano sopra l'immagine */
+}
+
 /* --- LA FOTO DEL PILOTA (FORZATA A VEDERSI INTERA) --- */
 .driver-large-photo {
     width: 100% !important;
