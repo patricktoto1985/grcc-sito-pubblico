@@ -338,6 +338,114 @@
         </div>
     </section>
     <style>
+        /* --- STILE SEZIONE CLASSIFICHE --- */
+.standings-section {
+    margin-bottom: 50px;
+}
+
+.standings-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    background: #131a26 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #94a3b8 !important;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    border-color: #ffb703 !important;
+    color: #fff !important;
+}
+
+.tab-btn.active {
+    background: #ffb703 !important;
+    color: #000 !important;
+    border-color: #ffb703 !important;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.table-container {
+    background: #131a26 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.standings-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.standings-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+.standings-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.table-team-logo {
+    width: 20px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 8px;
+    object-fit: contain;
+}
+
+.points-cell {
+    font-weight: bold;
+    color: #ffb703 !important;
+    font-size: 1.05rem;
+}
+
+/* Decorazioni del Podio */
+.podium-badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.pos-1 .podium-badge { background: #ffd700; color: #000; }
+.pos-2 .podium-badge { background: #c0c0c0; color: #000; }
+.pos-3 .podium-badge { background: #cd7f32; color: #000; }
         /* --- STILE SEZIONE CALENDARIO --- */
 .calendar-section {
     margin-bottom: 50px;
@@ -836,6 +944,127 @@
      </div>
     </section>
 
+    <section class="standings-section">
+    <h2 class="section-title">Classifiche <span>Stagione 2026</span></h2>
+    
+    <div class="standings-tabs">
+        <button class="tab-btn active" onclick="switchTab('piloti')"><i class="fas fa-user"></i> Classifica Piloti</button>
+        <button class="tab-btn" onclick="switchTab('costruttori')"><i class="fas fa-car"></i> Classifica Costruttori</button>
+    </div>
+
+    <div id="tab-piloti" class="tab-content active">
+        <div class="table-container">
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Pilota</th>
+                        <th>Scuderia</th>
+                        <th>Punti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="pos-1">
+                        <td><span class="podium-badge">1</span></td>
+                        <td><strong>SICKMIRKO</strong></td>
+                        <td><img src="assets/ferrari.png" class="table-team-logo" alt=""> Ferrari HP</td>
+                        <td class="points-cell">25</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><strong>MIKYPOWER</strong></td>
+                        <td><img src="assets/ferrari.png" class="table-team-logo" alt=""> Ferrari HP</td>
+                        <td class="points-cell">18</td>
+                    </tr>
+                    <tr class="pos-3">
+                        <td><span class="podium-badge">3</span></td>
+                        <td><strong>DANIELE251191</strong></td>
+                        <td><img src="assets/audi.png" class="table-team-logo" alt=""> Audi F1 Team</td>
+                        <td class="points-cell">15</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>TOTO'F1</td>
+                        <td><img src="assets/audi.png" class="table-team-logo" alt=""> Audi F1 Team</td>
+                        <td class="points-cell">12</td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="tab-costruttori" class="tab-content">
+        <div class="table-container">
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Scuderia</th>
+                        <th>Punti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="pos-1">
+                        <td><span class="podium-badge">1</span></td>
+                        <td><img src="assets/ferrari.png" class="table-team-logo" alt=""> Scuderia Ferrari HP</td>
+                        <td class="points-cell">43</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="assets/audi.png" class="table-team-logo" alt=""> Audi F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="img/alpine.png" class="table-team-logo" alt=""> Alpine F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-3">
+                        <td><span class="podium-badge">3</span></td>
+                        <td><img src="img/aston martin.png" class="table-team-logo" alt=""> Aston Martin F1 Team</td>
+                        <td class="points-cell">20</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="assets/cadillac-formula-1-team-seeklogo.png" class="table-team-logo" alt=""> Cadillac F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="assets/haas.png" class="table-team-logo" alt=""> Haas F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="img/mclaren.png" class="table-team-logo" alt=""> McLaren F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="assets/mercedes.png" class="table-team-logo" alt=""> Mercedes F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="assets/racing bulls.png" class="table-team-logo" alt=""> Racing Bulls F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="assets/red bull.png" class="table-team-logo" alt=""> Red Bull Racing</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                    <tr class="pos-2">
+                        <td><span class="podium-badge">2</span></td>
+                        <td><img src="assets/williams.png" class="table-team-logo" alt=""> Williams F1 Team</td>
+                        <td class="points-cell">27</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
     <section class="teams-section">
         <h2 class="section-title">Schieramento <span>Piloti & Scuderie</span></h2>
         
@@ -1263,5 +1492,17 @@
             </form>
         </section>
     </div>
+    <script>
+    function switchTab(tabName) {
+        // Rimuove la classe attiva da tutti i contenuti dei tab
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        // Rimuove la classe attiva da tutti i bottoni
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    
+        // Attiva il tab selezionato e il rispettivo bottone
+        document.getElementById('tab-' + tabName).classList.add('active');
+        event.currentTarget.classList.add('active');
+}
+</script>
 </body>
 </html>
