@@ -338,6 +338,70 @@
         </div>
     </section>
     <style>
+        /* --- STILE SEZIONE CALENDARIO --- */
+.calendar-section {
+    margin-bottom: 50px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.race-card {
+    background: #131a26 !important; /* Colore scuro coerente con i tuoi box */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.race-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Evidenziazione per la gara imminente */
+.race-card.upcoming {
+    border: 2px solid #ffb703 !important; /* Bordo color oro/accento */
+}
+
+.race-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffb703;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.race-round {
+    display: block;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.race-name {
+    font-size: 1.15rem;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.race-date {
+    font-size: 0.9rem;
+    color: #ffb703; /* Colore giallo/oro per far risaltare la data */
+    margin: 0;
+}
         /* --- GRIGLIA GENERALE SEZIONE --- */
         .teams-section { 
             max-width: 1200px; 
@@ -548,6 +612,38 @@
             .form-grid-2 { grid-template-columns: 1fr !important; } 
         }
     </style>
+    <section class="calendar-section">
+    <h2 class="section-title">Calendario <span>Gare 2026</span></h2>
+    
+    <div class="calendar-grid">
+        <div class="race-card upcoming">
+            <div class="race-status">Prossima Gara</div>
+            <div class="race-info">
+                <span class="race-round">Round 1</span>
+                <h3 class="race-name">GP d'Italia - Monza</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 15 Marzo 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 2</span>
+                <h3 class="race-name">GP del Belgio - Spa-Francorchamps</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 29 Marzo 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 3</span>
+                <h3 class="race-name">GP di Monaco - Monte Carlo</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <section class="teams-section">
         <h2 class="section-title">Schieramento <span>Piloti & Scuderie</span></h2>
