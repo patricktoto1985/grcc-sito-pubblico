@@ -719,8 +719,158 @@
         @media (max-width: 600px) { 
             .form-grid-2 { grid-template-columns: 1fr !important; } 
         }
+        /* --- STILE SEZIONE DIRETTA STREAMING --- */
+.live-stream-section {
+    margin-bottom: 50px;
+}
+
+.live-container {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 25px;
+    background: #131a26 !important;
+    border: 2px solid #ffb703 !important;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(255, 183, 3, 0.15);
+}
+
+.live-player-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.live-info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.live-badge-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ff3838;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-live 1.5s infinite;
+}
+
+@keyframes pulse-live {
+    0% { transform: scale(0.9); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 56, 56, 0.7); }
+    70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 8px rgba(255, 56, 56, 0); }
+    100% { transform: scale(0.9); opacity: 0; box-shadow: 0 0 0 0 rgba(255, 56, 56, 0); }
+}
+
+.live-text-badge {
+    color: #ff3838;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.live-title {
+    font-size: 1.8rem;
+    margin: 0 0 15px 0;
+    color: #fff;
+}
+
+.live-description {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+
+.live-schedule {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid #ffb703;
+    padding: 12px 15px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 25px;
+}
+
+.live-schedule p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #e2e8f0;
+}
+
+.live-schedule i {
+    color: #ffb703;
+    margin-right: 6px;
+}
+
+.live-twitch-btn {
+    background: #6441a5 !important;
+    color: #fff !important;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 14px 20px;
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(100, 65, 165, 0.3);
+}
+
+.live-twitch-btn:hover {
+    background: #7d5bbe !important;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .live-container { grid-template-columns: 1fr; }
+    .live-info-box { margin-top: 10px; }
+}
     </style>
-    <section class="calendar-section">
+
+    <section class="live-stream-section">
+    <div class="live-container">
+        
+        <div class="live-player-box">
+            <iframe 
+                src="https://player.twitch.tv/?channel=grccf1esport&parent=localhost&muted=false"
+                height="100%" 
+                width="100%" 
+                allowfullscreen="true"
+                style="border: none; border-radius: 8px;">
+            </iframe>
+        </div>
+
+        <div class="live-info-box">
+            <div class="live-badge-wrapper">
+                <span class="live-dot"></span>
+                <span class="live-text-badge">DIRETTA IN CORSO</span>
+            </div>
+            <h2 class="live-title">Gran Premio Live!</h2>
+            <p class="live-description">
+                Non perderti neanche un secondo della gara di oggi. I semafori si spengono a breve!
+            </p>
+            <div class="live-schedule">
+                <p><i class="fas fa-clock"></i> <strong>Apertura Lobby:</strong> Ore 20:45</p>
+                <p><i class="fas fa-flag"></i> <strong>Inizio Qualifiche:</strong> Ore 21:00</p>
+            </div>
+            <a href="https://www.twitch.tv/grccf1esport" target="_blank" class="live-twitch-btn">
+                <i class="fab fa-twitch"></i> Apri Chat su Twitch
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<section class="calendar-section">
     <h2 class="section-title">Calendario <span>Gare 2026</span></h2>
     
     <div class="calendar-grid">
