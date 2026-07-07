@@ -1029,6 +1029,162 @@
         grid-template-columns: 1fr;
     }
 }
+/* --- STILE SEZIONE NEWS --- */
+.news-section {
+    padding: 40px 20px;
+    margin-bottom: 50px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-card {
+    background: var(--bg-card); /* Coerente con lo sfondo dei tuoi box scuri */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 183, 3, 0.1);
+    border-color: rgba(255, 183, 3, 0.3);
+}
+
+.news-img-box {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-img-box img {
+    transform: scale(1.08);
+}
+
+/* Badge delle categorie sopra le foto */
+.news-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.badge-official { background: #ff1a1a; }
+.badge-race { background: #ffb703; color: #000; }
+.badge-stewards { background: #1877F2; }
+
+.news-content {
+    padding: 20px;
+}
+
+.news-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.news-date i {
+    margin-right: 5px;
+}
+
+.news-card-title {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.news-card-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+}
+
+.news-read-more {
+    color: var(--accent) !important; /* Colore oro del tuo tema */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.2s ease;
+}
+
+.news-read-more:hover {
+    gap: 8px;
+}
+/* --- STILE POP-UP NEWS (MODAL) --- */
+.news-modal {
+    display: none; /* Nascosto di base */
+    position: fixed;
+    z-index: 9999; /* Sempre sopra a tutto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px); /* Sfondo sfuocato molto moderno */
+    align-items: center;
+    justify-content: center;
+}
+
+.news-modal-content {
+    background-color: #131a26; /* Stesso scuro dei tuoi box */
+    border: 2px solid #ffb703; /* Bordino oro */
+    border-radius: 16px;
+    padding: 30px;
+    width: 90%;
+    max-width: 650px;
+    box-shadow: 0 10px 40px rgba(255, 183, 3, 0.2);
+    position: relative;
+    animation: scaleUp 0.3s ease;
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Tasto di chiusura (X) */
+.news-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--text-muted);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.news-modal-close:hover {
+    color: #ff3838; /* Diventa rosso al passaggio del mouse */
+}
     </style>
 
     <section class="live-stream-section">
@@ -1568,6 +1724,53 @@
     </div>
 </section>
 
+<section class="news-section">
+    <h2 class="section-title">Ultime dal <span>Paddock</span></h2>
+    
+    <div class="news-grid">
+        
+        <article class="news-card">
+            <div class="news-img-box">
+                <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80" alt="News 1">
+                <span class="news-badge badge-official">Ufficiale</span>
+            </div>
+            <div class="news-content">
+                <span class="news-date"><i class="far fa-calendar-alt"></i> 7 Luglio 2026</span>
+                <h3 class="news-card-title">Aperte le iscrizioni per le riserve della Stagione 2026</h3>
+                <p class="news-card-desc">Il muretto box GRCC ha aperto ufficialmente i moduli per i piloti di riserva. Scaldate i motori, i posti in griglia sono ambitissimi.</p>
+                <a href="javascript:void(0)" onclick="openArticle(1)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-img-box">
+                <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=600&q=80" alt="News 2">
+                <span class="news-badge badge-race">Resoconto</span>
+            </div>
+            <div class="news-content">
+                <span class="news-date"><i class="far fa-calendar-alt"></i> 5 Luglio 2026</span>
+                <h3 class="news-card-title">SICKMIRKO analizza i rivali: "Quest'anno sarà più dura"</h3>
+                <p class="news-card-desc">Il campione in carica ha rilasciato una breve intervista prima dell'inizio dei test invernali, tenendo d'occhio i tempi di RAO-783.</p>
+                <a href="javascript:void(0)" onclick="openArticle(2)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-img-box">
+                <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=600&q=80" alt="News 3">
+                <span class="news-badge badge-stewards">Commissari</span>
+            </div>
+            <div class="news-content">
+                <span class="news-date"><i class="far fa-calendar-alt"></i> 1 Luglio 2026</span>
+                <h3 class="news-card-title">Aggiornato il regolamento sulle penalità in pista</h3>
+                <p class="news-card-desc">La direzione gara ha chiarito i limiti del tracciato per evitare fraintendimenti alla prima curva del Gran Premio d'Australia.</p>
+                <a href="javascript:void(0)" onclick="openArticle(3)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+    </div>
+</section>
+
     <section class="teams-section">
         <h2 class="section-title">Schieramento <span>Piloti & Scuderie</span></h2>
         
@@ -2006,6 +2209,114 @@
         document.getElementById('tab-' + tabName).classList.add('active');
         event.currentTarget.classList.add('active');
 }
+</script>
+<div id="newsModal" class="news-modal">
+    <div class="news-modal-content">
+        <span class="news-modal-close">&times;</span>
+        <span id="modalBadge" class="news-badge">CATEGORIA</span>
+        <span id="modalDate" class="news-date" style="margin-top: 15px;"><i class="far fa-calendar-alt"></i> DATA</span>
+        <h2 id="modalTitle" style="color: #fff; margin: 15px 0; font-size: 1.8rem;">TITOLO NEWS</h2>
+        <div id="modalBody" style="color: var(--text-light); line-height: 1.6; font-size: 1rem;">
+            </div>
+    </div>
+</div>
+
+<script>
+const articlesData = {
+    1: {
+        title: 'Aperte le iscrizioni per le riserve della Stagione 2026',
+        badge: 'Ufficiale',
+        badgeClass: 'badge-official',
+        date: '7 Luglio 2026',
+        content: '<p>La direzione di gara del campionato <strong>GRCC F1 ESPORTS</strong> comunica ufficialmente l\'apertura del modulo d\'iscrizione per i piloti di riserva della nuova stagione imminente.</p><p>A causa dell\'elevato numero di richieste per la griglia principale, i piloti di riserva avranno un ruolo fondamentale quest\'anno e saranno chiamati a sostituire i titolari assenti per accumulare punti preziosi sia per la classifica piloti che per i costruttori. Per candidarsi, basta compilare il modulo disponibile sui nostri canali social ufficiali Discord e Facebook. Preparate i setup, il semaforo sta per spegnersi!</p>'
+    },
+    2: {
+        title: 'SICKMIRKO analizza i rivali: "Quest\'anno sarà più dura"',
+        badge: 'Resoconto',
+        badgeClass: 'badge-race',
+        date: '5 Luglio 2026',
+        content: '<p>Il campione del mondo in carica <strong>SICKMIRKO</strong>, reduce dallo straordinario trionfo con 535 punti nella scorsa stagione a bordo della Ferrari, ha rilasciato una dichiarazione esclusiva ai nostri microfoni.</p><p>"Guardando i tempi dei test invernali, il livello si è alzato tantissimo. RAO-783 e DAVIARCO1999 hanno un passo gara impressionante e la Haas sembra aver trovato qualcosa in più a livello aerodinamico. Difendere il titolo quest\'anno richiederà il 110% della concentrazione in ogni singola qualifica. Non vedo l\'ora di scendere in pista a Melbourne!".</p>'
+    },
+    3: {
+        title: 'Aggiornato il regolamento sulle penalità in pista',
+        badge: 'Commissari',
+        badgeClass: 'badge-stewards',
+        date: '1 Luglio 2026',
+        content: '<p>Il Collegio dei Commissari Sportivi GRCC ha rilasciato l\'addendum ufficiale al regolamento sportivo della Stagione 2026, focalizzandosi in particolare sul severo rispetto dei <strong>Track Limits</strong>.</p><p>A partire dal primo Round in Australia, i tagli di curva reiterati verranno sanzionati automaticamente dal gioco, ma i commissari applicheranno penalità in secondi post-gara in caso di sorpassi avvenuti traendo vantaggio oltre la linea bianca. È stato inoltre confermato che il sistema di investigazione dei contatti avverrà unicamente tramite l\'invio dei video di segnalazione nel canale dedicato entro 24 ore dal termine del Gran Premio.</p>'
+    }
+};
+
+const modal = document.getElementById("newsModal");
+const closeBtn = document.querySelector(".news-modal-close");
+
+function openArticle(id) {
+    const article = articlesData[id];
+    if(!article) return;
+    
+    document.getElementById("modalTitle").innerText = article.title;
+    document.getElementById("modalDate").innerHTML = `<i class="far fa-calendar-alt"></i> ${article.date}`;
+    document.getElementById("modalBody").innerHTML = article.content;
+    
+    const badge = document.getElementById("modalBadge");
+    badge.innerText = article.badge;
+    badge.className = `news-badge ${article.badgeClass}`;
+    
+    modal.style.display = "flex";
+}
+
+closeBtn.onclick = function() { modal.style.display = "none"; }
+window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+</script>
+<script>
+// Database dei testi completi degli articoli
+const articlesData = {
+    1: {
+        title: 'Aperte le iscrizioni per le riserve della Stagione 2026',
+        badge: 'Ufficiale',
+        badgeClass: 'badge-official',
+        date: '7 Luglio 2026',
+        content: '<p>La direzione di gara del campionato <strong>GRCC F1 ESPORTS</strong> comunica ufficialmente l\'apertura del modulo d\'iscrizione per i piloti di riserva della nuova stagione imminente.</p><p>A causa dell\'elevato numero di richieste per la griglia principale, i piloti di riserva avranno un ruolo fondamentale quest\'anno e saranno chiamati a sostituire i titolari assenti per accumulare punti preziosi sia per la classifica piloti che per i costruttori. Per candidarsi, basta compilare il modulo disponibile sui nostri canali social ufficiali Discord e Facebook. Preparate i setup, il semaforo sta per spegnersi!</p>'
+    },
+    2: {
+        title: 'SICKMIRKO analizza i rivali: "Quest\'anno sarà più dura"',
+        badge: 'Resoconto',
+        badgeClass: 'badge-race',
+        date: '5 Luglio 2026',
+        content: '<p>Il campione del mondo in carica <strong>SICKMIRKO</strong>, reduce dallo straordinario trionfo con 535 punti nella scorsa stagione a bordo della Ferrari, ha rilasciato una dichiarazione esclusiva ai nostri microfoni.</p><p>"Guardando i tempi dei test invernali, il livello si è alzato tantissimo. RAO-783 e DAVIARCO1999 hanno un passo gara impressionante e la Haas sembra aver trovato qualcosa in più a livello aerodinamico. Difendere il titolo quest\'anno richiederà il 110% della concentrazione in ogni singola qualifica. Non vedo l\'ora di scendere in pista a Melbourne!".</p>'
+    },
+    3: {
+        title: 'Aggiornato il regolamento sulle penalità in pista',
+        badge: 'Commissari',
+        badgeClass: 'badge-stewards',
+        date: '1 Luglio 2026',
+        content: '<p>Il Collegio dei Commissari Sportivi GRCC ha rilasciato l\'addendum ufficiale al regolamento sportivo della Stagione 2026, focalizzandosi in particolare sul severo rispetto dei <strong>Track Limits</strong>.</p><p>A partire dal primo Round in Australia, i tagli di curva reiterati verranno sanzionati automaticamente dal gioco, ma i commissari applicheranno penalità in secondi post-gara in caso di sorpassi avvenuti traendo vantaggio oltre la linea bianca. È stato inoltre confermato che il sistema di investigazione dei contatti avverrà unicamente tramite l\'invio dei video di segnalazione nel canale dedicato entro 24 ore dal termine del Gran Premio.</p>'
+    }
+};
+
+const modal = document.getElementById("newsModal");
+const closeBtn = document.querySelector(".news-modal-close");
+
+// Funzione per aprire il pop-up e caricare i dati corretti
+function openArticle(id) {
+    const article = articlesData[id];
+    if(!article) return;
+    
+    document.getElementById("modalTitle").innerText = article.title;
+    document.getElementById("modalDate").innerHTML = `<i class="far fa-calendar-alt"></i> ${article.date}`;
+    document.getElementById("modalBody").innerHTML = article.content;
+    
+    const badge = document.getElementById("modalBadge");
+    badge.innerText = article.badge;
+    badge.className = `news-badge ${article.badgeClass}`;
+    
+    modal.style.display = "flex";
+}
+
+// Chiudi cliccando sulla X
+closeBtn.onclick = function() { modal.style.display = "none"; }
+
+// Chiudi cliccando fuori dal pop-up
+window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 </script>
 </body>
 </html>
