@@ -970,6 +970,65 @@
         text-align: center;
     }
 }
+/* --- STILE SOCIAL COMMUNITY (DIRETTA STREAMING) --- */
+.live-social-wrapper {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.social-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.social-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Colore Blu Ufficiale Facebook */
+.btn-facebook {
+    background: #1877F2 !important;
+}
+
+/* Colore Nero Ufficiale TikTok */
+.btn-tiktok {
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Animazione Hover */
+.social-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+}
+
+/* Adattamento automatico per smartphone */
+@media (max-width: 480px) {
+    .social-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
     </style>
 
     <section class="live-stream-section">
@@ -977,7 +1036,7 @@
         
         <div class="live-player-box">
             <iframe 
-                src="https://player.twitch.tv/?channel=grccf1esport&parent=localhost&muted=false" 
+                src="https://player.twitch.tv/?channel=grccf1esport&parent=patricktoto1985.github.io&parent=127.0.0.1&muted=false" 
                 height="100%" 
                 width="100%" 
                 allowfullscreen="true"
@@ -995,14 +1054,27 @@
                 Non perderti neanche un secondo della gara di oggi. I semafori si spengono a breve!
             </p>
             <div class="live-schedule">
-                <p><i class="fas fa-clock"></i> <strong>Apertura Lobby:</strong> Ore 21:30</p>
-                <p><i class="fas fa-flag"></i> <strong>Inizio Qualifiche:</strong> Ore 21:40</p>
+                <p><i class="fas fa-clock"></i> <strong>Apertura Lobby:</strong> Ore 20:45</p>
+                <p><i class="fas fa-flag"></i> <strong>Inizio Qualifiche:</strong> Ore 21:00</p>
             </div>
-            <a href="https://www.twitch.tv/grccf1esport" target="_blank" class="live-twitch-btn">
+            
+            <a href="https://twitch.tv/grccf1esport" target="_blank" class="live-twitch-btn">
                 <i class="fab fa-twitch"></i> Apri Chat su Twitch
             </a>
-        </div>
 
+            <div class="live-social-wrapper">
+                <span class="social-label">Seguici anche su:</span>
+                <div class="social-links-grid">
+                    <a href="https://www.facebook.com/profile.php?id=61552370532570" target="_blank" class="social-btn btn-facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="https://www.tiktok.com/@grccf1esport?_r=1&_t=ZN-97prJLodlBe" target="_blank" class="social-btn btn-tiktok">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
 
