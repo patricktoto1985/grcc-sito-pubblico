@@ -2208,7 +2208,8 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch(url)
         .then(res => res.text())
         .then(data => {
-            const temp = data.substr(47).slice(0, -2);
+            // Sostituisci le righe 2211, 2212 e 2213 con questo:
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
             const rows = json.table.rows;
             
