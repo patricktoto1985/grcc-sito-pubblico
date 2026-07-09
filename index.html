@@ -2261,7 +2261,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
-            const rows = json.table.rows.slice(1); // Salta la riga delle intestazioni
+            const rows = json.table.rows.slice(0); // Salta la riga delle intestazioni
 
             // Cerca il contenitore corretto (prova sia con l'ID che cercando la sezione highlights)
             let gridBody = document.getElementById("highlights-grid") || document.querySelector(".standings-section.highlights-section") || document.querySelector(".grcc-body-wrapper");
