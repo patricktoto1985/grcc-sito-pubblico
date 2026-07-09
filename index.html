@@ -2261,14 +2261,11 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
-            const rows = json.table.rows.slice(0); // Salta la riga delle intestazioni
+            const rows = json.table.rows.slice(0); // Mostra tutti i video dal primo all'ultimo
 
-            // Cerca il contenitore corretto (prova sia con l'ID che cercando la sezione highlights)
             let gridBody = document.getElementById("highlights-grid") || document.querySelector(".standings-section.highlights-section") || document.querySelector(".grcc-body-wrapper");
             
-            // Se trova un messaggio di testo di caricamento puro, lo svuota
             if (gridBody) {
-                // Rimuove l'eventuale scritta di caricamento infinito se presente come testo semplice
                 const loadingText = Array.from(gridBody.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.includes("Caricamento"));
                 if (loadingText) loadingText.remove();
             }
@@ -2276,7 +2273,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const currentHost = "patricktoto1985.github.io";
 
             rows.forEach((row) => {
-                if (!row.c || !row.c[1]) return; // Salta le righe vuote del foglio
+                if (!row.c || !row.c[1]) return; 
 
                 const round = row.c[0] ? row.c[0].v : '';
                 const titolo = row.c[1] ? row.c[1].v : '';
@@ -2288,28 +2285,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (videoUrl.includes('twitch.tv')) {
                     let twitchParam = '';
+                    
+                    // SUPPORTO AUTOMATICO PER TUTTI I TIPI DI LINK TWITCH
                     if (videoUrl.includes('/videos/')) {
                         const videoId = videoUrl.split('/videos/')[1].split('?')[0];
-                        twitchParam = `video=${videoId}`;
-                    } else if (videoUrl.includes('clips.twitch.tv')) {
+                        twitchParam = "video=" + videoId;
+                    } else if (videoUrl.includes('clips.twitch.tv/')) {
                         const clipId = videoUrl.split('clips.twitch.tv/')[1].split('?')[0];
-                        twitchParam = `clip=${clipId}`;
-                    } else {
+                        twitchParam = "clip=" + clipId;
+                    } else if (videoUrl.includes('/clip/')) {
+                        // Converte i link tipo twitch.tv/canale/clip/NomeClip
                         const clipId = videoUrl.split('/clip/')[1].split('?')[0];
-                        twitchParam = `clip=${clipId}`;
+                        twitchParam = "clip=" + clipId;
+                    } else {
+                        // Se è un link generico del canale, estrae l'ultimo pezzo ipotizzando sia una clip
+                        const parts = videoUrl.split('/');
+                        const lastPart = parts[parts.length - 1].split('?')[0];
+                        twitchParam = "clip=" + lastPart;
                     }
                     
-                    videoPlayerHTML = `
-                        <iframe src="https://player.twitch.tv/?${twitchParam}&parent=${currentHost}&autoplay=false" 
-                                frameborder="0" allowfullscreen="true" scrolling="no" 
-                                style="width: 100%; height: 200px; border-radius: 8px 8px 0 0;">
-                        </iframe>`;
+                    videoPlayerHTML = '<iframe src="https://player.twitch.tv/?' + twitchParam + '&parent=' + currentHost + '&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 200px; border-radius: 8px 8px 0 0;"></iframe>';
                 } else if (videoUrl) {
-                    videoPlayerHTML = `
-                        <video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;">
-                            <source src="${videoUrl}" type="video/mp4">
-                            Il browser non supporta il video.
-                        </video>`;
+                    videoPlayerHTML = '<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="' + videoUrl + '" type="video/mp4">Il browser non supporta il video.</video>';
                 }
 
                 const card = document.createElement("article");
