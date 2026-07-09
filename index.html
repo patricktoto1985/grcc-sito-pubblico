@@ -1541,62 +1541,12 @@
                         <th>Punti</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="pos-1">
-                        <td><span class="podium-badge">1</span></td>
-                        <td><img src="assets/ferrari.png" class="table-team-logo" alt=""> Scuderia Ferrari HP</td>
-                        <td class="points-cell">43</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="assets/audi.png" class="table-team-logo" alt=""> Audi F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="img/alpine.png" class="table-team-logo" alt=""> Alpine F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-3">
-                        <td><span class="podium-badge">3</span></td>
-                        <td><img src="img/aston martin.png" class="table-team-logo" alt=""> Aston Martin F1 Team</td>
-                        <td class="points-cell">20</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="assets/cadillac-formula-1-team-seeklogo.png" class="table-team-logo" alt=""> Cadillac F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="assets/haas.png" class="table-team-logo" alt=""> Haas F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="img/mclaren.png" class="table-team-logo" alt=""> McLaren F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="assets/mercedes.png" class="table-team-logo" alt=""> Mercedes F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="assets/racing bulls.png" class="table-team-logo" alt=""> Racing Bulls F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="assets/red bull.png" class="table-team-logo" alt=""> Red Bull Racing</td>
-                        <td class="points-cell">27</td>
-                    </tr>
-                    <tr class="pos-2">
-                        <td><span class="podium-badge">2</span></td>
-                        <td><img src="assets/williams.png" class="table-team-logo" alt=""> Williams F1 Team</td>
-                        <td class="points-cell">27</td>
-                    </tr>
+                <tbody id="costruttori-table-body">
+             <tr id="costruttori-loading">
+            <td colspan="3" style="text-align: center; color: #a0aec0; padding: 20px;">
+                <i class="fas fa-spinner fa-spin"></i> Caricamento classifica in corso...
+            </td>
+        </tr>       
                 </tbody>
             </table>
         </div>
@@ -2201,20 +2151,20 @@ window.onclick = function(event) { if (event.target == modal) { modal.style.disp
 document.addEventListener("DOMContentLoaded", function() {
     // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
     const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
-    const sheetName = 'Foglio 1'; 
     
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+    // 1. SCRIPT AUTOMATICO CLASSIFICA PILOTI
+    const sheetNamePiloti = 'Foglio 1';
+    const urlPiloti = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNamePiloti}`;
 
-    fetch(url)
+    fetch(urlPiloti)
         .then(res => res.text())
         .then(data => {
-            // Sostituisci le righe 2211, 2212 e 2213 con questo:
             const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
             const rows = json.table.rows;
-            
+
             const tableBody = document.getElementById("piloti-table-body");
-            if(tableBody) {
+            if (tableBody) {
                 tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
             }
 
@@ -2224,15 +2174,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 const scuderia = row.c[2] ? row.c[2].v : '';
                 const punti = row.c[3] ? row.c[3].v : '0';
 
-                // Questo pezzo prende il nome scritto sul foglio e cerca il file .png corrispondente
                 const logoPath = `assets/${scuderia.toLowerCase().replace(/\s+/g, '')}.png`;
 
                 const tr = document.createElement("tr");
-                
-                // Mantiene le classi grafiche originali per i primi 3 posti (oro, argento, bronzo)
-                if(pos == 1) tr.className = "pos-1";
-                else if(pos == 2) tr.className = "pos-2";
-                else if(pos == 3) tr.className = "pos-3";
+
+                if (pos == 1) tr.className = "pos-1";
+                else if (pos == 2) tr.className = "pos-2";
+                else if (pos == 3) tr.className = "pos-3";
 
                 tr.innerHTML = `
                     <td><span class="podio-badge">${pos}</span></td>
@@ -2240,14 +2188,56 @@ document.addEventListener("DOMContentLoaded", function() {
                     <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> ${scuderia}</td>
                     <td class="points-cell">${punti}</td>
                 `;
-                if(tableBody) {
+
+                if (tableBody) {
                     tableBody.appendChild(tr);
                 }
             });
         })
-        .catch(err => {
-            console.error("Errore foglio:", err);
-        });
+        .catch(err => console.error("Errore foglio piloti:", err));
+
+
+    // 2. SCRIPT AUTOMATICO CLASSIFICA COSTRUTTORI
+    const sheetNameCostruttori = 'Costruttori'; 
+    const urlCostruttori = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameCostruttori}`;
+
+    fetch(urlCostruttori)
+        .then(res => res.text())
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
+
+            const tableBody = document.getElementById("costruttori-table-body");
+            if (tableBody) {
+                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
+            }
+
+            rows.forEach((row) => {
+                const pos = row.c[0] ? row.c[0].v : '';
+                const scuderia = row.c[1] ? row.c[1].v : '';
+                const punti = row.c[2] ? row.c[2].v : '0';
+
+                const logoPath = `assets/${scuderia.toLowerCase().replace(/\s+/g, '')}.png`;
+
+                const tr = document.createElement("tr");
+
+                if (pos == 1) tr.className = "pos-1";
+                else if (pos == 2) tr.className = "pos-2";
+                else if (pos == 3) tr.className = "pos-3";
+
+                tr.innerHTML = `
+                    <td><span class="podio-badge">${pos}</span></td>
+                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> <strong>${scuderia}</strong></td>
+                    <td class="points-cell">${punti}</td>
+                `;
+
+                if (tableBody) {
+                    tableBody.appendChild(tr);
+                }
+            });
+        })
+        .catch(err => console.error("Errore costruttori:", err));
 });
 </script>
 </body>
