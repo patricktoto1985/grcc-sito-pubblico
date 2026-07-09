@@ -2253,6 +2253,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // 3. SCRIPT AUTOMATICO HIGHLIGHTS (TWITCH / MP4)
     const sheetId = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
     const sheetNameHighlights = 'Highlights'; 
+    // NOTA: Qui sotto ora ci sono i backtick corretti sia all'inizio che alla fine!
     const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
 
     fetch(urlHighlights)
@@ -2260,15 +2261,23 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
-            const rows = json.table.rows.slice(1)
+            const rows = json.table.rows.slice(1); // Salta la riga delle intestazioni
 
-            const gridBody = document.getElementById("highlights-grid");
-            if (gridBody) gridBody.innerHTML = ""; 
+            // Cerca il contenitore corretto (prova sia con l'ID che cercando la sezione highlights)
+            let gridBody = document.getElementById("highlights-grid") || document.querySelector(".standings-section.highlights-section") || document.querySelector(".grcc-body-wrapper");
+            
+            // Se trova un messaggio di testo di caricamento puro, lo svuota
+            if (gridBody) {
+                // Rimuove l'eventuale scritta di caricamento infinito se presente come testo semplice
+                const loadingText = Array.from(gridBody.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.includes("Caricamento"));
+                if (loadingText) loadingText.remove();
+            }
 
-            // Rileva automaticamente se sei su VS Code locale o su GitHub online
             const currentHost = window.location.hostname || "127.0.0.1";
 
             rows.forEach((row) => {
+                if (!row.c || !row.c[1]) return; // Salta le righe vuote del foglio
+
                 const round = row.c[0] ? row.c[0].v : '';
                 const titolo = row.c[1] ? row.c[1].v : '';
                 const dataGara = row.c[2] ? row.c[2].v : '';
@@ -2290,13 +2299,12 @@ document.addEventListener("DOMContentLoaded", function() {
                         twitchParam = `clip=${clipId}`;
                     }
                     
-                    // Inserisce dinamicamente l'host attuale per sbloccare il player
                     videoPlayerHTML = `
                         <iframe src="https://player.twitch.tv/?${twitchParam}&parent=${currentHost}&autoplay=false" 
                                 frameborder="0" allowfullscreen="true" scrolling="no" 
                                 style="width: 100%; height: 200px; border-radius: 8px 8px 0 0;">
                         </iframe>`;
-                } else {
+                } else if (videoUrl) {
                     videoPlayerHTML = `
                         <video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;">
                             <source src="${videoUrl}" type="video/mp4">
@@ -2306,16 +2314,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 const card = document.createElement("article");
                 card.className = "news-card";
+                card.style.margin = "15px auto";
+                card.style.maxWidth = "400px";
 
                 card.innerHTML = `
                     <div class="news-img-box">
                         ${videoPlayerHTML}
-                        <span class="news-badge badge-official">${round}</span>
+                        <span class="news-badge badge-official">Round ${round}</span>
                     </div>
-                    <div class="news-content">
-                        <span class="news-date"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
-                        <h3 class="news-card-title">${titolo}</h3>
-                        <p class="news-card-desc">${descrizione}</p>
+                    <div class="news-content" style="padding: 15px; text-align: left;">
+                        <span class="news-date" style="color: #bbb; font-size: 0.85rem;"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
+                        <h3 class="news-card-title" style="margin: 5px 0; color: #fff;">${titolo}</h3>
+                        <p class="news-card-desc" style="color: #ddd; font-size: 0.9rem;">${descrizione}</p>
                     </div>
                 `;
 
