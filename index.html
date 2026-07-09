@@ -1553,6 +1553,17 @@
     </div>
 </section>
 
+
+<section class="highlights-section" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
+    <h2 class="section-title" style="margin-bottom: 30px;">Highlights <span style="color: #ff9800;">Gare</span></h2>
+    
+    <div class="news-grid" id="highlights-grid">
+        <div style="color: #a0aec0; text-align: center; width: 100%; grid-column: 1/-1; padding: 40px;">
+            Caricamento highlights in corso...
+        </div>
+    </div>
+</section>
+
 <section class="news-section">
     <h2 class="section-title">Ultime dal <span>Paddock</span></h2>
     
@@ -2239,6 +2250,78 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(err => console.error("Errore costruttori:", err));
 });
+// 3. SCRIPT AUTOMATICO HIGHLIGHTS (TWITCH / MP4)
+    const sheetNameHighlights = 'Highlights'; 
+    const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
+
+    fetch(urlHighlights)
+        .then(res => res.text())
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
+
+            const gridBody = document.getElementById("highlights-grid");
+            if (gridBody) gridBody.innerHTML = ""; 
+
+            // Rileva automaticamente se sei su VS Code locale o su GitHub online
+            const currentHost = window.location.hostname || "127.0.0.1";
+
+            rows.forEach((row) => {
+                const round = row.c[0] ? row.c[0].v : '';
+                const titolo = row.c[1] ? row.c[1].v : '';
+                const dataGara = row.c[2] ? row.c[2].v : '';
+                const videoUrl = row.c[3] ? row.c[3].v : '';
+                const descrizione = row.c[4] ? row.c[4].v : '';
+
+                let videoPlayerHTML = '';
+
+                if (videoUrl.includes('twitch.tv')) {
+                    let twitchParam = '';
+                    if (videoUrl.includes('/videos/')) {
+                        const videoId = videoUrl.split('/videos/')[1].split('?')[0];
+                        twitchParam = `video=${videoId}`;
+                    } else if (videoUrl.includes('clips.twitch.tv')) {
+                        const clipId = videoUrl.split('clips.twitch.tv/')[1].split('?')[0];
+                        twitchParam = `clip=${clipId}`;
+                    } else {
+                        const clipId = videoUrl.split('/clip/')[1].split('?')[0];
+                        twitchParam = `clip=${clipId}`;
+                    }
+                    
+                    // Inserisce dinamicamente l'host attuale per sbloccare il player
+                    videoPlayerHTML = `
+                        <iframe src="https://player.twitch.tv/?${twitchParam}&parent=${currentHost}&autoplay=false" 
+                                frameborder="0" allowfullscreen="true" scrolling="no" 
+                                style="width: 100%; height: 200px; border-radius: 8px 8px 0 0;">
+                        </iframe>`;
+                } else {
+                    videoPlayerHTML = `
+                        <video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;">
+                            <source src="${videoUrl}" type="video/mp4">
+                            Il browser non supporta il video.
+                        </video>`;
+                }
+
+                const card = document.createElement("article");
+                card.className = "news-card";
+
+                card.innerHTML = `
+                    <div class="news-img-box">
+                        ${videoPlayerHTML}
+                        <span class="news-badge badge-official">${round}</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
+                        <h3 class="news-card-title">${titolo}</h3>
+                        <p class="news-card-desc">${descrizione}</p>
+                    </div>
+                `;
+
+                if (gridBody) gridBody.appendChild(card);
+            });
+        })
+        .catch(err => console.error("Errore highlights:", err));
 </script>
 </body>
 </html>
