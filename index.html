@@ -2259,7 +2259,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
-            const rows = json.table.rows;
+            const rows = json.table.rows.slice(1)
 
             const gridBody = document.getElementById("highlights-grid");
             if (gridBody) gridBody.innerHTML = ""; 
