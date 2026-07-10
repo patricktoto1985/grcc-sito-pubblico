@@ -2270,9 +2270,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (loadingText) loadingText.remove();
             }
 
-            const currentHost = window.location.hostname;
-
-            rows.forEach((row) => {
+rows.forEach((row) => {
                 if (!row.c || !row.c[1]) return; 
 
                 const round = row.c[0] ? row.c[0].v : '';
@@ -2283,23 +2281,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 let videoPlayerHTML = '';
 
-                if (videoUrl.includes('twitch.tv')) {
+                if (videoUrl.includes('twitch.tv') || videoUrl.includes('clips.twitch.tv')) {
                     let twitchParam = '';
                     
-                    // SUPPORTO AUTOMATICO PER TUTTI I TIPI DI LINK TWITCH
-                    if (videoUrl.includes('/videos/')) {
-                        const videoId = videoUrl.split('/videos/')[1].split('?')[0].split('/')[0];
+                    let cleanUrl = videoUrl.split('?')[0].trim();
+                    if (cleanUrl.endsWith('/')) {
+                        cleanUrl = cleanUrl.slice(0, -1);
+                    }
+
+                    if (cleanUrl.includes('/videos/')) {
+                        const videoId = cleanUrl.split('/videos/').pop();
                         twitchParam = "video=" + videoId;
-                    } else if (videoUrl.includes('clips.twitch.tv/')) {
-                        const clipId = videoUrl.split('clips.twitch.tv/')[1].split('?')[0].split('/')[0];
+                    } else if (cleanUrl.includes('clips.twitch.tv/')) {
+                        const clipId = cleanUrl.split('clips.twitch.tv/').pop();
                         twitchParam = "clip=" + clipId;
-                    } else if (videoUrl.includes('/clip/')) {
-                        // Estrae correttamente la clip anche dai link lunghi del canale
-                        const clipId = videoUrl.split('/clip/')[1].split('?')[0].split('/')[0];
+                    } else if (cleanUrl.includes('/clip/')) {
+                        const clipId = cleanUrl.split('/clip/').pop();
                         twitchParam = "clip=" + clipId;
                     } else {
-                        // Gestione di emergenza per link puliti
-                        const parts = videoUrl.split('?')[0].split('/');
+                        const parts = cleanUrl.split('/');
                         const lastPart = parts[parts.length - 1];
                         twitchParam = "clip=" + lastPart;
                     }
