@@ -2108,54 +2108,6 @@ closeBtn.onclick = function() { modal.style.display = "none"; }
 window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 </script>
 
-    1: {
-        title: 'Aperte le iscrizioni per le riserve della Stagione 2026',
-        badge: 'Ufficiale',
-        badgeClass: 'badge-official',
-        date: '7 Luglio 2026',
-        content: '<p>La direzione di gara del campionato <strong>GRCC F1 ESPORTS</strong> comunica ufficialmente l\'apertura del modulo d\'iscrizione per i piloti di riserva della nuova stagione imminente.</p><p>A causa dell\'elevato numero di richieste per la griglia principale, i piloti di riserva avranno un ruolo fondamentale quest\'anno e saranno chiamati a sostituire i titolari assenti per accumulare punti preziosi sia per la classifica piloti che per i costruttori. Per candidarsi, basta compilare il modulo disponibile sui nostri canali social ufficiali Discord e Facebook. Preparate i setup, il semaforo sta per spegnersi!</p>'
-    },
-    2: {
-        title: 'SICKMIRKO analizza i rivali: "Quest\'anno sarà più dura"',
-        badge: 'Resoconto',
-        badgeClass: 'badge-race',
-        date: '5 Luglio 2026',
-        content: '<p>Il campione del mondo in carica <strong>SICKMIRKO</strong>, reduce dallo straordinario trionfo con 535 punti nella scorsa stagione a bordo della Ferrari, ha rilasciato una dichiarazione esclusiva ai nostri microfoni.</p><p>"Guardando i tempi dei test invernali, il livello si è alzato tantissimo. RAO-783 e DAVIARCO1999 hanno un passo gara impressionante e la Haas sembra aver trovato qualcosa in più a livello aerodinamico. Difendere il titolo quest\'anno richiederà il 110% della concentrazione in ogni singola qualifica. Non vedo l\'ora di scendere in pista a Melbourne!".</p>'
-    },
-    3: {
-        title: 'Aggiornato il regolamento sulle penalità in pista',
-        badge: 'Commissari',
-        badgeClass: 'badge-stewards',
-        date: '1 Luglio 2026',
-        content: '<p>Il Collegio dei Commissari Sportivi GRCC ha rilasciato l\'addendum ufficiale al regolamento sportivo della Stagione 2026, focalizzandosi in particolare sul severo rispetto dei <strong>Track Limits</strong>.</p><p>A partire dal primo Round in Australia, i tagli di curva reiterati verranno sanzionati automaticamente dal gioco, ma i commissari applicheranno penalità in secondi post-gara in caso di sorpassi avvenuti traendo vantaggio oltre la linea bianca. È stato inoltre confermato che il sistema di investigazione dei contatti avverrà unicamente tramite l\'invio dei video di segnalazione nel canale dedicato entro 24 ore dal termine del Gran Premio.</p>'
-    }
-};
-
-const modal = document.getElementById("newsModal");
-const closeBtn = document.querySelector(".news-modal-close");
-
-// Funzione per aprire il pop-up e caricare i dati corretti
-function openArticle(id) {
-    const article = articlesData[id];
-    if(!article) return;
-    
-    document.getElementById("modalTitle").innerText = article.title;
-    document.getElementById("modalDate").innerHTML = `<i class="far fa-calendar-alt"></i> ${article.date}`;
-    document.getElementById("modalBody").innerHTML = article.content;
-    
-    const badge = document.getElementById("modalBadge");
-    badge.innerText = article.badge;
-    badge.className = `news-badge ${article.badgeClass}`;
-    
-    modal.style.display = "flex";
-}
-
-// Chiudi cliccando sulla X
-closeBtn.onclick = function() { modal.style.display = "none"; }
-
-// Chiudi cliccando fuori dal pop-up
-window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
-</script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
@@ -2251,10 +2203,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // =========================================================
     // SCRIPT AUTOMATICO HIGHLIGHTS CORRETTO (URL RIPRISTINATO)
     // =========================================================
+    <script>
     (function() {
         const sheetId = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
         const sheetNameHighlights = 'Highlights';
-        // NOTA: Qui è stato reinserito il pezzo /d/ fondamentale prima di ${sheetId}
         const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
 
         fetch(urlHighlights)
@@ -2288,7 +2240,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     gridBody.innerHTML = gridBody.innerHTML.replace("Caricamento highlights in corso...", "");
                 }
 
-                // Gestione Host Sicura per Twitch (Risolve sia localhost che GitHub Pages)
                 const currentHost = window.location.hostname === "127.0.0.1" ? "localhost" : (window.location.hostname || "localhost");
 
                 rows.forEach((row) => {
@@ -2305,28 +2256,22 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (videoUrl.includes('twitch.tv') || videoUrl.includes('clips.twitch.tv')) {
                         let twitchParam = '';
                         let cleanUrl = videoUrl.split('?')[0].trim();
-                        if (cleanUrl.endsWith('/')) {
-                            cleanUrl = cleanUrl.slice(0, -1);
-                        }
+                        if (cleanUrl.endsWith('/')) cleanUrl = cleanUrl.slice(0, -1);
 
                         if (cleanUrl.includes('/videos/')) {
-                            const videoid = cleanUrl.split('/videos/').pop();
-                            twitchParam = "video=" + videoid;
+                            twitchParam = "video=" + cleanUrl.split('/videos/').pop();
                         } else if (cleanUrl.includes('clips.twitch.tv/')) {
-                            const clipId = cleanUrl.split('clips.twitch.tv/').pop();
-                            twitchParam = "clip=" + clipId;
+                            twitchParam = "clip=" + cleanUrl.split('clips.twitch.tv/').pop();
                         } else if (cleanUrl.includes('/clip/')) {
-                            const clipId = cleanUrl.split('/clip/').pop();
-                            twitchParam = "clip=" + clipId;
+                            twitchParam = "clip=" + cleanUrl.split('/clip/').pop();
                         } else {
                             const parts = cleanUrl.split('/');
-                            const lastPart = parts[parts.length - 1];
-                            twitchParam = "clip=" + lastPart;
+                            twitchParam = "clip=" + parts[parts.length - 1];
                         }
 
                         videoPlayerHTML = `<iframe src="https://player.twitch.tv/?${twitchParam}&parent=${currentHost}&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="200" width="100%" style="border-radius: 8px 8px 0 0;"></iframe>`;
                     } else if (videoUrl) {
-                        videoPlayerHTML = `<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="${videoUrl}" type="video/pipe"></video>`;
+                        videoPlayerHTML = `<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="${videoUrl}" type="video/mp4"></video>`;
                     }
 
                     const card = document.createElement("article");
@@ -2353,8 +2298,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (gridBody) gridBody.appendChild(card);
                 });
             })
-            .catch(err => console.error("Errore nel caricamento dei dati di Excel:", err));
+            .catch(err => console.error("Errore nel caricamento degli Highlights:", err));
     })();
-</script>
+    </script>
 </body>
 </html>
