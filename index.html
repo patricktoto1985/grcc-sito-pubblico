@@ -2250,91 +2250,106 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(err => console.error("Errore costruttori:", err));
 });
-// 3. SCRIPT AUTOMATICO HIGHLIGHTS (TWITCH / MP4)
-    const sheetId = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
-    const sheetNameHighlights = 'Highlights'; 
-    const urlHighlights = "https://docs.google.com/spreadsheets/d/" + sheetId + "/gviz/tq?tqx=out:json&sheet=" + sheetNameHighlights;
+// =========================================================
+    // SCRIPT AUTOMATICO HIGHLIGHTS BLINDATO (TWITCH / MP4)
+    // =========================================================
+    (function() {
+        const sheetId = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
+        const sheetNameHighlights = 'Highlights'; 
+        const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
 
-    fetch(urlHighlights)
-        .then(res => res.text())
-        .then(data => {
-            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
-            const json = JSON.parse(temp);
-            const rows = json.table.rows.slice(0); // Legge tutte le righe del foglio
+        fetch(urlHighlights)
+            .then(res => res.text())
+            .then(data => {
+                const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+                const json = JSON.parse(temp);
+                const rows = json.table.rows;
 
-            let gridBody = document.getElementById("highlights-grid") || document.querySelector(".standings-section.highlights-section") || document.querySelector(".grcc-body-wrapper");
-            
-            if (gridBody) {
-                // Rimuove la scritta "Caricamento highlights in corso..."
-                const loadingText = Array.from(gridBody.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.includes("Caricamento"));
-                if (loadingText) loadingText.remove();
-                
-                // Rimuove eventuali testi di caricamento dentro i tag figli
-                gridBody.innerHTML = gridBody.innerHTML.replace("Caricamento highlights in corso...", "");
-            }
+                // Cerca l'elemento contenitore o la sezione degli highlights
+                let gridBody = document.getElementById("highlights-grid") || 
+                               document.querySelector(".highlights-section") || 
+                               document.querySelector(".grcc-body-wrapper");
 
-            const currentHost = window.location.hostname || "127.0.0.1";
-
-            rows.forEach((row) => {
-                if (!row.c || !row.c[1]) return; 
-
-                const round = row.c[0] ? row.c[0].v : '';
-                const titolo = row.c[1] ? row.c[1].v : '';
-                const dataGara = row.c[2] ? row.c[2].v : '';
-                const videoUrl = row.c[3] ? row.c[3].v : '';
-                const descrizione = row.c[4] ? row.c[4].v : '';
-
-                let videoPlayerHTML = '';
-
-                if (videoUrl.includes('twitch.tv') || videoUrl.includes('clips.twitch.tv')) {
-                    let twitchParam = '';
-                    
-                    let cleanUrl = videoUrl.split('?')[0].trim();
-                    if (cleanUrl.endsWith('/')) {
-                        cleanUrl = cleanUrl.slice(0, -1);
+                if (!gridBody) {
+                    // Fallback di emergenza se non trova la griglia: la crea sotto il titolo
+                    const headers = document.querySelectorAll('h2, h1');
+                    for (let h of headers) {
+                        if (h.textContent.toUpperCase().includes('HIGHLIGHTS')) {
+                            gridBody = document.createElement('div');
+                            gridBody.style.display = 'flex';
+                            gridBody.style.flexWrap = 'wrap';
+                            gridBody.style.justifyContent = 'center';
+                            gridBody.style.gap = '20px';
+                            h.parentNode.insertBefore(gridBody, h.nextSibling);
+                            break;
+                        }
                     }
-
-                    if (cleanUrl.includes('/videos/')) {
-                        const videoId = cleanUrl.split('/videos/').pop();
-                        twitchParam = "video=" + videoId;
-                    } else if (cleanUrl.includes('clips.twitch.tv/')) {
-                        const clipId = cleanUrl.split('clips.twitch.tv/').pop();
-                        twitchParam = "clip=" + clipId;
-                    } else if (cleanUrl.includes('/clip/')) {
-                        const clipId = cleanUrl.split('/clip/').pop();
-                        twitchParam = "clip=" + clipId;
-                    } else {
-                        const parts = cleanUrl.split('/');
-                        const lastPart = parts[parts.length - 1];
-                        twitchParam = "clip=" + lastPart;
-                    }
-                    
-                    videoPlayerHTML = '<iframe src="https://player.twitch.tv/?' + twitchParam + '&parent=' + currentHost + '&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 200px; border-radius: 8px 8px 0 0;"></iframe>';
-                } else if (videoUrl) {
-                    videoPlayerHTML = '<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="' + videoUrl + '" type="video/mp4">Il browser non supporta il video.</video>';
                 }
 
-                const card = document.createElement("article");
-                card.className = "news-card";
-                card.style.margin = "15px auto";
-                card.style.maxWidth = "400px";
+                if (gridBody) {
+                    // Pulisce la scritta di caricamento vecchia
+                    gridBody.innerHTML = gridBody.innerHTML.replace("Caricamento highlights in corso...", "");
+                }
 
-                card.innerHTML = `
-                    <div class="news-img-box">
-                        ${videoPlayerHTML}
-                        <span class="news-badge badge-official">Round ${round}</span>
-                    </div>
-                    <div class="news-content" style="padding: 15px; text-align: left;">
-                        <span class="news-date" style="color: #bbb; font-size: 0.85rem;"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
-                        <h3 class="news-card-title" style="margin: 5px 0; color: #fff;">${titolo}</h3>
-                        <p class="news-card-desc" style="color: #ddd; font-size: 0.9rem;">${descrizione}</p>
-                    </div>
-                `;
+                const currentHost = window.location.hostname || "127.0.0.1";
 
-                if (gridBody) gridBody.appendChild(card);
-            });
-        })
-        .catch(err => console.error("Errore highlights:", err));
+                rows.forEach((row) => {
+                    if (!row.c || !row.c[1] || !row.c[1].v) return; 
+
+                    const round = row.c[0] ? row.c[0].v : '';
+                    const titolo = row.c[1] ? row.c[1].v : '';
+                    const dataGara = row.c[2] ? row.c[2].v : '';
+                    const videoUrl = row.c[3] ? row.c[3].v : '';
+                    const descrizione = row.c[4] ? row.c[4].v : '';
+
+                    let videoPlayerHTML = '';
+
+                    if (videoUrl.includes('twitch.tv') || videoUrl.includes('clips.twitch.tv')) {
+                        let twitchParam = '';
+                        let cleanUrl = videoUrl.split('?')[0].trim();
+                        if (cleanUrl.endsWith('/')) cleanUrl = cleanUrl.slice(0, -1);
+
+                        if (cleanUrl.includes('/videos/')) {
+                            twitchParam = "video=" + cleanUrl.split('/videos/').pop();
+                        } else if (cleanUrl.includes('clips.twitch.tv/')) {
+                            twitchParam = "clip=" + cleanUrl.split('clips.twitch.tv/').pop();
+                        } else if (cleanUrl.includes('/clip/')) {
+                            twitchParam = "clip=" + cleanUrl.split('/clip/').pop();
+                        } else {
+                            twitchParam = "clip=" + cleanUrl.split('/').pop();
+                        }
+                        
+                        videoPlayerHTML = `<iframe src="https://player.twitch.tv/?${twitchParam}&parent=${currentHost}&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 200px; border-radius: 8px 8px 0 0;"></iframe>`;
+                    } else if (videoUrl) {
+                        videoPlayerHTML = `<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="${videoUrl}" type="video/mp4">Il browser non supporta il video.</video>`;
+                    }
+
+                    const card = document.createElement("article");
+                    card.className = "news-card";
+                    card.style.margin = "15px";
+                    card.style.maxWidth = "400px";
+                    card.style.width = "100%";
+                    card.style.background = "#1a1c23";
+                    card.style.borderRadius = "8px";
+                    card.style.display = "inline-block";
+
+                    card.innerHTML = `
+                        <div class="news-img-box" style="position:relative;">
+                            ${videoPlayerHTML}
+                            <span class="news-badge badge-official" style="position:absolute; top:10px; right:10px; background:#e10600; color:#fff; padding:3px 8px; border-radius:4px; font-weight:bold; font-size:0.8rem;">Round ${round}</span>
+                        </div>
+                        <div class="news-content" style="padding: 15px; text-align: left;">
+                            <span class="news-date" style="color: #bbb; font-size: 0.85rem;"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
+                            <h3 class="news-card-title" style="margin: 5px 0; color: #fff; font-size: 1.2rem;">${titolo}</h3>
+                            <p class="news-card-desc" style="color: #ddd; font-size: 0.9rem; margin-bottom:0;">${descrizione}</p>
+                        </div>
+                    `;
+
+                    if (gridBody) gridBody.appendChild(card);
+                });
+            })
+            .catch(err => console.error("Errore nel caricamento dei dati di Excel:", err));
+    })();
 </script>
 </body>
 </html>
