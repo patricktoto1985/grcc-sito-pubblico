@@ -2107,9 +2107,7 @@ function openArticle(id) {
 closeBtn.onclick = function() { modal.style.display = "none"; }
 window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 </script>
-<script>
-// Database dei testi completi degli articoli
-const articlesData = {
+
     1: {
         title: 'Aperte le iscrizioni per le riserve della Stagione 2026',
         badge: 'Ufficiale',
@@ -2250,12 +2248,13 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(err => console.error("Errore costruttori:", err));
 });
-// =========================================================
-    // SCRIPT AUTOMATICO HIGHLIGHTS CORRETTO
+    // =========================================================
+    // SCRIPT AUTOMATICO HIGHLIGHTS CORRETTO (URL RIPRISTINATO)
     // =========================================================
     (function() {
-        const sheetId = '1o7jvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
+        const sheetId = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
         const sheetNameHighlights = 'Highlights';
+        // NOTA: Qui è stato reinserito il pezzo /d/ fondamentale prima di ${sheetId}
         const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
 
         fetch(urlHighlights)
