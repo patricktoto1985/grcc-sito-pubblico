@@ -2270,7 +2270,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (loadingText) loadingText.remove();
             }
 
-            const currentHost = "patricktoto1985.github.io";
+            const currentHost = window.location.hostname;
 
             rows.forEach((row) => {
                 if (!row.c || !row.c[1]) return; 
