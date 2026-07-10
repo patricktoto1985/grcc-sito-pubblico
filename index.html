@@ -2288,19 +2288,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     
                     // SUPPORTO AUTOMATICO PER TUTTI I TIPI DI LINK TWITCH
                     if (videoUrl.includes('/videos/')) {
-                        const videoId = videoUrl.split('/videos/')[1].split('?')[0];
+                        const videoId = videoUrl.split('/videos/')[1].split('?')[0].split('/')[0];
                         twitchParam = "video=" + videoId;
                     } else if (videoUrl.includes('clips.twitch.tv/')) {
-                        const clipId = videoUrl.split('clips.twitch.tv/')[1].split('?')[0];
+                        const clipId = videoUrl.split('clips.twitch.tv/')[1].split('?')[0].split('/')[0];
                         twitchParam = "clip=" + clipId;
                     } else if (videoUrl.includes('/clip/')) {
-                        // Converte i link tipo twitch.tv/canale/clip/NomeClip
-                        const clipId = videoUrl.split('/clip/')[1].split('?')[0];
+                        // Estrae correttamente la clip anche dai link lunghi del canale
+                        const clipId = videoUrl.split('/clip/')[1].split('?')[0].split('/')[0];
                         twitchParam = "clip=" + clipId;
                     } else {
-                        // Se è un link generico del canale, estrae l'ultimo pezzo ipotizzando sia una clip
-                        const parts = videoUrl.split('/');
-                        const lastPart = parts[parts.length - 1].split('?')[0];
+                        // Gestione di emergenza per link puliti
+                        const parts = videoUrl.split('?')[0].split('/');
+                        const lastPart = parts[parts.length - 1];
                         twitchParam = "clip=" + lastPart;
                     }
                     
