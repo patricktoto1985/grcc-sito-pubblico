@@ -2265,26 +2265,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 const json = JSON.parse(temp);
                 const rows = json.table.rows;
 
-                // Cerca l'elemento contenitore o la sezione degli highlights
                 let gridBody = document.getElementById("highlights-grid") || 
-                               document.querySelector(".highlights-section") || 
-                               document.querySelector(".grcc-body-wrapper");
+               document.querySelector(".highlights-section");
 
-                if (!gridBody) {
-                    // Fallback di emergenza se non trova la griglia: la crea sotto il titolo
-                    const headers = document.querySelectorAll('h2, h1');
-                    for (let h of headers) {
-                        if (h.textContent.toUpperCase().includes('HIGHLIGHTS')) {
-                            gridBody = document.createElement('div');
-                            gridBody.style.display = 'flex';
-                            gridBody.style.flexWrap = 'wrap';
-                            gridBody.style.justifyContent = 'center';
-                            gridBody.style.gap = '20px';
-                            h.parentNode.insertBefore(gridBody, h.nextSibling);
-                            break;
-                        }
-                    }
-                }
+if (!gridBody) {
+    // Se non trova il contenitore, lo crea automaticamente sotto al titolo "HIGHLIGHTS GARE"
+    const headers = document.querySelectorAll('h2, h1, h3');
+    for (let h of headers) {
+        if (h.textContent.toUpperCase().includes('HIGHLIGHTS')) {
+            gridBody = document.createElement('div');
+            gridBody.id = "highlights-grid";
+            gridBody.style.display = 'flex';
+            gridBody.style.flexWrap = 'wrap';
+            gridBody.style.justifyContent = 'center';
+            gridBody.style.gap = '20px';
+            gridBody.style.padding = '20px';
+            h.parentNode.insertBefore(gridBody, h.nextSibling);
+            break;
+        }
+    }
+}
 
                 if (gridBody) {
                     // Pulisce la scritta di caricamento vecchia
