@@ -2253,24 +2253,29 @@ document.addEventListener("DOMContentLoaded", function() {
 // 3. SCRIPT AUTOMATICO HIGHLIGHTS (TWITCH / MP4)
     const sheetId = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
     const sheetNameHighlights = 'Highlights'; 
-    // NOTA: Qui sotto ora ci sono i backtick corretti sia all'inizio che alla fine!
-    const urlHighlights = `https://docs.google.com/spreadsheets/d/1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
+    const urlHighlights = "https://docs.google.com/spreadsheets/d/" + sheetId + "/gviz/tq?tqx=out:json&sheet=" + sheetNameHighlights;
 
     fetch(urlHighlights)
         .then(res => res.text())
         .then(data => {
             const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
-            const rows = json.table.rows.slice(0); // Mostra tutti i video dal primo all'ultimo
+            const rows = json.table.rows.slice(0); // Legge tutte le righe del foglio
 
             let gridBody = document.getElementById("highlights-grid") || document.querySelector(".standings-section.highlights-section") || document.querySelector(".grcc-body-wrapper");
             
             if (gridBody) {
+                // Rimuove la scritta "Caricamento highlights in corso..."
                 const loadingText = Array.from(gridBody.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent.includes("Caricamento"));
                 if (loadingText) loadingText.remove();
+                
+                // Rimuove eventuali testi di caricamento dentro i tag figli
+                gridBody.innerHTML = gridBody.innerHTML.replace("Caricamento highlights in corso...", "");
             }
 
-rows.forEach((row) => {
+            const currentHost = window.location.hostname || "127.0.0.1";
+
+            rows.forEach((row) => {
                 if (!row.c || !row.c[1]) return; 
 
                 const round = row.c[0] ? row.c[0].v : '';
