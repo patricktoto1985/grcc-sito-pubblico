@@ -2251,11 +2251,11 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(err => console.error("Errore costruttori:", err));
 });
 // =========================================================
-    // SCRIPT AUTOMATICO HIGHLIGHTS BLINDATO (TWITCH / MP4)
+    // SCRIPT AUTOMATICO HIGHLIGHTS CORRETTO
     // =========================================================
     (function() {
-        const sheetId = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
-        const sheetNameHighlights = 'Highlights'; 
+        const sheetId = '1o7jvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
+        const sheetNameHighlights = 'Highlights';
         const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
 
         fetch(urlHighlights)
@@ -2266,35 +2266,34 @@ document.addEventListener("DOMContentLoaded", function() {
                 const rows = json.table.rows;
 
                 let gridBody = document.getElementById("highlights-grid") || 
-               document.querySelector(".highlights-section");
+                               document.querySelector(".highlights-section");
 
-if (!gridBody) {
-    // Se non trova il contenitore, lo crea automaticamente sotto al titolo "HIGHLIGHTS GARE"
-    const headers = document.querySelectorAll('h2, h1, h3');
-    for (let h of headers) {
-        if (h.textContent.toUpperCase().includes('HIGHLIGHTS')) {
-            gridBody = document.createElement('div');
-            gridBody.id = "highlights-grid";
-            gridBody.style.display = 'flex';
-            gridBody.style.flexWrap = 'wrap';
-            gridBody.style.justifyContent = 'center';
-            gridBody.style.gap = '20px';
-            gridBody.style.padding = '20px';
-            h.parentNode.insertBefore(gridBody, h.nextSibling);
-            break;
-        }
-    }
-}
+                if (!gridBody) {
+                    const headers = document.querySelectorAll('h2, h1, h3');
+                    for (let h of headers) {
+                        if (h.textContent.toUpperCase().includes('HIGHLIGHTS')) {
+                            gridBody = document.createElement('div');
+                            gridBody.id = "highlights-grid";
+                            gridBody.style.display = 'flex';
+                            gridBody.style.flexWrap = 'wrap';
+                            gridBody.style.justifyContent = 'center';
+                            gridBody.style.gap = '20px';
+                            gridBody.style.padding = '20px';
+                            h.parentNode.insertBefore(gridBody, h.nextSibling);
+                            break;
+                        }
+                    }
+                }
 
                 if (gridBody) {
-                    // Pulisce la scritta di caricamento vecchia
                     gridBody.innerHTML = gridBody.innerHTML.replace("Caricamento highlights in corso...", "");
                 }
 
-                const currentHost = window.location.hostname || "127.0.0.1";
+                // Gestione Host Sicura per Twitch (Risolve sia localhost che GitHub Pages)
+                const currentHost = window.location.hostname === "127.0.0.1" ? "localhost" : (window.location.hostname || "localhost");
 
                 rows.forEach((row) => {
-                    if (!row.c || !row.c[1] || !row.c[1].v) return; 
+                    if (!row || !row.c || !row.c[1] || !row.c[1].v) return;
 
                     const round = row.c[0] ? row.c[0].v : '';
                     const titolo = row.c[1] ? row.c[1].v : '';
@@ -2307,26 +2306,33 @@ if (!gridBody) {
                     if (videoUrl.includes('twitch.tv') || videoUrl.includes('clips.twitch.tv')) {
                         let twitchParam = '';
                         let cleanUrl = videoUrl.split('?')[0].trim();
-                        if (cleanUrl.endsWith('/')) cleanUrl = cleanUrl.slice(0, -1);
+                        if (cleanUrl.endsWith('/')) {
+                            cleanUrl = cleanUrl.slice(0, -1);
+                        }
 
                         if (cleanUrl.includes('/videos/')) {
-                            twitchParam = "video=" + cleanUrl.split('/videos/').pop();
+                            const videoid = cleanUrl.split('/videos/').pop();
+                            twitchParam = "video=" + videoid;
                         } else if (cleanUrl.includes('clips.twitch.tv/')) {
-                            twitchParam = "clip=" + cleanUrl.split('clips.twitch.tv/').pop();
+                            const clipId = cleanUrl.split('clips.twitch.tv/').pop();
+                            twitchParam = "clip=" + clipId;
                         } else if (cleanUrl.includes('/clip/')) {
-                            twitchParam = "clip=" + cleanUrl.split('/clip/').pop();
+                            const clipId = cleanUrl.split('/clip/').pop();
+                            twitchParam = "clip=" + clipId;
                         } else {
-                            twitchParam = "clip=" + cleanUrl.split('/').pop();
+                            const parts = cleanUrl.split('/');
+                            const lastPart = parts[parts.length - 1];
+                            twitchParam = "clip=" + lastPart;
                         }
-                        
-                        videoPlayerHTML = `<iframe src="https://player.twitch.tv/?${twitchParam}&parent=${currentHost}&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" style="width: 100%; height: 200px; border-radius: 8px 8px 0 0;"></iframe>`;
+
+                        videoPlayerHTML = `<iframe src="https://player.twitch.tv/?${twitchParam}&parent=${currentHost}&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="200" width="100%" style="border-radius: 8px 8px 0 0;"></iframe>`;
                     } else if (videoUrl) {
-                        videoPlayerHTML = `<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="${videoUrl}" type="video/mp4">Il browser non supporta il video.</video>`;
+                        videoPlayerHTML = `<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="${videoUrl}" type="video/pipe"></video>`;
                     }
 
                     const card = document.createElement("article");
                     card.className = "news-card";
-                    card.style.margin = "15px";
+                    card.style.margin = "15px auto";
                     card.style.maxWidth = "400px";
                     card.style.width = "100%";
                     card.style.background = "#1a1c23";
@@ -2336,7 +2342,7 @@ if (!gridBody) {
                     card.innerHTML = `
                         <div class="news-img-box" style="position:relative;">
                             ${videoPlayerHTML}
-                            <span class="news-badge badge-official" style="position:absolute; top:10px; right:10px; background:#e10600; color:#fff; padding:3px 8px; border-radius:4px; font-weight:bold; font-size:0.8rem;">Round ${round}</span>
+                            <span class="news-badge badge-official" style="position:absolute; top:10px; right:10px; background:#e10600; color:#fff; padding:3px 8px; border-radius:4px; font-weight:bold; font-size:12px;">Round ${round}</span>
                         </div>
                         <div class="news-content" style="padding: 15px; text-align: left;">
                             <span class="news-date" style="color: #bbb; font-size: 0.85rem;"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
