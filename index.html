@@ -2202,17 +2202,21 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(err => console.error("Errore costruttori:", err));
 });
- // ==========================================
-// VERSIONE AUTONOMA HIGHLIGHTS (FIX SHEETID)
+
+// ==========================================
+// VERSIONE DEFINITIVA HIGHLIGHTS (ID CORRETTO)
 // ==========================================
 (function() {
-    // Inseriamo l'ID direttamente qui dentro per evitare il ReferenceError
-    const sheetIdHighlights = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
+    // ID esatto recuperato dal blocco classifiche funzionante
+    const sheetIdHighlights = '1oZJvdapQMAWUNP7tujD2rIubN3DjC5vjufjSYELUc';
     const sheetNameHighlights = 'Highlights';
     const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetIdHighlights}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
 
     fetch(urlHighlights)
-        .then(res => res.text())
+        .then(res => {
+            if (!res.ok) throw new Error("Errore di connessione al file Google");
+            return res.text();
+        })
         .then(data => {
             const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
             const json = JSON.parse(temp);
