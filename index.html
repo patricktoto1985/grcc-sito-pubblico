@@ -2202,87 +2202,87 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(err => console.error("Errore costruttori:", err));
 });
-    // ==========================================
-// VERSIONE DEFINITIVA HIGHLIGHTS CON SICUREZZA HOST
+ // ==========================================
+// VERSIONE AUTONOMA HIGHLIGHTS (FIX SHEETID)
 // ==========================================
-const sheetNameHighlights = 'Highlights';
-const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
+(function() {
+    // Inseriamo l'ID direttamente qui dentro per evitare il ReferenceError
+    const sheetIdHighlights = '1o7JvdapQMAWUNP7tujD2rTubN3DjC5vjufjSYEtUrY';
+    const sheetNameHighlights = 'Highlights';
+    const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetIdHighlights}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
 
-fetch(urlHighlights)
-    .then(res => res.text())
-    .then(data => {
-        const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
-        const json = JSON.parse(temp);
-        const rows = json.table.rows;
+    fetch(urlHighlights)
+        .then(res => res.text())
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
 
-        const container = document.querySelector(".highlights-section");
-        if (container) {
-            container.innerHTML = ""; 
-        }
+            const container = document.querySelector(".highlights-section");
+            if (container) {
+                container.innerHTML = ""; 
+            }
 
-        // Rileva dinamicamente l'host corrente
-        const currentHost = window.location.hostname || "localhost";
+            rows.forEach((row) => {
+                if (!row || !row.c || !row.c[1] || !row.c[1].v) return;
 
-        rows.forEach((row) => {
-            if (!row || !row.c || !row.c[1] || !row.c[1].v) return;
+                const round = row.c[0] ? row.c[0].v : '';
+                const titolo = row.c[1] ? row.c[1].v : '';
+                const dataGara = row.c[2] ? row.c[2].v : '';
+                const videoUrl = row.c[3] ? row.c[3].v : '';
+                const descrizione = row.c[4] ? row.c[4].v : '';
 
-            const round = row.c[0] ? row.c[0].v : '';
-            const titolo = row.c[1] ? row.c[1].v : '';
-            const dataGara = row.c[2] ? row.c[2].v : '';
-            const videoUrl = row.c[3] ? row.c[3].v : '';
-            const descrizione = row.c[4] ? row.c[4].v : '';
+                let videoPlayerHTML = '';
 
-            let videoPlayerHTML = '';
+                if (videoUrl.includes('twitch.tv') || videoUrl.includes('clips.twitch.tv')) {
+                    let twitchParam = '';
+                    let cleanUrl = videoUrl.split('?')[0].trim();
+                    if (cleanUrl.endsWith('/')) cleanUrl = cleanUrl.slice(0, -1);
 
-            if (videoUrl.includes('twitch.tv') || videoUrl.includes('clips.twitch.tv')) {
-                let twitchParam = '';
-                let cleanUrl = videoUrl.split('?')[0].trim();
-                if (cleanUrl.endsWith('/')) cleanUrl = cleanUrl.slice(0, -1);
+                    if (cleanUrl.includes('/videos/')) {
+                        twitchParam = "video=" + cleanUrl.split('/videos/').pop();
+                    } else if (cleanUrl.includes('clips.twitch.tv/')) {
+                        twitchParam = "clip=" + cleanUrl.split('clips.twitch.tv/').pop();
+                    } else if (cleanUrl.includes('/clip/')) {
+                        twitchParam = "clip=" + cleanUrl.split('/clip/').pop();
+                    } else {
+                        const parts = cleanUrl.split('/');
+                        twitchParam = "clip=" + parts[parts.length - 1];
+                    }
 
-                if (cleanUrl.includes('/videos/')) {
-                    twitchParam = "video=" + cleanUrl.split('/videos/').pop();
-                } else if (cleanUrl.includes('clips.twitch.tv/')) {
-                    twitchParam = "clip=" + cleanUrl.split('clips.twitch.tv/').pop();
-                } else if (cleanUrl.includes('/clip/')) {
-                    twitchParam = "clip=" + cleanUrl.split('/clip/').pop();
-                } else {
-                    const parts = cleanUrl.split('/');
-                    twitchParam = "clip=" + parts[parts.length - 1];
+                    videoPlayerHTML = `<iframe src="https://player.twitch.tv/?${twitchParam}&parent=localhost&parent=patricktoto1985.github.io&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="200" width="100%" style="border-radius: 8px 8px 0 0;"></iframe>`;
+                } else if (videoUrl) {
+                    videoPlayerHTML = `<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="${videoUrl}" type="video/mp4"></video>`;
                 }
 
-                // Inseriamo il parent sia per localhost che per GitHub Pages contemporaneamente
-                videoPlayerHTML = `<iframe src="https://player.twitch.tv/?${twitchParam}&parent=localhost&parent=patricktoto1985.github.io&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="200" width="100%" style="border-radius: 8px 8px 0 0;"></iframe>`;
-            } else if (videoUrl) {
-                videoPlayerHTML = `<video controls style="width: 100%; height: 200px; border-radius: 8px 8px 0 0; background: #000;"><source src="${videoUrl}" type="video/mp4"></video>`;
-            }
+                const card = document.createElement("article");
+                card.className = "news-card";
+                card.style.margin = "15px auto";
+                card.style.maxWidth = "400px";
+                card.style.width = "100%";
+                card.style.background = "#1a1c23";
+                card.style.borderRadius = "8px";
+                card.style.display = "inline-block";
 
-            const card = document.createElement("article");
-            card.className = "news-card";
-            card.style.margin = "15px auto";
-            card.style.maxWidth = "400px";
-            card.style.width = "100%";
-            card.style.background = "#1a1c23";
-            card.style.borderRadius = "8px";
-            card.style.display = "inline-block";
+                card.innerHTML = `
+                    <div class="news-img-box" style="position:relative;">
+                        ${videoPlayerHTML}
+                        <span class="news-badge badge-official" style="position:absolute; top:10px; right:10px; background:#e10600; color:#fff; padding:3px 8px; border-radius:4px; font-weight:bold; font-size:12px;">Round ${round}</span>
+                    </div>
+                    <div class="news-content" style="padding: 15px; text-align: left;">
+                        <span class="news-date" style="color: #bbb; font-size: 0.85rem;"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
+                        <h3 class="news-card-title" style="margin: 5px 0; color: #fff; font-size: 1.2rem;">${titolo}</h3>
+                        <p class="news-card-desc" style="color: #ddd; font-size: 0.9rem; margin-bottom:0;">${descrizione}</p>
+                    </div>
+                `;
 
-            card.innerHTML = `
-                <div class="news-img-box" style="position:relative;">
-                    ${videoPlayerHTML}
-                    <span class="news-badge badge-official" style="position:absolute; top:10px; right:10px; background:#e10600; color:#fff; padding:3px 8px; border-radius:4px; font-weight:bold; font-size:12px;">Round ${round}</span>
-                </div>
-                <div class="news-content" style="padding: 15px; text-align: left;">
-                    <span class="news-date" style="color: #bbb; font-size: 0.85rem;"><i class="far fa-calendar-alt"></i> ${dataGara}</span>
-                    <h3 class="news-card-title" style="margin: 5px 0; color: #fff; font-size: 1.2rem;">${titolo}</h3>
-                    <p class="news-card-desc" style="color: #ddd; font-size: 0.9rem; margin-bottom:0;">${descrizione}</p>
-                </div>
-            `;
-
-            if (container) {
-                container.appendChild(card);
-            }
-        });
-    })
-    .catch(err => console.error("Errore nel caricamento degli Highlights:", err));
+                if (container) {
+                    container.appendChild(card);
+                }
+            });
+        })
+        .catch(err => console.error("Errore effettivo highlights:", err));
+})();
 </script>
 </body>
 </html>
