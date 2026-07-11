@@ -2223,7 +2223,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const json = JSON.parse(temp);
             const rows = json.table.rows;
 
-            const container = document.querySelector(".highlights-section");
+            const container = document.getElementById("highlights-grid");
             if (container) {
                 container.innerHTML = ""; 
             }
