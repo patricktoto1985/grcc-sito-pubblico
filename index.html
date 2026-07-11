@@ -2204,13 +2204,14 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // ==========================================
-// VERSIONE DEFINITIVA HIGHLIGHTS (ID CORRETTO)
+// VERSIONE HIGHLIGHTS GENERICA (CON URL CORRETTO)
 // ==========================================
 (function() {
-    // ID esatto recuperato dal blocco classifiche funzionante
     const sheetIdHighlights = '1oZJvdapQMAWUNP7tujD2rIubN3DjC5vjufjSYELUc';
     const sheetNameHighlights = 'Highlights';
-    const urlHighlights = `https://docs.google.com/spreadsheets/d/${sheetIdHighlights}/gviz/tq?tqx=out:json&sheet=${sheetNameHighlights}`;
+    
+    // URL ricostruito precisamente con tutti i parametri di esportazione Google JSON
+    const urlHighlights = 'https://docs.google.com/spreadsheets/d/' + sheetIdHighlights + '/gviz/tq?tqx=out:json&sheet=' + sheetNameHighlights;
 
     fetch(urlHighlights)
         .then(res => {
