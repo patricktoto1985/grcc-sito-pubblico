@@ -146,93 +146,351 @@
             letter-spacing: 0.5px;
         }
         /* ==========================================
-   MAPPA DEL CAMPIONATO
+   MAPPA CAMPIONATO INTERATTIVA
 ========================================== */
 
 .championship-map-section {
-    padding: 60px 20px;
-    margin: 0 auto 60px auto;
+    width: 100%;
     max-width: 1200px;
+    margin: 0 auto 70px auto;
+    padding: 60px 20px 0;
+    box-sizing: border-box;
 }
 
 .championship-map {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 18px;
-    background: #0b0f17;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.45);
-}
-
-.championship-map::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(
-            180deg,
-            rgba(11,15,23,0.08),
-            rgba(11,15,23,0.35)
-        );
-    pointer-events: none;
+    background: #080b11;
+    border: 1px solid rgba(255, 183, 3, 0.25);
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(255, 183, 3, 0.08);
 }
 
 .championship-map img {
     display: block;
     width: 100%;
     height: auto;
-    opacity: 0.82;
+    border-radius: 18px;
 }
 
-.map-race {
+/* Marker generale */
+
+.map-marker {
     position: absolute;
-    z-index: 2;
-    width: 38px;
-    height: 38px;
+    z-index: 5;
+    width: 22px;
+    height: 22px;
+    padding: 0;
     transform: translate(-50%, -50%);
+    border: none;
     border-radius: 50%;
-    border: 2px solid #ffb703;
-    background: #111827;
-    color: #fff;
-    font-weight: 900;
+    background: transparent;
     cursor: pointer;
-    box-shadow:
-        0 0 0 5px rgba(255,183,3,0.12),
-        0 0 20px rgba(255,183,3,0.75);
-    transition: 0.2s ease;
 }
 
-.map-race:hover {
-    transform: translate(-50%, -50%) scale(1.2);
+.marker-dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: auto;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Stati gara */
+
+.race-completed .marker-dot {
+    background: #19d66b;
+    box-shadow:
+        0 0 0 5px rgba(25, 214, 107, 0.16),
+        0 0 18px rgba(25, 214, 107, 0.9);
+}
+
+.race-next .marker-dot {
+    background: #ff3838;
+    box-shadow:
+        0 0 0 6px rgba(255, 56, 56, 0.18),
+        0 0 22px rgba(255, 56, 56, 1);
+    animation: next-race-pulse 1.5s infinite;
+}
+
+.race-future .marker-dot {
+    background: #ffb703;
+    box-shadow:
+        0 0 0 5px rgba(255, 183, 3, 0.16),
+        0 0 18px rgba(255, 183, 3, 0.85);
+}
+
+.map-marker:hover .marker-dot {
+    transform: scale(1.45);
+}
+
+@keyframes next-race-pulse {
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(255, 56, 56, 0.65),
+            0 0 18px rgba(255, 56, 56, 0.9);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 14px rgba(255, 56, 56, 0),
+            0 0 25px rgba(255, 56, 56, 1);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(255, 56, 56, 0),
+            0 0 18px rgba(255, 56, 56, 0.9);
+    }
+}
+
+/* Posizione dei primi tre GP */
+
+.marker-australia {
+    left: 86%;
+    top: 77%;
+}
+
+.marker-china {
+    left: 77%;
+    top: 48%;
+}
+
+.marker-japan {
+    left: 88%;
+    top: 42%;
+}
+
+/* Tooltip */
+
+.map-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 14px);
+    min-width: 145px;
+    padding: 10px 12px;
+    transform:
+        translateX(-50%)
+        translateY(5px);
+    border: 1px solid rgba(255, 183, 3, 0.35);
+    border-radius: 8px;
+    background: rgba(8, 11, 17, 0.96);
+    color: #cbd5e1;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    text-align: left;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+}
+
+.map-tooltip strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #ffb703;
+    text-transform: uppercase;
+}
+
+.map-marker:hover .map-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+/* Legenda */
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+}
+
+.map-legend div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legend-dot.completed {
+    background: #19d66b;
+    box-shadow: 0 0 10px rgba(25, 214, 107, 0.8);
+}
+
+.legend-dot.next {
+    background: #ff3838;
+    box-shadow: 0 0 10px rgba(255, 56, 56, 0.9);
+}
+
+.legend-dot.future {
+    background: #ffb703;
+    box-shadow: 0 0 10px rgba(255, 183, 3, 0.8);
+}
+
+/* Finestra dettagli gara */
+
+.race-map-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.76);
+    backdrop-filter: blur(8px);
+}
+
+.race-map-modal.open {
+    display: flex;
+}
+
+.race-map-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    padding: 34px;
+    border: 1px solid rgba(255, 183, 3, 0.55);
+    border-radius: 16px;
+    background:
+        linear-gradient(
+            145deg,
+            #172033,
+            #090d16
+        );
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(255, 183, 3, 0.14);
+    animation: race-modal-show 0.25s ease;
+}
+
+@keyframes race-modal-show {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.race-map-close {
+    position: absolute;
+    top: 12px;
+    right: 17px;
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.race-map-close:hover {
+    color: #ff3838;
+}
+
+.race-map-status {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 5px 10px;
+    border-radius: 4px;
     background: #ffb703;
     color: #000;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
-.australia {
-    left: 86%;
-    top: 76%;
+.race-map-modal-content h2 {
+    margin: 0 0 22px;
+    color: #fff;
+    font-size: 2rem;
+    text-transform: uppercase;
 }
 
-.china {
-    left: 77%;
-    top: 43%;
+.race-map-details {
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
 }
 
-.japan {
-    left: 88%;
-    top: 40%;
+.race-map-details p {
+    margin: 10px 0;
+    color: #cbd5e1;
 }
+
+.race-map-details i {
+    width: 25px;
+    color: #ffb703;
+}
+
+.race-map-highlights-btn {
+    width: 100%;
+    margin-top: 22px;
+    padding: 13px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #6441a5;
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.race-map-highlights-btn:hover {
+    background: #7d5bbe;
+}
+
+/* Smartphone */
 
 @media (max-width: 768px) {
     .championship-map-section {
-        padding: 40px 10px;
+        padding: 40px 8px 0;
     }
 
-    .map-race {
-        width: 28px;
-        height: 28px;
-        font-size: 0.75rem;
+    .map-marker {
+        width: 18px;
+        height: 18px;
+    }
+
+    .marker-dot {
+        width: 9px;
+        height: 9px;
+    }
+
+    .map-tooltip {
+        display: none;
+    }
+
+    .map-legend {
+        gap: 14px;
+        font-size: 0.72rem;
+    }
+
+    .race-map-modal-content {
+        padding: 28px 20px;
     }
 }
     </style>
@@ -1598,24 +1856,146 @@
 
     <div class="championship-map">
 
-        <img src="img/world-map-dark.png" alt="Mappa mondiale campionato GRCC F1 Esports">
+        <img
+            src="img/world-map-dark.png"
+            alt="Mappa mondiale campionato GRCC F1 Esports"
+        >
 
-        <button class="map-race australia"
-                onclick="openRaceMap('Round 1', 'Australia', 'Albert Park', '15 Marzo 2026')">
-            1
+        <!-- ROUND 1 - AUSTRALIA -->
+        <button
+            class="map-marker race-completed marker-australia"
+            type="button"
+            aria-label="Round 1 Australia"
+            onclick="openRaceDetails(
+                'Round 1',
+                'Australia',
+                'Albert Park',
+                '15 Marzo 2026',
+                'Gara disputata',
+                'SICKMIRKO'
+            )"
+        >
+            <span class="marker-dot"></span>
+
+            <span class="map-tooltip">
+                <strong>Round 1</strong>
+                Australia<br>
+                Albert Park
+            </span>
         </button>
 
-        <button class="map-race china"
-                onclick="openRaceMap('Round 2', 'Cina', 'Shanghai', '29 Marzo 2026')">
-            2
+        <!-- ROUND 2 - CINA -->
+        <button
+            class="map-marker race-next marker-china"
+            type="button"
+            aria-label="Round 2 Cina"
+            onclick="openRaceDetails(
+                'Round 2',
+                'Cina',
+                'Shanghai',
+                '29 Marzo 2026',
+                'Prossima gara',
+                'Da disputare'
+            )"
+        >
+            <span class="marker-dot"></span>
+
+            <span class="map-tooltip">
+                <strong>Round 2</strong>
+                Cina<br>
+                Shanghai
+            </span>
         </button>
 
-        <button class="map-race japan"
-                onclick="openRaceMap('Round 3', 'Giappone', 'Suzuka', '12 Aprile 2026')">
-            3
-        </button>
+        <!-- ROUND 3 - GIAPPONE -->
+        <button
+            class="map-marker race-future marker-japan"
+            type="button"
+            aria-label="Round 3 Giappone"
+            onclick="openRaceDetails(
+                'Round 3',
+                'Giappone',
+                'Suzuka',
+                '12 Aprile 2026',
+                'Gara futura',
+                'Da disputare'
+            )"
+        >
+            <span class="marker-dot"></span>
 
+            <span class="map-tooltip">
+                <strong>Round 3</strong>
+                Giappone<br>
+                Suzuka
+            </span>
+        </button>
     </div>
+
+    <div class="map-legend">
+        <div>
+            <span class="legend-dot completed"></span>
+            Gara disputata
+        </div>
+
+        <div>
+            <span class="legend-dot next"></span>
+            Prossima gara
+        </div>
+
+        <div>
+            <span class="legend-dot future"></span>
+            Gara futura
+        </div>
+    </div>
+</section>
+
+<div id="raceMapModal" class="race-map-modal">
+    <div class="race-map-modal-content">
+
+        <button
+            class="race-map-close"
+            type="button"
+            onclick="closeRaceDetails()"
+            aria-label="Chiudi"
+        >
+            &times;
+        </button>
+
+        <span id="raceMapStatus" class="race-map-status">
+            STATO GARA
+        </span>
+
+        <h2 id="raceMapCountry">Australia</h2>
+
+        <div class="race-map-details">
+            <p>
+                <i class="fas fa-flag-checkered"></i>
+                <strong id="raceMapRound">Round 1</strong>
+            </p>
+
+            <p>
+                <i class="fas fa-road"></i>
+                <span id="raceMapCircuit">Albert Park</span>
+            </p>
+
+            <p>
+                <i class="far fa-calendar-alt"></i>
+                <span id="raceMapDate">15 Marzo 2026</span>
+            </p>
+
+            <p>
+                <i class="fas fa-trophy"></i>
+                Vincitore:
+                <strong id="raceMapWinner">SICKMIRKO</strong>
+            </p>
+        </div>
+
+        <button class="race-map-highlights-btn" type="button">
+            <i class="fab fa-twitch"></i>
+            Guarda gli highlights
+        </button>
+    </div>
+</div>
 </section>
 
     <section class="standings-section">
@@ -2166,14 +2546,47 @@
         document.getElementById('tab-' + tabName).classList.add('active');
         event.currentTarget.classList.add('active');
 }
-function openRaceMap(round, country, circuit, date) {
-    alert(
-        round + "\n\n" +
-        country + "\n" +
-        circuit + "\n" +
-        date
-    );
+function openRaceDetails(
+    round,
+    country,
+    circuit,
+    date,
+    status,
+    winner
+) {
+    document.getElementById("raceMapRound").textContent = round;
+    document.getElementById("raceMapCountry").textContent = country;
+    document.getElementById("raceMapCircuit").textContent = circuit;
+    document.getElementById("raceMapDate").textContent = date;
+    document.getElementById("raceMapStatus").textContent = status;
+    document.getElementById("raceMapWinner").textContent = winner;
+
+    document
+        .getElementById("raceMapModal")
+        .classList
+        .add("open");
 }
+
+function closeRaceDetails() {
+    document
+        .getElementById("raceMapModal")
+        .classList
+        .remove("open");
+}
+
+window.addEventListener("click", function(event) {
+    const modal = document.getElementById("raceMapModal");
+
+    if (event.target === modal) {
+        closeRaceDetails();
+    }
+});
+
+window.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeRaceDetails();
+    }
+});
 </script>
 <div id="newsModal" class="news-modal">
     <div class="news-modal-content">
