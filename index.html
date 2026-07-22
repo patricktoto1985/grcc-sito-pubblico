@@ -2902,10 +2902,13 @@ function createChampionshipMapMarkers() {
     });
 }
 
-document.addEventListener(
-    "DOMContentLoaded",
-    loadMapHighlightsFromSheet
-);
+document.addEventListener("DOMContentLoaded", function () {
+    // Mostra subito tutti i punti della mappa
+    createChampionshipMapMarkers();
+
+    // Poi recupera i link degli highlights dal foglio Google
+    loadMapHighlightsFromSheet();
+});
 
 
 window.addEventListener("click", function(event) {
