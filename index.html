@@ -468,6 +468,24 @@
     font-weight: 800;
     cursor: pointer;
 }
+.race-details-page-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 13px 18px;
+    border: 1px solid rgba(255, 183, 3, 0.55);
+    border-radius: 8px;
+    background: transparent;
+    color: #ffb703;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.race-details-page-btn:hover {
+    background: #ffb703;
+    color: #000;
+    transform: translateY(-2px);
+}
 
 .race-map-highlights-btn:hover {
     background: #7d5bbe;
@@ -2026,6 +2044,15 @@
     <i class="fas fa-video-slash"></i>
     Highlights non disponibili
 </button>
+
+<button
+    id="raceDetailsPageBtn"
+    class="race-details-page-btn"
+    type="button"
+>
+    <i class="fas fa-chart-line"></i>
+    Pagina completa GP
+</button>
     </div>
 </div>
 <div id="highlightsVideoModal" class="highlights-video-modal">
@@ -2632,6 +2659,17 @@ function openRaceDetails(
 
     const highlightsButton =
         document.getElementById("raceHighlightsBtn");
+
+    const detailsPageButton =
+        document.getElementById("raceDetailsPageBtn");
+
+    const roundNumber =
+        String(round).replace(/\D/g, "");
+
+    detailsPageButton.onclick = function () {
+        window.location.href =
+            "gp.html?round=" + roundNumber;
+};
 
     if (highlights && highlights.trim() !== "") {
         highlightsButton.disabled = false;
