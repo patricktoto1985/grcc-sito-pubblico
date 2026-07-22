@@ -503,6 +503,89 @@
         padding: 28px 20px;
     }
 }
+.highlights-video-modal {
+    display: none;
+    position: fixed;
+    z-index: 11000;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(10px);
+}
+
+.highlights-video-modal.open {
+    display: flex;
+}
+
+.highlights-video-content {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    overflow: hidden;
+    border: 1px solid rgba(145, 70, 255, 0.7);
+    border-radius: 18px;
+    background: #080b11;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.8),
+        0 0 35px rgba(100, 65, 165, 0.35);
+}
+
+.highlights-video-close {
+    position: absolute;
+    z-index: 5;
+    top: 10px;
+    right: 16px;
+    border: 0;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 2.2rem;
+    cursor: pointer;
+}
+
+.highlights-video-close:hover {
+    color: #ff3838;
+}
+
+.highlights-video-header {
+    padding: 20px 55px 18px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.highlights-video-header span {
+    color: #a970ff;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.highlights-video-header h2 {
+    margin: 7px 0 0;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.highlights-video-player {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: black;
+}
+
+.highlights-video-player iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.race-map-highlights-btn:disabled {
+    background: #303744;
+    color: #8993a4;
+    cursor: not-allowed;
+    opacity: 0.75;
+}
     </style>
 </head>
 <body>
@@ -1934,10 +2017,51 @@
             </p>
         </div>
 
-        <button class="race-map-highlights-btn" type="button">
-            <i class="fab fa-twitch"></i>
-            Guarda gli highlights
+        <button
+    id="raceHighlightsBtn"
+    class="race-map-highlights-btn"
+    type="button"
+    disabled
+>
+    <i class="fas fa-video-slash"></i>
+    Highlights non disponibili
+</button>
+    </div>
+</div>
+<div id="highlightsVideoModal" class="highlights-video-modal">
+    <div class="highlights-video-content">
+
+        <button
+            class="highlights-video-close"
+            type="button"
+            onclick="closeHighlightsVideo()"
+        >
+            &times;
         </button>
+
+        <div class="highlights-video-header">
+            <span>
+                <i class="fab fa-twitch"></i>
+                Highlights gara
+            </span>
+
+            <h2 id="highlightsVideoTitle">
+                GRCC F1 ESPORTS
+            </h2>
+        </div>
+
+        <div class="highlights-video-player">
+            <iframe
+                id="highlightsVideoFrame"
+                src=""
+                title="Highlights Twitch"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen
+                allow="autoplay; fullscreen"
+            ></iframe>
+        </div>
+
     </div>
 </div>
 </section>
@@ -2496,7 +2620,8 @@ function openRaceDetails(
     circuit,
     date,
     status,
-    winner
+    winner,
+    highlights
 ) {
     document.getElementById("raceMapRound").textContent = round;
     document.getElementById("raceMapCountry").textContent = country;
@@ -2505,10 +2630,39 @@ function openRaceDetails(
     document.getElementById("raceMapStatus").textContent = status;
     document.getElementById("raceMapWinner").textContent = winner;
 
+    const highlightsButton =
+        document.getElementById("raceHighlightsBtn");
+
+    if (highlights && highlights.trim() !== "") {
+        highlightsButton.disabled = false;
+
+        highlightsButton.innerHTML = `
+            <i class="fab fa-twitch"></i>
+            Guarda gli highlights
+        `;
+
+        highlightsButton.onclick = function () {
+            openHighlightsVideo(
+                highlights,
+                `${round} - ${country} - ${circuit}`
+            );
+        };
+    } else {
+        highlightsButton.disabled = true;
+
+        highlightsButton.innerHTML = `
+            <i class="fas fa-video-slash"></i>
+            Highlights non disponibili
+        `;
+
+        highlightsButton.onclick = null;
+    }
+
     document
         .getElementById("raceMapModal")
         .classList
         .add("open");
+}
 }
 
 function closeRaceDetails() {
@@ -2924,6 +3078,68 @@ window.addEventListener("keydown", function(event) {
         closeRaceDetails();
     }
 });
+function extractTwitchClipId(url) {
+    if (!url) {
+        return "";
+    }
+
+    const cleanUrl = url
+        .split("?")[0]
+        .replace(/\/$/, "");
+
+    if (cleanUrl.includes("clips.twitch.tv/")) {
+        return cleanUrl
+            .split("clips.twitch.tv/")
+            .pop();
+    }
+
+    if (cleanUrl.includes("/clip/")) {
+        return cleanUrl
+            .split("/clip/")
+            .pop();
+    }
+
+    return "";
+}
+
+function openHighlightsVideo(twitchUrl, title) {
+    const clipId = extractTwitchClipId(twitchUrl);
+
+    if (!clipId) {
+        alert("Il link della clip Twitch non è valido.");
+        return;
+    }
+
+    document.getElementById(
+        "highlightsVideoTitle"
+    ).textContent = title;
+
+    document.getElementById(
+        "highlightsVideoFrame"
+    ).src =
+        "https://clips.twitch.tv/embed" +
+        "?clip=" + encodeURIComponent(clipId) +
+        "&parent=patricktoto1985.github.io" +
+        "&autoplay=false";
+
+    closeRaceDetails();
+
+    document
+        .getElementById("highlightsVideoModal")
+        .classList
+        .add("open");
+}
+
+function closeHighlightsVideo() {
+    document
+        .getElementById("highlightsVideoModal")
+        .classList
+        .remove("open");
+
+    document.getElementById(
+        "highlightsVideoFrame"
+    ).src = "";
+}
 </script>
 <div id="newsModal" class="news-modal">
     <div class="news-modal-content">
