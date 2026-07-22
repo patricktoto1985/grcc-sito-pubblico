@@ -175,6 +175,16 @@
     height: auto;
     border-radius: 18px;
 }
+#mapMarkers {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#mapMarkers .map-marker {
+    pointer-events: auto;
+}
 
 /* Marker generale */
 
@@ -1861,74 +1871,8 @@
             alt="Mappa mondiale campionato GRCC F1 Esports"
         >
 
-        <!-- ROUND 1 - AUSTRALIA -->
-        <button
-            class="map-marker race-completed marker-australia"
-            type="button"
-            aria-label="Round 1 Australia"
-            onclick="openRaceDetails(
-                'Round 1',
-                'Australia',
-                'Albert Park',
-                '15 Marzo 2026',
-                'Gara disputata',
-                'SICKMIRKO'
-            )"
-        >
-            <span class="marker-dot"></span>
+        <div id="mapMarkers"></div>
 
-            <span class="map-tooltip">
-                <strong>Round 1</strong>
-                Australia<br>
-                Albert Park
-            </span>
-        </button>
-
-        <!-- ROUND 2 - CINA -->
-        <button
-            class="map-marker race-next marker-china"
-            type="button"
-            aria-label="Round 2 Cina"
-            onclick="openRaceDetails(
-                'Round 2',
-                'Cina',
-                'Shanghai',
-                '29 Marzo 2026',
-                'Prossima gara',
-                'Da disputare'
-            )"
-        >
-            <span class="marker-dot"></span>
-
-            <span class="map-tooltip">
-                <strong>Round 2</strong>
-                Cina<br>
-                Shanghai
-            </span>
-        </button>
-
-        <!-- ROUND 3 - GIAPPONE -->
-        <button
-            class="map-marker race-future marker-japan"
-            type="button"
-            aria-label="Round 3 Giappone"
-            onclick="openRaceDetails(
-                'Round 3',
-                'Giappone',
-                'Suzuka',
-                '12 Aprile 2026',
-                'Gara futura',
-                'Da disputare'
-            )"
-        >
-            <span class="marker-dot"></span>
-
-            <span class="map-tooltip">
-                <strong>Round 3</strong>
-                Giappone<br>
-                Suzuka
-            </span>
-        </button>
     </div>
 
     <div class="map-legend">
@@ -2573,6 +2517,326 @@ function closeRaceDetails() {
         .classList
         .remove("open");
 }
+const championshipRaces = [
+    {
+        round: 1,
+        country: "Australia",
+        circuit: "Albert Park",
+        date: "15 Marzo 2026",
+        status: "next",
+        winner: "Da disputare",
+        left: 86.4,
+        top: 77.5
+    },
+    {
+        round: 2,
+        country: "Cina",
+        circuit: "Shanghai",
+        date: "29 Marzo 2026",
+        status: "future",
+        winner: "Da disputare",
+        left: 76.8,
+        top: 48.5
+    },
+    {
+        round: 3,
+        country: "Giappone",
+        circuit: "Suzuka",
+        date: "12 Aprile 2026",
+        status: "future",
+        winner: "Da disputare",
+        left: 87.7,
+        top: 42.5
+    },
+    {
+        round: 4,
+        country: "Bahrain",
+        circuit: "Sakhir",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 63.2,
+        top: 55.5
+    },
+    {
+        round: 5,
+        country: "Arabia Saudita",
+        circuit: "Jeddah",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 61.6,
+        top: 61.2
+    },
+    {
+        round: 6,
+        country: "Stati Uniti",
+        circuit: "Miami",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 25.7,
+        top: 50.5
+    },
+    {
+        round: 7,
+        country: "Canada",
+        circuit: "Montréal",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 24.2,
+        top: 40.8
+    },
+    {
+        round: 8,
+        country: "Monaco",
+        circuit: "Monte Carlo",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 49.2,
+        top: 48.8
+    },
+    {
+        round: 9,
+        country: "Spagna",
+        circuit: "Barcellona",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 46.8,
+        top: 51.8
+    },
+    {
+        round: 10,
+        country: "Austria",
+        circuit: "Red Bull Ring",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 51.8,
+        top: 45.8
+    },
+    {
+        round: 11,
+        country: "Gran Bretagna",
+        circuit: "Silverstone",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 47.2,
+        top: 38.5
+    },
+    {
+        round: 12,
+        country: "Belgio",
+        circuit: "Spa-Francorchamps",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 48.7,
+        top: 41.7
+    },
+    {
+        round: 13,
+        country: "Ungheria",
+        circuit: "Hungaroring",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 53.3,
+        top: 45.3
+    },
+    {
+        round: 14,
+        country: "Paesi Bassi",
+        circuit: "Zandvoort",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 48.8,
+        top: 37.8
+    },
+    {
+        round: 15,
+        country: "Italia",
+        circuit: "Monza",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 50.6,
+        top: 48.5
+    },
+    {
+        round: 16,
+        country: "Spagna",
+        circuit: "Madrid",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 45.3,
+        top: 52.8
+    },
+    {
+        round: 17,
+        country: "Azerbaigian",
+        circuit: "Baku",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 59.7,
+        top: 47.6
+    },
+    {
+        round: 18,
+        country: "Singapore",
+        circuit: "Marina Bay",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 78.7,
+        top: 64.5
+    },
+    {
+        round: 19,
+        country: "Stati Uniti",
+        circuit: "Austin",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 21.7,
+        top: 51.5
+    },
+    {
+        round: 20,
+        country: "Messico",
+        circuit: "Hermanos Rodríguez",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 20.8,
+        top: 57.5
+    },
+    {
+        round: 21,
+        country: "Brasile",
+        circuit: "São Paulo",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 33.5,
+        top: 73.5
+    },
+    {
+        round: 22,
+        country: "Stati Uniti",
+        circuit: "Las Vegas",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 15.8,
+        top: 48.5
+    },
+    {
+        round: 23,
+        country: "Qatar",
+        circuit: "Lusail",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 64.2,
+        top: 57.5
+    },
+    {
+        round: 24,
+        country: "Emirati Arabi Uniti",
+        circuit: "Yas Marina",
+        date: "Data da definire",
+        status: "future",
+        winner: "Da disputare",
+        left: 65.1,
+        top: 61.7
+    }
+];
+
+function getRaceStatusClass(status) {
+    if (status === "completed") {
+        return "race-completed";
+    }
+
+    if (status === "next") {
+        return "race-next";
+    }
+
+    return "race-future";
+}
+
+function getRaceStatusText(status) {
+    if (status === "completed") {
+        return "Gara disputata";
+    }
+
+    if (status === "next") {
+        return "Prossima gara";
+    }
+
+    return "Gara futura";
+}
+
+function createChampionshipMapMarkers() {
+    const markerContainer = document.getElementById("mapMarkers");
+
+    if (!markerContainer) {
+        return;
+    }
+
+    markerContainer.innerHTML = "";
+
+    championshipRaces.forEach((race) => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className =
+            `map-marker ${getRaceStatusClass(race.status)}`;
+
+        button.style.left = `${race.left}%`;
+        button.style.top = `${race.top}%`;
+
+        button.setAttribute(
+            "aria-label",
+            `Round ${race.round}, ${race.country}, ${race.circuit}`
+        );
+
+        button.innerHTML = `
+            <span class="marker-dot"></span>
+
+            <span class="map-tooltip">
+                <strong>Round ${race.round}</strong>
+                ${race.country}<br>
+                ${race.circuit}
+            </span>
+        `;
+
+        button.addEventListener("click", () => {
+            openRaceDetails(
+                `Round ${race.round}`,
+                race.country,
+                race.circuit,
+                race.date,
+                getRaceStatusText(race.status),
+                race.winner
+            );
+        });
+
+        markerContainer.appendChild(button);
+    });
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    createChampionshipMapMarkers
+);
 
 window.addEventListener("click", function(event) {
     const modal = document.getElementById("raceMapModal");
