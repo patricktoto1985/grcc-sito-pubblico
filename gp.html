@@ -317,41 +317,6 @@
     </main>
 
     <script>
-        const championshipRaces = [
-            {
-                round: 1,
-                country: "Australia",
-                circuit: "Albert Park",
-                date: "15 Marzo 2026",
-                status: "completed",
-                winner: "SICKMIRKO",
-                pole: "Da inserire",
-                fastestLap: "Da inserire",
-                second: "Da inserire",
-                third: "Da inserire",
-                winnerTeam: "Ferrari",
-                secondTeam: "",
-                thirdTeam: "",
-                notes: "Nessuna comunicazione disponibile."
-            },
-
-            {
-                round: 2,
-                country: "Cina",
-                circuit: "Shanghai",
-                date: "29 Marzo 2026",
-                status: "next",
-                winner: "Da disputare",
-                pole: "Da disputare",
-                fastestLap: "Da disputare",
-                second: "Da disputare",
-                third: "Da disputare",
-                winnerTeam: "",
-                secondTeam: "",
-                thirdTeam: "",
-                notes: "Gara non ancora disputata."
-            }
-        ];
 
         const GOOGLE_SHEET_ID =
             "1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc";
@@ -384,6 +349,73 @@
 
             return "";
         }
+        async function loadRaceFromSheet(round) {
+    const sheetName = "GP";
+
+    const url =
+        "https://docs.google.com/spreadsheets/d/" +
+        GOOGLE_SHEET_ID +
+        "/gviz/tq?tqx=out:json&sheet=" +
+        encodeURIComponent(sheetName);
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Impossibile leggere il foglio GP");
+        }
+
+        const text = await response.text();
+
+        const jsonText = text.substring(
+            text.indexOf("{"),
+            text.lastIndexOf("}") + 1
+        );
+
+        const json = JSON.parse(jsonText);
+        const rows = json.table.rows || [];
+
+        for (const row of rows) {
+            if (!row || !row.c) {
+                continue;
+            }
+
+            const rowRound =
+                row.c[0] && row.c[0].v !== null
+                    ? Number(row.c[0].v)
+                    : 0;
+
+            if (rowRound !== round) {
+                continue;
+            }
+
+            return {
+                round: rowRound,
+                country: row.c[1]?.v || "",
+                circuit: row.c[2]?.v || "",
+                date: row.c[3]?.f || row.c[3]?.v || "",
+                status: row.c[4]?.v || "future",
+                winner: row.c[5]?.v || "Da disputare",
+                winnerTeam: row.c[6]?.v || "",
+                second: row.c[7]?.v || "Da disputare",
+                secondTeam: row.c[8]?.v || "",
+                third: row.c[9]?.v || "Da disputare",
+                thirdTeam: row.c[10]?.v || "",
+                pole: row.c[11]?.v || "Da disputare",
+                poleTime: row.c[12]?.v || "",
+                fastestLap: row.c[13]?.v || "Da disputare",
+                fastestLapTime: row.c[14]?.v || "",
+                notes: row.c[15]?.v || "Nessuna comunicazione disponibile."
+            };
+        }
+
+        return null;
+
+    } catch (error) {
+        console.error("Errore caricamento GP:", error);
+        return null;
+    }
+}
 
         async function loadHighlightForRound(round) {
             const sheetName = "Highlights";
@@ -563,8 +595,9 @@
                                     Pole position
                                 </span>
                                 <span class="result-value">
-                                    ${race.pole}
-                                </span>
+    ${race.pole}
+    ${race.poleTime ? `<br><small>${race.poleTime}</small>` : ""}
+</span>
                             </div>
 
                             <div class="result-row">
@@ -572,8 +605,9 @@
                                     Giro più veloce
                                 </span>
                                 <span class="result-value">
-                                    ${race.fastestLap}
-                                </span>
+    ${race.fastestLap}
+    ${race.fastestLapTime ? `<br><small>${race.fastestLapTime}</small>` : ""}
+</span>
                             </div>
 
                             <div class="result-row">
@@ -608,38 +642,33 @@
         }
 
         async function initialiseGpPage() {
-            const round = getRoundFromUrl();
+    const round = getRoundFromUrl();
 
-            if (!round) {
-                document.getElementById("gpContent").innerHTML = `
-                    <div class="error-message">
-                        Round non specificato.
-                    </div>
-                `;
+    if (!round) {
+        document.getElementById("gpContent").innerHTML = `
+            <div class="error-message">
+                Round non specificato.
+            </div>
+        `;
+        return;
+    }
 
-                return;
-            }
+    const race = await loadRaceFromSheet(round);
 
-            const race =
-                championshipRaces.find(
-                    (item) => item.round === round
-                );
+    if (!race) {
+        document.getElementById("gpContent").innerHTML = `
+            <div class="error-message">
+                Gran Premio non trovato nel foglio GP.
+            </div>
+        `;
+        return;
+    }
 
-            if (!race) {
-                document.getElementById("gpContent").innerHTML = `
-                    <div class="error-message">
-                        Gran Premio non trovato.
-                    </div>
-                `;
+    const highlightUrl =
+        await loadHighlightForRound(round);
 
-                return;
-            }
-
-            const highlightUrl =
-                await loadHighlightForRound(round);
-
-            renderGpPage(race, highlightUrl);
-        }
+    renderGpPage(race, highlightUrl);
+}
 
         initialiseGpPage();
     </script>
