@@ -2783,6 +2783,74 @@ function getRaceStatusText(status) {
 
     return "Gara futura";
 }
+async function loadMapHighlightsFromSheet() {
+    const sheetId =
+        "1oZJvdapQMAWUNP7tujD2rIubN3DjC5vjufjSYELUc";
+
+    const sheetName = "Highlights";
+
+    const sheetUrl =
+        "https://docs.google.com/spreadsheets/d/" +
+        sheetId +
+        "/gviz/tq?tqx=out:json&sheet=" +
+        encodeURIComponent(sheetName);
+
+    try {
+        const response = await fetch(sheetUrl);
+
+        if (!response.ok) {
+            throw new Error("Impossibile leggere il foglio Highlights");
+        }
+
+        const text = await response.text();
+
+        const cleanJson = text.substring(
+            text.indexOf("{"),
+            text.lastIndexOf("}") + 1
+        );
+
+        const json = JSON.parse(cleanJson);
+        const rows = json.table.rows || [];
+
+        const highlightsByRound = new Map();
+
+        rows.forEach((row) => {
+            if (!row || !row.c) {
+                return;
+            }
+
+            const round =
+                row.c[0] && row.c[0].v !== null
+                    ? String(row.c[0].v).trim()
+                    : "";
+
+            const videoUrl =
+                row.c[3] && row.c[3].v
+                    ? String(row.c[3].v).trim()
+                    : "";
+
+            if (round && videoUrl) {
+                highlightsByRound.set(round, videoUrl);
+            }
+        });
+
+        championshipRaces.forEach((race) => {
+            race.highlights =
+                highlightsByRound.get(String(race.round)) || "";
+        });
+
+        createChampionshipMapMarkers();
+
+    } catch (error) {
+        console.error(
+            "Errore caricamento highlights per la mappa:",
+            error
+        );
+
+        /* Mostra comunque i punti anche se Google non risponde */
+        createChampionshipMapMarkers();
+    }
+}
 
 function createChampionshipMapMarkers() {
     const markerContainer = document.getElementById("mapMarkers");
@@ -2826,6 +2894,7 @@ function createChampionshipMapMarkers() {
                 race.date,
                 getRaceStatusText(race.status),
                 race.winner
+                race.highlights
             );
         });
 
@@ -2835,8 +2904,9 @@ function createChampionshipMapMarkers() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    createChampionshipMapMarkers
+    loadMapHighlightsFromSheet
 );
+
 
 window.addEventListener("click", function(event) {
     const modal = document.getElementById("raceMapModal");
