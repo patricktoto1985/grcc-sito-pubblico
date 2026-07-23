@@ -304,7 +304,7 @@
 
     <main class="gp-page">
 
-        <a href="index.html" class="back-link">
+        <a href="index.html" class="back-link" id="backHomeLink">
             <i class="fas fa-arrow-left"></i>
             Torna alla home
         </a>
@@ -325,6 +325,37 @@
             const params = new URLSearchParams(window.location.search);
             return Number(params.get("round"));
         }
+        function configureBackHomeLink() {
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const from = params.get("from");
+
+    const backLink =
+        document.getElementById("backHomeLink");
+
+    if (!backLink) {
+        return;
+    }
+
+    if (from === "calendar") {
+        backLink.href = "index.html#calendario";
+        backLink.innerHTML =
+            '<i class="fas fa-arrow-left"></i> Torna al calendario';
+        return;
+    }
+
+    if (from === "map") {
+        backLink.href = "index.html#mappa";
+        backLink.innerHTML =
+            '<i class="fas fa-arrow-left"></i> Torna alla mappa';
+        return;
+    }
+
+    backLink.href = "index.html";
+    backLink.innerHTML =
+        '<i class="fas fa-arrow-left"></i> Torna alla home';
+}
 
         function extractTwitchClipId(url) {
             if (!url) {
@@ -642,6 +673,7 @@
         }
 
         async function initialiseGpPage() {
+            configureBackHomeLink();
     const round = getRoundFromUrl();
 
     if (!round) {
