@@ -297,6 +297,128 @@
                 order: -1;
             }
         }
+        .gp-hero {
+    position: relative;
+    min-height: 430px;
+    margin: 25px 0 45px;
+    border: 1px solid rgba(255, 183, 3, 0.28);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    background-color: #0d1522;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(5, 10, 18, 0.98) 0%,
+            rgba(5, 10, 18, 0.78) 42%,
+            rgba(5, 10, 18, 0.25) 100%
+        ),
+        url("img/world-map-dark.png");
+    background-size: cover;
+    background-position: center;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.45),
+        inset 0 -1px 0 rgba(255, 183, 3, 0.18);
+}
+
+.gp-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.05) 0%,
+            rgba(0, 0, 0, 0.72) 100%
+        );
+    pointer-events: none;
+}
+
+.gp-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at 80% 35%,
+            rgba(255, 183, 3, 0.18),
+            transparent 35%
+        );
+}
+
+.gp-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    padding: 55px;
+}
+
+.gp-hero-round {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: #ffb703;
+    color: #050a12;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.gp-hero-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2.5rem, 6vw, 5.4rem);
+    line-height: 0.95;
+    font-weight: 950;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    text-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
+}
+
+.gp-hero-circuit {
+    margin: 18px 0 0;
+    color: #ffb703;
+    font-size: clamp(1.15rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+}
+
+.gp-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: 24px;
+    color: #d7deea;
+    font-weight: 700;
+}
+
+.gp-hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gp-hero-meta i {
+    color: #ffb703;
+}
+
+@media (max-width: 700px) {
+    .gp-hero {
+        min-height: 360px;
+        margin-bottom: 30px;
+        background-position: center;
+    }
+
+    .gp-hero-content {
+        padding: 30px 24px;
+    }
+
+    .gp-hero-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
     </style>
 </head>
 
@@ -308,7 +430,35 @@
             <i class="fas fa-arrow-left"></i>
             Torna alla home
         </a>
+<section id="gpHero" class="gp-hero">
+    <div class="gp-hero-overlay"></div>
 
+    <div class="gp-hero-content">
+        <span id="gpHeroRound" class="gp-hero-round">
+            ROUND
+        </span>
+
+        <h1 id="gpHeroTitle" class="gp-hero-title">
+            GRAN PREMIO
+        </h1>
+
+        <p id="gpHeroCircuit" class="gp-hero-circuit">
+            Circuito
+        </p>
+
+        <div class="gp-hero-meta">
+            <span id="gpHeroDate">
+                <i class="far fa-calendar-alt"></i>
+                Data
+            </span>
+
+            <span id="gpHeroStatus">
+                <i class="fas fa-flag-checkered"></i>
+                Stato
+            </span>
+        </div>
+    </div>
+</section>
         <div id="gpContent" class="loading">
             <i class="fas fa-spinner fa-spin"></i>
             Caricamento Gran Premio...
@@ -519,8 +669,92 @@
 
             return "Gara futura";
         }
+function renderGpHero(race) {
+    const hero =
+        document.getElementById("gpHero");
 
+    if (!hero || !race) {
+        return;
+    }
+
+    document.getElementById("gpHeroRound").textContent =
+        "ROUND " + race.round;
+
+    document.getElementById("gpHeroTitle").textContent =
+        "GP " + race.country;
+
+    document.getElementById("gpHeroCircuit").textContent =
+        race.circuit;
+
+    document.getElementById("gpHeroDate").innerHTML =
+        '<i class="far fa-calendar-alt"></i> ' +
+        race.date;
+
+    document.getElementById("gpHeroStatus").innerHTML =
+        '<i class="fas fa-flag-checkered"></i> ' +
+        getHeroStatusText(race.status);
+
+    const imageFile =
+        getGpHeroImage(race.round);
+
+    hero.style.backgroundImage = `
+        linear-gradient(
+            90deg,
+            rgba(5, 10, 18, 0.98) 0%,
+            rgba(5, 10, 18, 0.78) 42%,
+            rgba(5, 10, 18, 0.25) 100%
+        ),
+        url("${imageFile}")
+    `;
+}
+
+function getHeroStatusText(status) {
+    if (status === "completed") {
+        return "Gara disputata";
+    }
+
+    if (status === "next") {
+        return "Prossima gara";
+    }
+
+    return "Gara futura";
+}
+
+function getGpHeroImage(round) {
+    const heroImages = {
+        1: "img/gp-australia.jpg",
+        2: "img/gp-cina.jpg",
+        3: "img/gp-giappone.jpg",
+        4: "img/gp-bahrain.jpg",
+        5: "img/gp-arabia-saudita.jpg",
+        6: "img/gp-miami.jpg",
+        7: "img/gp-canada.jpg",
+        8: "img/gp-monaco.jpg",
+        9: "img/gp-spagna.jpg",
+        10: "img/gp-austria.jpg",
+        11: "img/gp-gran-bretagna.jpg",
+        12: "img/gp-belgio.jpg",
+        13: "img/gp-ungheria.jpg",
+        14: "img/gp-olanda.jpg",
+        15: "img/gp-italia.jpg",
+        16: "img/gp-madrid.jpg",
+        17: "img/gp-azerbaigian.jpg",
+        18: "img/gp-singapore.jpg",
+        19: "img/gp-stati-uniti.jpg",
+        20: "img/gp-messico.jpg",
+        21: "img/gp-brasile.jpg",
+        22: "img/gp-las-vegas.jpg",
+        23: "img/gp-qatar.jpg",
+        24: "img/gp-abu-dhabi.jpg"
+    };
+
+    return (
+        heroImages[round] ||
+        "img/world-map-dark.png"
+    );
+}
         function renderGpPage(race, highlightUrl) {
+            renderGpHero(race);
             const content =
                 document.getElementById("gpContent");
 
