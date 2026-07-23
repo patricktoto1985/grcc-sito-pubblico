@@ -1738,7 +1738,7 @@
     </div>
 </section>
 
-<section class="calendar-section">
+<section id="calendario" class="calendar-section"></section>
     <h2 class="section-title">Calendario <span>Gare 2026</span></h2>
     
     <div class="calendar-grid" id="calendar-grid">
@@ -1749,7 +1749,7 @@
 </div>
     </section>
 
-    <section class="championship-map-section">
+    <section id="mappa" class="championship-map-section"></section>
     <h2 class="section-title">Mappa del <span>Campionato</span></h2>
 
     <div class="championship-map">
@@ -2451,6 +2451,9 @@ function openRaceDetails(
         roundNumber +
         "&from=map";
 };
+
+        
+
 
     if (highlights && highlights.trim() !== "") {
         highlightsButton.disabled = false;
