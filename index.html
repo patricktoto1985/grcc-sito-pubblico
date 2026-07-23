@@ -2755,8 +2755,7 @@ function getRaceStatusText(status) {
     return "Gara futura";
 }
 async function loadMapHighlightsFromSheet() {
-    const sheetId =
-        "1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc";
+    
 
     const sheetName = "Highlights";
 
@@ -2879,7 +2878,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Poi recupera i link degli highlights dal foglio Google
     loadMapHighlightsFromSheet();
-    
+
     loadCalendarFromSheet();
 });
 
@@ -3019,9 +3018,10 @@ window.onclick = function(event) { if (event.target == modal) { modal.style.disp
 </script>
 
 <script>
+    const sheetId = '1oZJvdapQMAWUNP7tujD2r2IubN3DjC5vjufjSYELUc';
 document.addEventListener("DOMContentLoaded", function() {
     // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
-    const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
+    
     
     // 1. SCRIPT AUTOMATICO CLASSIFICA PILOTI
     const sheetNamePiloti = 'Foglio 1';
@@ -3237,7 +3237,7 @@ async function loadCalendarFromSheet() {
 
     const url =
         "https://docs.google.com/spreadsheets/d/" +
-        GOOGLE_SHEET_ID +
+        sheetId +
         "/gviz/tq?tqx=out:json&sheet=" +
         encodeURIComponent(sheetName);
 
