@@ -2446,8 +2446,10 @@ function openRaceDetails(
         String(round).replace(/\D/g, "");
 
     detailsPageButton.onclick = function () {
-        window.location.href =
-            "gp.html?round=" + roundNumber;
+    window.location.href =
+        "gp.html?round=" +
+        roundNumber +
+        "&from=map";
 };
 
     if (highlights && highlights.trim() !== "") {
@@ -3381,7 +3383,7 @@ function activateCalendarCards() {
                     card.dataset.round;
 
                 window.location.href =
-                    "gp.html?round=" + round;
+    "gp.html?round=" + round + "&from=calendar";
             };
 
             card.addEventListener(
