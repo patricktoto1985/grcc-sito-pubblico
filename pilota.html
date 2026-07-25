@@ -134,15 +134,19 @@ h1{
   <section class="stats">
     <div class="stat"><i class="fa-solid fa-ranking-star"></i><div class="stat-value" id="statPosition">—</div><div class="stat-label">Posizione mondiale</div></div>
     <div class="stat"><i class="fa-solid fa-star"></i><div class="stat-value" id="statPoints">0</div><div class="stat-label">Punti</div></div>
+    <div class="stat"><i class="fa-solid fa-flag-checkered"></i><div class="stat-value" id="statWins">0</div><div class="stat-label">Vittorie</div></div>
+    <div class="stat"><i class="fa-solid fa-medal"></i><div class="stat-value" id="statPodiums">0</div><div class="stat-label">Podi</div></div>
+    <div class="stat"><i class="fa-solid fa-stopwatch"></i><div class="stat-value" id="statPoles">0</div><div class="stat-label">Pole position</div></div>
+    <div class="stat"><i class="fa-solid fa-bolt"></i><div class="stat-value" id="statFastest">0</div><div class="stat-label">Giri veloci</div></div>
     <div class="stat"><i class="fa-solid fa-trophy"></i><div class="stat-value" id="statDotd">0</div><div class="stat-label">Driver of the Day</div></div>
-    <div class="stat"><i class="fa-solid fa-flag"></i><div class="stat-value" id="statRaces">0</div><div class="stat-label">GP registrati</div></div>
+    <div class="stat"><i class="fa-solid fa-flag"></i><div class="stat-value" id="statRaces">0</div><div class="stat-label">GP disputati</div></div>
   </section>
 
   <section class="grid">
     <div class="card">
       <h2>Risultati stagione</h2>
       <div id="resultsList" class="result-list">
-        <div class="empty">I risultati gara completi saranno collegati nella fase successiva.</div>
+        <div class="empty">Caricamento risultati...</div>
       </div>
     </div>
     <div class="card">
@@ -195,7 +199,7 @@ if(!driver){
   document.getElementById('driverImage').src=driver.img;
   document.getElementById('driverImage').alt=name;
 
-  Promise.all([loadStandings(),loadDotd()]).finally(()=>{
+  Promise.all([loadStandings(),loadDotd(),loadRaceResults()]).finally(()=>{
     document.getElementById('loading').style.display='none';
     document.getElementById('profile').style.display='block';
   });
@@ -215,11 +219,41 @@ function loadStandings(){
   }).catch(console.error);
 }
 
+
+function loadRaceResults(){
+  return fetch(DOTD_URL+'?action=results_driver&pilota='+encodeURIComponent(name)+'&_='+Date.now(),{cache:'no-store'})
+    .then(r=>r.json()).then(data=>{
+      const races=Array.isArray(data.risultati)?data.risultati:[];
+      document.getElementById('statRaces').textContent=races.length;
+      document.getElementById('statWins').textContent=races.filter(r=>Number(r.posizione)===1).length;
+      document.getElementById('statPodiums').textContent=races.filter(r=>Number(r.posizione)<=3 && r.stato==='CLASSIFICATO').length;
+      document.getElementById('statPoles').textContent=races.filter(r=>r.pole===true || r.pole==='SI').length;
+      document.getElementById('statFastest').textContent=races.filter(r=>r.giroVeloce===true || r.giroVeloce==='SI').length;
+
+      const list=document.getElementById('resultsList');
+      if(!races.length){
+        list.innerHTML='<div class="empty">Nessun risultato ufficiale ancora pubblicato.</div>';
+        return;
+      }
+      list.innerHTML=races.sort((a,b)=>Number(b.round)-Number(a.round)).map(r=>{
+        const status=r.stato && r.stato!=='CLASSIFICATO' ? ' · '+r.stato : '';
+        const awards=[r.pole===true||r.pole==='SI'?'🟣 Pole':'',r.giroVeloce===true||r.giroVeloce==='SI'?'⚡ GV':''].filter(Boolean).join(' ');
+        return `<div class="result">
+          <div class="round">R${r.round}</div>
+          <div class="gp">${r.gp}<div style="color:#94a3b8;font-size:.72rem;margin-top:3px">${awards}</div></div>
+          <div class="place">${r.posizione}°${status}<br><strong style="color:#ffb703">${r.punti} pt</strong></div>
+        </div>`;
+      }).join('');
+    }).catch(err=>{
+      console.error(err);
+      document.getElementById('resultsList').innerHTML='<div class="empty">Impossibile caricare i risultati.</div>';
+    });
+}
+
 function loadDotd(){
   return fetch(DOTD_URL+'?action=dotd_all&_='+Date.now(),{cache:'no-store'})
     .then(r=>r.json()).then(data=>{
       const races=Array.isArray(data.gare)?data.gare:[];
-      document.getElementById('statRaces').textContent=races.filter(g=>g.stato==='CHIUSA').length;
       const wins=races.filter(g=>g.vincitore===name);
       document.getElementById('statDotd').textContent=wins.length;
       const box=document.getElementById('dotdList');
