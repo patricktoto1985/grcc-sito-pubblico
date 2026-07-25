@@ -3151,7 +3151,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 tr.innerHTML = `
                     <td><span class="podio-badge">${pos}</span></td>
-                    <td><strong>${pilota}</strong></td>
+                    <td><a href="pilota.html?id=${encodeURIComponent(pilota)}" style="color:#fff;text-decoration:none;font-weight:800">${pilota}</a></td>
                     <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> ${scuderia}</td>
                     <td class="points-cell">${punti}</td>
                 `;
