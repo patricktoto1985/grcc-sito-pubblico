@@ -468,24 +468,6 @@
     font-weight: 800;
     cursor: pointer;
 }
-.race-details-page-btn {
-    width: 100%;
-    margin-top: 12px;
-    padding: 13px 18px;
-    border: 1px solid rgba(255, 183, 3, 0.55);
-    border-radius: 8px;
-    background: transparent;
-    color: #ffb703;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.race-details-page-btn:hover {
-    background: #ffb703;
-    color: #000;
-    transform: translateY(-2px);
-}
 
 .race-map-highlights-btn:hover {
     background: #7d5bbe;
@@ -521,90 +503,102 @@
         padding: 28px 20px;
     }
 }
-.highlights-video-modal {
-    display: none;
-    position: fixed;
-    z-index: 11000;
-    inset: 0;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.88);
-    backdrop-filter: blur(10px);
-}
-
-.highlights-video-modal.open {
-    display: flex;
-}
-
-.highlights-video-content {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    overflow: hidden;
-    border: 1px solid rgba(145, 70, 255, 0.7);
-    border-radius: 18px;
-    background: #080b11;
-    box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.8),
-        0 0 35px rgba(100, 65, 165, 0.35);
-}
-
-.highlights-video-close {
-    position: absolute;
-    z-index: 5;
-    top: 10px;
-    right: 16px;
-    border: 0;
-    background: transparent;
-    color: #94a3b8;
-    font-size: 2.2rem;
-    cursor: pointer;
-}
-
-.highlights-video-close:hover {
-    color: #ff3838;
-}
-
-.highlights-video-header {
-    padding: 20px 55px 18px 22px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.highlights-video-header span {
-    color: #a970ff;
-    font-size: 0.8rem;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.highlights-video-header h2 {
-    margin: 7px 0 0;
-    color: white;
-    font-size: 1.4rem;
-}
-
-.highlights-video-player {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: black;
-}
-
-.highlights-video-player iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.race-map-highlights-btn:disabled {
-    background: #303744;
-    color: #8993a4;
-    cursor: not-allowed;
-    opacity: 0.75;
-}
     </style>
+
+<style>
+.dotd-public-section{
+    max-width:1200px;
+    margin:60px auto;
+    padding:0 20px;
+}
+.dotd-public-card{
+    position:relative;
+    min-height:390px;
+    overflow:hidden;
+    border-radius:24px;
+    border:1px solid rgba(255,183,3,.38);
+    background:
+        radial-gradient(circle at 72% 18%,rgba(255,183,3,.20),transparent 30%),
+        linear-gradient(135deg,#151a25,#080b12 72%);
+    box-shadow:0 22px 65px rgba(0,0,0,.42);
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+}
+.dotd-public-copy{
+    position:relative;
+    z-index:2;
+    padding:44px;
+}
+.dotd-public-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#ffb703;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:.78rem;
+    font-weight:900;
+}
+.dotd-public-copy h2{
+    margin:12px 0 8px;
+    color:#fff;
+    font-size:clamp(2rem,5vw,4rem);
+    line-height:.95;
+    text-transform:uppercase;
+    font-style:italic;
+}
+.dotd-public-driver{
+    color:#ffb703;
+}
+.dotd-public-meta{
+    color:#a0aec0;
+    margin:10px 0 24px;
+    font-size:1rem;
+}
+.dotd-public-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:13px 18px;
+    border-radius:10px;
+    background:#ffb703;
+    color:#090b10;
+    text-decoration:none;
+    font-weight:900;
+    text-transform:uppercase;
+}
+.dotd-public-image-wrap{
+    height:390px;
+    position:relative;
+}
+.dotd-public-image-wrap:before{
+    content:"";
+    position:absolute;
+    inset:12% 10%;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,183,3,.25),transparent 68%);
+    filter:blur(12px);
+}
+.dotd-public-image{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    position:relative;
+    z-index:1;
+    filter:drop-shadow(0 24px 28px rgba(0,0,0,.6));
+}
+.dotd-public-loading{
+    color:#a0aec0;
+    font-style:italic;
+}
+@media(max-width:760px){
+    .dotd-public-card{grid-template-columns:1fr;text-align:center}
+    .dotd-public-copy{padding:32px 22px 10px}
+    .dotd-public-image-wrap{height:300px}
+}
+</style>
+
 </head>
 <body>
     <div class="grcc-body-wrapper">
@@ -1738,18 +1732,231 @@
     </div>
 </section>
 
-<section id="calendario" class="calendar-section"></section>
+<section class="calendar-section">
     <h2 class="section-title">Calendario <span>Gare 2026</span></h2>
     
-    <div class="calendar-grid" id="calendar-grid">
-    <div class="calendar-loading">
-        <i class="fas fa-spinner fa-spin"></i>
-        Caricamento calendario...
-    </div>
-</div>
+    <div class="calendar-grid">
+
+        <div class="race-card upcoming">
+            <div class="race-status">Prossima Gara</div>
+            <div class="race-info">
+                <span class="race-round">Round 1</span>
+                <h3 class="race-name">GP d'Australia - Albert Park</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 15 Marzo 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 2</span>
+                <h3 class="race-name">GP Cina - Shanghai (SPRINT)</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 29 Marzo 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 3</span>
+                <h3 class="race-name">GP Giappone - Suzuka</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+    
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 4</span>
+                <h3 class="race-name">GP Barhain - Barhain</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 5</span>
+                <h3 class="race-name">GP Arabia Saudita - Jeddah</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 6</span>
+                <h3 class="race-name">GP Miami - Miami (SPRINT)</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 7</span>
+                <h3 class="race-name">GP Canada - Circuit Gilles Villeneuve (SPRINT)</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 8</span>
+                <h3 class="race-name">GP Monaco - Monte Carlo</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 9</span>
+                <h3 class="race-name">GP Spagna - Barcellona</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 10</span>
+                <h3 class="race-name">GP Austria - Red Bull Ring</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 11</span>
+                <h3 class="race-name">GP Gran Bretagna - Silverstone (SPRINT)</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 12</span>
+                <h3 class="race-name">GP Belgio - Spa-Francorchamps</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 13</span>
+                <h3 class="race-name">GP Ungheria- Hungaroring</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 14</span>
+                <h3 class="race-name">GP Olanda - Zandvoort (SPRINT)</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 15</span>
+                <h3 class="race-name">GP Italia - Monza</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 16</span>
+                <h3 class="race-name">GP Spagna - Madring</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 17</span>
+                <h3 class="race-name">GP Azerbaijan - Baku</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 18</span>
+                <h3 class="race-name">GP Singapore - Marina Bay (SPRINT)</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 19</span>
+                <h3 class="race-name">GP Stati Uniti - Austin</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 20</span>
+                <h3 class="race-name">GP Messico - Hermanos Rodriguez</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 21</span>
+                <h3 class="race-name">GP Brasile - São Paulo</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 22</span>
+                <h3 class="race-name">GP Las Vegas - Las Vegas</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 23</span>
+                <h3 class="race-name">GP Qatar - Lusail</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+        <div class="race-card">
+            <div class="race-status hidden"></div>
+            <div class="race-info">
+                <span class="race-round">Round 24</span>
+                <h3 class="race-name">GP Abu Dhabi - Yas Marina</h3>
+                <p class="race-date"><i class="far fa-calendar-alt"></i> 12 Aprile 2026 - Ore 21:00</p>
+            </div>
+        </div>
+
+     </div>
     </section>
 
-    <section id="mappa" class="championship-map-section"></section>
+    <section class="championship-map-section">
     <h2 class="section-title">Mappa del <span>Campionato</span></h2>
 
     <div class="championship-map">
@@ -1822,60 +2029,10 @@
             </p>
         </div>
 
-        <button
-    id="raceHighlightsBtn"
-    class="race-map-highlights-btn"
-    type="button"
-    disabled
->
-    <i class="fas fa-video-slash"></i>
-    Highlights non disponibili
-</button>
-
-<button
-    id="raceDetailsPageBtn"
-    class="race-details-page-btn"
-    type="button"
->
-    <i class="fas fa-chart-line"></i>
-    Pagina completa GP
-</button>
-    </div>
-</div>
-<div id="highlightsVideoModal" class="highlights-video-modal">
-    <div class="highlights-video-content">
-
-        <button
-            class="highlights-video-close"
-            type="button"
-            onclick="closeHighlightsVideo()"
-        >
-            &times;
+        <button class="race-map-highlights-btn" type="button">
+            <i class="fab fa-twitch"></i>
+            Guarda gli highlights
         </button>
-
-        <div class="highlights-video-header">
-            <span>
-                <i class="fab fa-twitch"></i>
-                Highlights gara
-            </span>
-
-            <h2 id="highlightsVideoTitle">
-                GRCC F1 ESPORTS
-            </h2>
-        </div>
-
-        <div class="highlights-video-player">
-            <iframe
-                id="highlightsVideoFrame"
-                src=""
-                title="Highlights Twitch"
-                frameborder="0"
-                scrolling="no"
-                allowfullscreen
-                allow="autoplay; fullscreen"
-            ></iframe>
-        </div>
-
     </div>
 </div>
 </section>
@@ -1934,6 +2091,50 @@
 
 
 
+<section class="dotd-public-section" id="driver-of-the-day">
+    <h2 class="section-title">Driver <span>of the Day</span></h2>
+
+    <div class="dotd-public-card">
+        <div class="dotd-public-copy">
+            <div class="dotd-public-kicker">
+                <i class="fas fa-trophy"></i>
+                Riconoscimento ufficiale GRCC
+            </div>
+
+            <h2 id="homeDotdTitle">
+                <span class="dotd-public-loading">Caricamento...</span>
+            </h2>
+
+            <div class="dotd-public-meta" id="homeDotdMeta">
+                Il vincitore dell’ultimo Gran Premio comparirà qui dopo la chiusura della votazione.
+            </div>
+
+            <a class="dotd-public-btn" href="driver-of-the-day.html">
+                <i class="fas fa-chart-column"></i>
+                Classifica completa
+            </a>
+        </div>
+
+        <div class="dotd-public-image-wrap">
+            <img
+                id="homeDotdImage"
+                class="dotd-public-image"
+                src="img/logo.png"
+                alt="Driver of the Day"
+            >
+        </div>
+    </div>
+</section>
+
+<section class="highlights-section" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
+    <h2 class="section-title" style="margin-bottom: 30px;">Highlights <span style="color: #ff9800;">Gare</span></h2>
+    
+    <div class="news-grid" id="highlights-grid">
+        <div style="color: #a0aec0; text-align: center; width: 100%; grid-column: 1/-1; padding: 40px;">
+            Caricamento highlights in corso...
+        </div>
+    </div>
+</section>
 
 <section class="news-section">
     <h2 class="section-title">Ultime dal <span>Paddock</span></h2>
@@ -2426,8 +2627,7 @@ function openRaceDetails(
     circuit,
     date,
     status,
-    winner,
-    highlights
+    winner
 ) {
     document.getElementById("raceMapRound").textContent = round;
     document.getElementById("raceMapCountry").textContent = country;
@@ -2436,56 +2636,11 @@ function openRaceDetails(
     document.getElementById("raceMapStatus").textContent = status;
     document.getElementById("raceMapWinner").textContent = winner;
 
-    const highlightsButton =
-        document.getElementById("raceHighlightsBtn");
-
-    const detailsPageButton =
-        document.getElementById("raceDetailsPageBtn");
-
-    const roundNumber =
-        String(round).replace(/\D/g, "");
-
-    detailsPageButton.onclick = function () {
-    window.location.href =
-        "gp.html?round=" +
-        roundNumber +
-        "&from=map";
-};
-
-        
-
-
-    if (highlights && highlights.trim() !== "") {
-        highlightsButton.disabled = false;
-
-        highlightsButton.innerHTML = `
-            <i class="fab fa-twitch"></i>
-            Guarda gli highlights
-        `;
-
-        highlightsButton.onclick = function () {
-            openHighlightsVideo(
-                highlights,
-                `${round} - ${country} - ${circuit}`
-            );
-        };
-    } else {
-        highlightsButton.disabled = true;
-
-        highlightsButton.innerHTML = `
-            <i class="fas fa-video-slash"></i>
-            Highlights non disponibili
-        `;
-
-        highlightsButton.onclick = null;
-    }
-
     document
         .getElementById("raceMapModal")
         .classList
         .add("open");
 }
-
 
 function closeRaceDetails() {
     document
@@ -2760,7 +2915,8 @@ function getRaceStatusText(status) {
     return "Gara futura";
 }
 async function loadMapHighlightsFromSheet() {
-    
+    const sheetId =
+        "1oZJvdapQMAWUNP7tujD2rIubN3DjC5vjufjSYELUc";
 
     const sheetName = "Highlights";
 
@@ -2883,8 +3039,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Poi recupera i link degli highlights dal foglio Google
     loadMapHighlightsFromSheet();
-
-    loadCalendarFromSheet();
 });
 
 
@@ -2901,68 +3055,6 @@ window.addEventListener("keydown", function(event) {
         closeRaceDetails();
     }
 });
-function extractTwitchClipId(url) {
-    if (!url) {
-        return "";
-    }
-
-    const cleanUrl = url
-        .split("?")[0]
-        .replace(/\/$/, "");
-
-    if (cleanUrl.includes("clips.twitch.tv/")) {
-        return cleanUrl
-            .split("clips.twitch.tv/")
-            .pop();
-    }
-
-    if (cleanUrl.includes("/clip/")) {
-        return cleanUrl
-            .split("/clip/")
-            .pop();
-    }
-
-    return "";
-}
-
-function openHighlightsVideo(twitchUrl, title) {
-    const clipId = extractTwitchClipId(twitchUrl);
-
-    if (!clipId) {
-        alert("Il link della clip Twitch non è valido.");
-        return;
-    }
-
-    document.getElementById(
-        "highlightsVideoTitle"
-    ).textContent = title;
-
-    document.getElementById(
-        "highlightsVideoFrame"
-    ).src =
-        "https://clips.twitch.tv/embed" +
-        "?clip=" + encodeURIComponent(clipId) +
-        "&parent=patricktoto1985.github.io" +
-        "&autoplay=false";
-
-    closeRaceDetails();
-
-    document
-        .getElementById("highlightsVideoModal")
-        .classList
-        .add("open");
-}
-
-function closeHighlightsVideo() {
-    document
-        .getElementById("highlightsVideoModal")
-        .classList
-        .remove("open");
-
-    document.getElementById(
-        "highlightsVideoFrame"
-    ).src = "";
-}
 </script>
 <div id="newsModal" class="news-modal">
     <div class="news-modal-content">
@@ -3023,10 +3115,9 @@ window.onclick = function(event) { if (event.target == modal) { modal.style.disp
 </script>
 
 <script>
-    const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
 document.addEventListener("DOMContentLoaded", function() {
     // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
-    
+    const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
     
     // 1. SCRIPT AUTOMATICO CLASSIFICA PILOTI
     const sheetNamePiloti = 'Foglio 1';
@@ -3230,193 +3321,76 @@ else if (videoUrl) {
         })
         .catch(err => console.error("Errore effettivo highlights:", err));
 })();
-async function loadCalendarFromSheet() {
-    const calendarGrid =
-        document.getElementById("calendar-grid");
+</script>
 
-    if (!calendarGrid) {
-        return;
-    }
+<script>
+(function(){
+    const DOTD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec";
 
-    const sheetName = "GP";
-
-    const url =
-        "https://docs.google.com/spreadsheets/d/" +
-        sheetId +
-        "/gviz/tq?tqx=out:json&sheet=" +
-        encodeURIComponent(sheetName);
-
-    try {
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            throw new Error(
-                "Impossibile leggere il foglio GP"
-            );
-        }
-
-        const text = await response.text();
-
-        const jsonText = text.substring(
-            text.indexOf("{"),
-            text.lastIndexOf("}") + 1
-        );
-
-        const json = JSON.parse(jsonText);
-        const rows = json.table.rows || [];
-
-        const races = rows
-            .map(row => parseCalendarRace(row))
-            .filter(race => race !== null)
-            .sort((a, b) => a.round - b.round);
-
-        renderCalendar(races);
-
-    } catch (error) {
-        console.error(
-            "Errore caricamento calendario:",
-            error
-        );
-
-        calendarGrid.innerHTML = `
-            <div class="calendar-error">
-                Impossibile caricare il calendario.
-            </div>
-        `;
-    }
-}
-
-function parseCalendarRace(row) {
-    if (!row || !row.c) {
-        return null;
-    }
-
-    const round = Number(
-        row.c[0]?.v || 0
-    );
-
-    if (!round) {
-        return null;
-    }
-
-    return {
-        round: round,
-        country: row.c[1]?.v || "",
-        circuit: row.c[2]?.v || "",
-        date:
-            row.c[3]?.f ||
-            row.c[3]?.v ||
-            "",
-        status:
-            String(
-                row.c[4]?.v || "future"
-            ).toLowerCase()
+    const dotdDrivers = {
+        "LIVLONELY": {team:"Aston Martin Aramco", img:"img/LIVLONELY.png"},
+        "GIUMEND29": {team:"Aston Martin Aramco", img:"img/MENDOLIA.jpeg"},
+        "BENE20DOMENICO": {team:"Oracle Red Bull Racing", img:"img/BENE20DOMENICO.jpeg"},
+        "RAO-783": {team:"Oracle Red Bull Racing", img:"img/RAO-783.png"},
+        "DAVIARCO1999": {team:"Haas F1 Team", img:"img/DAVIARCO1999.png"},
+        "BRA_FOSY89": {team:"Haas F1 Team", img:"img/BRA_FOSY89.png"},
+        "SICKMIRKO": {team:"Scuderia Ferrari HP", img:"img/SICKMIRKO.png"},
+        "MIKYPOWER": {team:"Scuderia Ferrari HP", img:"img/MIKYPOWER.png"},
+        "CONDE785": {team:"Alpine F1 Team", img:"img/CONDE.png"},
+        "PEPPEFLE_IRT": {team:"Alpine F1 Team", img:"img/PEPPEFLE_IRT.png"},
+        "TOTO'F1": {team:"Audi F1 Team", img:"img/TOTO'F1.png"},
+        "DANIELE251191": {team:"Audi F1 Team", img:"img/DANIELE251191.png"},
+        "NXS_ODI": {team:"Cadillac F1 Team", img:"img/NXS_ODI.png"},
+        "KEIDIKID2": {team:"Cadillac F1 Team", img:"img/KEIDIKID2.png"},
+        "FRA319153": {team:"McLaren Formula 1 Team", img:"img/FRA319153.png"},
+        "LRT_KURAMA": {team:"McLaren Formula 1 Team", img:"img/LRT_KURAMA.png"},
+        "MKI-110": {team:"Mercedes-AMG Petronas", img:"img/MKI-110.png"},
+        "SALVOTD91": {team:"Mercedes-AMG Petronas", img:"img/SALVOTD91.png"},
+        "GRCC F1 VITTORIO": {team:"Visa Cash App RB", img:"img/GRCC F1 VITTORIO.jpeg"},
+        "LILLUPAZZU": {team:"Visa Cash App RB", img:"img/LILLUPAZZU.png"},
+        "ICEANT16": {team:"Williams Racing", img:"img/ICEANT16.jpeg"}
     };
-}
 
-function renderCalendar(races) {
-    const calendarGrid =
-        document.getElementById("calendar-grid");
+    fetch(DOTD_SCRIPT_URL + "?action=dotd_all&_=" + Date.now(), {cache:"no-store"})
+        .then(response => response.json())
+        .then(data => {
+            const gare = Array.isArray(data.gare) ? data.gare : [];
+            const concluse = gare
+                .filter(g => String(g.stato).toUpperCase() === "CHIUSA" && g.vincitore)
+                .sort((a,b) => Number(b.round) - Number(a.round));
 
-    if (!races.length) {
-        calendarGrid.innerHTML = `
-            <div class="calendar-error">
-                Nessuna gara trovata nel foglio GP.
-            </div>
-        `;
-        return;
-    }
+            const title = document.getElementById("homeDotdTitle");
+            const meta = document.getElementById("homeDotdMeta");
+            const image = document.getElementById("homeDotdImage");
 
-    calendarGrid.innerHTML = races
-        .map(race => {
-            const isNext =
-                race.status === "next";
+            if (!concluse.length) {
+                title.innerHTML = 'Nessun vincitore <span class="dotd-public-driver">ancora proclamato</span>';
+                meta.textContent = "La sezione si aggiornerà automaticamente quando la Direzione Gara chiuderà la prima votazione.";
+                image.src = "img/logo.png";
+                return;
+            }
 
-            const statusClass =
-                isNext ? "upcoming" : "";
-
-            const statusLabel =
-                isNext
-                    ? `<div class="race-status">
-                           Prossima Gara
-                       </div>`
-                    : `<div class="race-status hidden"></div>`;
-
-            return `
-                <article
-                    class="race-card ${statusClass}"
-                    tabindex="0"
-                    role="link"
-                    data-round="${race.round}"
-                    aria-label="Apri il Round ${race.round}, ${escapeHtml(race.country)}"
-                >
-                    ${statusLabel}
-
-                    <div class="race-info">
-                        <span class="race-round">
-                            Round ${race.round}
-                        </span>
-
-                        <h3 class="race-name">
-                            GP ${escapeHtml(race.country)}
-                            - ${escapeHtml(race.circuit)}
-                        </h3>
-
-                        <p class="race-date">
-                            <i class="far fa-calendar-alt"></i>
-                            ${escapeHtml(race.date)}
-                        </p>
-                    </div>
-                </article>
-            `;
-        })
-        .join("");
-
-    activateCalendarCards();
-}
-
-function activateCalendarCards() {
-    document
-        .querySelectorAll(
-            "#calendar-grid .race-card"
-        )
-        .forEach(card => {
-            const openRacePage = () => {
-                const round =
-                    card.dataset.round;
-
-                window.location.href =
-    "gp.html?round=" + round + "&from=calendar";
+            const latest = concluse[0];
+            const driver = dotdDrivers[latest.vincitore] || {
+                team: latest.team || "Pilota GRCC",
+                img: "img/logo.png"
             };
 
-            card.addEventListener(
-                "click",
-                openRacePage
-            );
-
-            card.addEventListener(
-                "keydown",
-                event => {
-                    if (
-                        event.key === "Enter" ||
-                        event.key === " "
-                    ) {
-                        event.preventDefault();
-                        openRacePage();
-                    }
-                }
-            );
+            title.innerHTML = latest.vincitore + '<br><span class="dotd-public-driver">Driver of the Day</span>';
+            meta.textContent =
+                "Round " + latest.round + " · " + latest.gp + " · " +
+                driver.team + " · " + latest.voti + " " +
+                (Number(latest.voti) === 1 ? "voto" : "voti");
+            image.src = driver.img;
+            image.alt = latest.vincitore;
+        })
+        .catch(error => {
+            console.error("Errore Driver of the Day:", error);
+            document.getElementById("homeDotdTitle").innerHTML =
+                'Driver of the Day <span class="dotd-public-driver">non disponibile</span>';
         });
-}
-
-function escapeHtml(value) {
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
+})();
 </script>
+
 </body>
 </html>
