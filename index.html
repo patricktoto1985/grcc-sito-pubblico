@@ -3674,5 +3674,45 @@ else if (videoUrl) {
 })();
 </script>
 
+
+<script>
+// Invio candidature GRCC F1 ESPORTS
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('.candidatura-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = form.querySelector('.btn-submit');
+    const original = button ? button.innerHTML : '';
+    if (button) { button.disabled = true; button.textContent = 'Invio in corso...'; }
+
+    const payload = {
+      action: 'candidatura_submit',
+      nome: form.querySelector('[name="nome"]')?.value.trim() || '',
+      gamertag: form.querySelector('[name="gamertag"]')?.value.trim() || '',
+      piattaforma: form.querySelector('[name="piattaforma"]')?.value || '',
+      difficolta: form.querySelector('[name="difficolta"]')?.value || '',
+      scuderia: form.querySelector('[name="scuderia"]')?.value || '',
+      esperienze: form.querySelector('[name="esperienze"]')?.value.trim() || ''
+    };
+
+    try {
+      await fetch('https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      alert('Candidatura inviata correttamente! La Direzione Gara la valuterà al più presto.');
+      form.reset();
+    } catch (error) {
+      console.error('Errore candidatura:', error);
+      alert('Errore durante l\'invio della candidatura. Riprova tra poco.');
+    } finally {
+      if (button) { button.disabled = false; button.innerHTML = original; }
+    }
+  });
+});
+</script>
 </body>
 </html>
