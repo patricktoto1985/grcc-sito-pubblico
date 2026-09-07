@@ -3681,11 +3681,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.candidatura-form');
   if (!form) return;
 
+  let invioInCorso = false;
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (invioInCorso) return;
+    invioInCorso = true;
+
     const button = form.querySelector('.btn-submit');
     const original = button ? button.innerHTML : '';
-    if (button) { button.disabled = true; button.textContent = 'Invio in corso...'; }
+    if (button) {
+      button.disabled = true;
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Invio in corso...';
+    }
 
     const payload = {
       action: 'candidatura_submit',
@@ -3700,16 +3708,22 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await fetch('https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec', {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
-      alert('Candidatura inviata correttamente! La Direzione Gara la valuterà al più presto.');
+
+      alert('✅ Candidatura inviata con successo! La Direzione Gara GRCC F1 ESPORTS valuterà la tua richiesta.');
       form.reset();
     } catch (error) {
       console.error('Errore candidatura:', error);
-      alert('Errore durante l\'invio della candidatura. Riprova tra poco.');
+      alert('❌ Errore durante l\'invio della candidatura. Riprova tra poco.');
     } finally {
-      if (button) { button.disabled = false; button.innerHTML = original; }
+      invioInCorso = false;
+      if (button) {
+        button.disabled = false;
+        button.innerHTML = original;
+      }
     }
   });
 });
