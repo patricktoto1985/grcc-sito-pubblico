@@ -752,9 +752,47 @@
 }
 </style>
 
+
+<style>
+.site-visit-counter{
+    max-width:1200px;
+    margin:0 auto 26px;
+    padding:0 20px;
+    text-align:center;
+}
+.site-visit-counter-box{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:10px 16px;
+    border-radius:999px;
+    background:rgba(19,26,38,.92);
+    border:1px solid rgba(255,183,3,.35);
+    color:#cbd5e1;
+    font-weight:700;
+    box-shadow:0 8px 22px rgba(0,0,0,.25);
+}
+.site-visit-counter-box i{
+    color:#ffb703;
+}
+#siteVisitTotal{
+    color:#ffb703;
+    font-weight:900;
+}
+</style>
+
 </head>
 <body>
     <div class="grcc-body-wrapper">
+
+        <div class="site-visit-counter">
+            <div class="site-visit-counter-box">
+                <i class="fas fa-eye"></i>
+                <span>Visite al sito:</span>
+                <span id="siteVisitTotal">...</span>
+            </div>
+        </div>
+
 
         <header class="hero-section">
             <span class="hero-tag">Official Community Site</span>
@@ -3728,5 +3766,54 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+<script>
+(function(){
+    const VISITE_API_URL = 'https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec';
+
+    function getVisitorId(){
+        const key = 'grcc_public_visitor_id';
+        let id = localStorage.getItem(key);
+        if(!id){
+            if (window.crypto && crypto.randomUUID) {
+                id = crypto.randomUUID();
+            } else {
+                id = 'v-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+            }
+            localStorage.setItem(key, id);
+        }
+        return id;
+    }
+
+    async function registraVisitaPubblica(){
+        const counter = document.getElementById('siteVisitTotal');
+        try{
+            const response = await fetch(VISITE_API_URL, {
+                method: 'POST',
+                headers: {'Content-Type':'text/plain;charset=utf-8'},
+                body: JSON.stringify({
+                    action: 'visita_sito',
+                    pagina: 'Home',
+                    visitatore: getVisitorId()
+                })
+            });
+
+            const result = await response.json();
+
+            if(result && result.success && typeof result.visiteTotali !== 'undefined'){
+                counter.textContent = Number(result.visiteTotali).toLocaleString('it-IT');
+            } else {
+                counter.textContent = '—';
+            }
+        } catch(err){
+            console.error('Errore contatore visite:', err);
+            if(counter) counter.textContent = '—';
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', registraVisitaPubblica);
+})();
+</script>
+
 </body>
 </html>
