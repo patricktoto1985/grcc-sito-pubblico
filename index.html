@@ -781,6 +781,53 @@
 }
 </style>
 
+<style>
+.hof-podium-gallery{
+    margin-top:28px;
+}
+.hof-podium-gallery-title{
+    margin:0 0 16px;
+    text-align:center;
+    color:#fff;
+    font-size:1.15rem;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+.hof-podium-gallery-title span{color:#ffb703}
+.hof-podium-gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+.hof-podium-gallery-grid figure{
+    margin:0;
+    overflow:hidden;
+    border-radius:12px;
+    background:#080b11;
+    border:1px solid rgba(255,183,3,.28);
+    box-shadow:0 10px 24px rgba(0,0,0,.32);
+}
+.hof-podium-gallery-grid img{
+    display:block;
+    width:100%;
+    height:auto;
+}
+.hof-podium-gallery-grid figcaption{
+    padding:10px 8px;
+    text-align:center;
+    color:#fff;
+    font-size:.78rem;
+    font-weight:900;
+    text-transform:uppercase;
+}
+@media(max-width:700px){
+    .hof-podium-gallery-grid{
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+}
+</style>
 </head>
 <body>
     <div class="grcc-body-wrapper">
@@ -1969,6 +2016,23 @@
             <div class="hof-trophy-photo">
                 <img src="img/trofei-stagione-2025.jpg" alt="Trofei GRCC F1 ESPORTS stagione 2025">
                 <div class="hof-trophy-caption">🏆 I TROFEI DELLA STAGIONE 2025</div>
+            </div>
+            <div class="hof-podium-gallery">
+                <h3 class="hof-podium-gallery-title">🏁 I PROTAGONISTI DEL <span>PODIO 2025/26</span></h3>
+                <div class="hof-podium-gallery-grid">
+                    <figure>
+                        <img src="img/sickmirko-campione-2025-26.jpeg" alt="SICKMIRKO - 1° posto stagione 2025/26">
+                        <figcaption>🥇 SICKMIRKO · 1° POSTO</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="img/rao-783-secondo-2025-26.jpeg" alt="RAO-783 - 2° posto stagione 2025/26">
+                        <figcaption>🥈 RAO-783 · 2° POSTO</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="img/daviarco1999-terzo-2025-26.jpeg" alt="DAVIARCO1999 - 3° posto stagione 2025/26">
+                        <figcaption>🥉 DAVIARCO1999 · 3° POSTO</figcaption>
+                    </figure>
+                </div>
             </div>
         </div>
     </div>
