@@ -831,6 +831,17 @@
 <style>
 .rwc-section{max-width:1200px;margin:0 auto 55px;padding:0 20px}.rwc-card{border-radius:20px;border:1px solid rgba(255,183,3,.42);background:linear-gradient(135deg,#151d2d,#090d16 75%);box-shadow:0 18px 45px rgba(0,0,0,.45);padding:30px}.rwc-top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.rwc-kicker{color:#ffb703;font-size:.78rem;font-weight:900;letter-spacing:2px;text-transform:uppercase}.rwc-title{margin:7px 0;color:#fff;font-size:clamp(1.7rem,4vw,2.8rem);font-weight:950;text-transform:uppercase}.rwc-meta{color:#cbd5e1;font-weight:700}.rwc-status{display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;min-width:0;min-height:0;padding:7px 12px;border-radius:999px;background:rgba(255,183,3,.12);border:1px solid rgba(255,183,3,.4);color:#ffb703;font-size:.75rem;font-weight:900;line-height:1;text-transform:uppercase;white-space:nowrap}.rwc-results{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:24px}.rwc-result{padding:14px 10px;border-radius:11px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);text-align:center}.rwc-result small{display:block;color:#94a3b8;font-size:.68rem;font-weight:800;text-transform:uppercase;margin-bottom:6px}.rwc-result strong{color:#fff;font-size:.9rem}.rwc-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}.rwc-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:9px;background:#131a26;border:1px solid rgba(255,255,255,.11);color:#fff;font-weight:900;font-size:.78rem;text-transform:uppercase;cursor:pointer}.rwc-btn.primary{background:#ffb703;color:#080b11;border-color:#ffb703}@media(max-width:760px){.rwc-card{padding:24px 18px}.rwc-results{grid-template-columns:1fr 1fr}.rwc-result:last-child{grid-column:1/-1}.rwc-actions{grid-template-columns:1fr 1fr}}
 </style>
+<style>
+/* ===== NUMERI DEL CAMPIONATO ===== */
+.champ-stats-section{max-width:1200px;margin:-25px auto 55px;padding:0 20px}
+.champ-stats-title{text-align:center;color:#fff;font-size:1rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 15px}
+.champ-stats-title span{color:#ffb703}
+.champ-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.champ-stat{background:#131a26;border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:18px 12px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+.champ-stat-number{display:block;color:#ffb703;font-size:1.8rem;font-weight:950;line-height:1}
+.champ-stat-label{display:block;color:#94a3b8;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+@media(max-width:650px){.champ-stats-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
 <body>
     <div class="grcc-body-wrapper">
@@ -875,6 +886,15 @@
 
 
         <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 1 — GP D'AUSTRALIA</h2><div class="rwc-meta">📅 <span id="rwcDate">23 Ottobre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Albert Park</span></div></div><div class="rwc-status">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
+<section class="champ-stats-section">
+  <h2 class="champ-stats-title">Numeri del <span>Campionato</span></h2>
+  <div class="champ-stats-grid">
+    <div class="champ-stat"><span class="champ-stat-number">24</span><span class="champ-stat-label">Gran Premi</span></div>
+    <div class="champ-stat"><span class="champ-stat-number">20</span><span class="champ-stat-label">Piloti</span></div>
+    <div class="champ-stat"><span class="champ-stat-number">10</span><span class="champ-stat-label">Scuderie</span></div>
+    <div class="champ-stat"><span class="champ-stat-number" id="completedRacesStat">0/24</span><span class="champ-stat-label">Gare disputate</span></div>
+  </div>
+</section>
 <section class="about-section">
             <h2 class="section-headline"><i class="fas fa-history" style="color: var(--accent); margin-right: 10px;"></i> La Nostra Storia</h2>
             
@@ -3895,5 +3915,22 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>document.addEventListener('DOMContentLoaded',()=>{function sync(){let t=id=>document.getElementById(id)?.textContent?.trim()||'';let r=t('nextRaceRound'),n=t('nextRaceName'),d=t('nextRaceDate'),l=t('nextRaceLocation');if(r||n)document.getElementById('rwcTitle').textContent=[r,n].filter(Boolean).join(' — ');if(d)document.getElementById('rwcDate').textContent=d;if(l)document.getElementById('rwcCircuit').textContent=l.split('•')[0].trim()}sync();setTimeout(sync,1000);setTimeout(sync,2500)});</script>
+<script>
+(function(){
+  const raceDates=[
+    '2026-10-23','2026-10-30','2026-11-06','2026-11-13','2026-11-20','2026-11-27',
+    '2026-12-04','2026-12-11','2026-12-18','2027-01-08','2027-01-15','2027-01-22',
+    '2027-01-29','2027-02-05','2027-02-12','2027-02-19','2027-02-26','2027-03-05',
+    '2027-03-12','2027-03-26','2027-04-02','2027-04-09','2027-04-16','2027-04-23'
+  ];
+  function updateCompletedRaces(){
+    const now=new Date();
+    const completed=raceDates.filter(d=>now>new Date(d+'T23:59:59')).length;
+    const el=document.getElementById('completedRacesStat');
+    if(el) el.textContent=completed+'/24';
+  }
+  document.addEventListener('DOMContentLoaded',updateCompletedRaces);
+})();
+</script>
 </body>
 </html>
