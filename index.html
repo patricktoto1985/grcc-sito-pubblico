@@ -890,8 +890,8 @@
   <h2 class="champ-stats-title">Numeri del <span>Campionato</span></h2>
   <div class="champ-stats-grid">
     <div class="champ-stat"><span class="champ-stat-number">24</span><span class="champ-stat-label">Gran Premi</span></div>
-    <div class="champ-stat"><span class="champ-stat-number">20</span><span class="champ-stat-label">Piloti</span></div>
-    <div class="champ-stat"><span class="champ-stat-number">10</span><span class="champ-stat-label">Scuderie</span></div>
+    <div class="champ-stat"><span class="champ-stat-number" id="driversCountStat">--</span><span class="champ-stat-label">Piloti</span></div>
+    <div class="champ-stat"><span class="champ-stat-number" id="teamsCountStat">--</span><span class="champ-stat-label">Scuderie</span></div>
     <div class="champ-stat"><span class="champ-stat-number" id="completedRacesStat">0/24</span><span class="champ-stat-label">Gare disputate</span></div>
   </div>
 </section>
@@ -3931,6 +3931,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   document.addEventListener('DOMContentLoaded',updateCompletedRaces);
 })();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  function aggiornaContatoriGriglia(){
+    const teamBlocks = [...document.querySelectorAll('.teams-grid .team-block')];
+    const teamCount = teamBlocks.length;
+
+    let driverCount = 0;
+    teamBlocks.forEach(team => {
+      driverCount += team.querySelectorAll('.driver-card').length;
+    });
+
+    const driversEl = document.getElementById('driversCountStat');
+    const teamsEl = document.getElementById('teamsCountStat');
+    if (driversEl) driversEl.textContent = driverCount;
+    if (teamsEl) teamsEl.textContent = teamCount;
+  }
+
+  aggiornaContatoriGriglia();
+});
 </script>
 </body>
 </html>
