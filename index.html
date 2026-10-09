@@ -554,7 +554,10 @@
         padding: 28px 20px;
     }
 }
-    </style>
+    
+/* Badge compatto: evita l’ovale causato dall’allungamento nel flex */
+#rwc-status-label{flex:0 0 auto!important;align-self:flex-start!important;display:inline-flex!important;width:max-content!important;height:auto!important;min-width:0!important;min-height:0!important;max-width:100%!important;aspect-ratio:auto!important;padding:8px 13px!important;border-radius:8px!important;line-height:1.2!important;white-space:nowrap!important;background:rgba(255,183,3,.12)!important;border:1px solid rgba(255,183,3,.45)!important}
+</style>
 
 <style>
 .dotd-public-section{
@@ -885,7 +888,7 @@
         </section>
 
 
-        <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 1 — GP D'AUSTRALIA</h2><div class="rwc-meta">📅 <span id="rwcDate">23 Ottobre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Albert Park</span></div></div><div class="rwc-status">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
+        <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 1 — GP D'AUSTRALIA</h2><div class="rwc-meta">📅 <span id="rwcDate">23 Ottobre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Albert Park</span></div></div><div class="rwc-status" id="rwc-status-label">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
 <section class="champ-stats-section">
   <h2 class="champ-stats-title">Numeri del <span>Campionato</span></h2>
   <div class="champ-stats-grid">
