@@ -40,7 +40,16 @@ body.lightbox-open{overflow:hidden}
  {nome:"PILOTA 3",foto:"img/podi/round-01-terzo.jpg"}
  ]}
 */
-const risultati={};
+const risultati={
+  1: {
+    podio: 'img/podi/round-01-podio.png',
+    piloti: [
+      {nome:'DAVIARCO1999',foto:'img/podi/round-01-primo.png'},
+      {nome:'SICKMIRKO',foto:'img/podi/round-01-secondo.png'},
+      {nome:'RAO-783',foto:'img/podi/round-01-terzo.png'}
+    ]
+  }
+};
 for(const [round,data] of Object.entries(risultati)){
  const card=document.querySelector(`[data-round="${round}"]`);
  if(!card||!data.podio||!Array.isArray(data.piloti)||data.piloti.length!==3)continue;
