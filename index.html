@@ -845,6 +845,9 @@
 .champ-stat-label{display:block;color:#94a3b8;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-top:8px}
 @media(max-width:650px){.champ-stats-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
+<style>
+.race-card.completed{cursor:pointer;border-color:rgba(25,214,107,.5)!important}.race-card.completed .race-status{background:#19d66b}.race-card.upcoming .race-status{font-size:.65rem}.grcc-results-overlay{display:none;position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.83);padding:18px;align-items:center;justify-content:center;backdrop-filter:blur(7px)}.grcc-results-overlay.open{display:flex}.grcc-results-dialog{position:relative;width:min(100%,540px);max-height:90vh;overflow:auto;padding:30px;border:1px solid #ffb703;border-radius:18px;background:#121a27;color:#fff;box-shadow:0 20px 80px #000}.grcc-results-close{position:absolute;right:16px;top:9px;font-size:30px;background:none;border:0;color:#fff;cursor:pointer}.grcc-results-tag{color:#19d66b;font-weight:900;font-size:.75rem}.grcc-results-dialog h2{font-size:2rem;margin:12px 0 4px}.grcc-results-dialog h3{color:#ffb703}.grcc-results-dialog p{color:#aab9cc}.grcc-results-line{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:15px 0;border-bottom:1px solid #2c3748}.grcc-results-line span{color:#ffb703}.grcc-results-note{font-size:.85rem;line-height:1.5}.grcc-results-action{background:#ffb703;color:#10151e;border:0;border-radius:9px;padding:12px 18px;font-weight:900;cursor:pointer;margin-top:12px}.grcc-highlight-empty{padding:30px;text-align:center;border:1px solid #384251;background:linear-gradient(135deg,#172131,#10151f);border-radius:14px;max-width:700px;margin:0 auto;color:#d5dfeb}.grcc-highlight-empty h3{color:#ffb703;margin:12px 0}.grcc-highlight-empty a{display:inline-block;background:#6441a5;color:#fff;padding:11px 17px;border-radius:8px;text-decoration:none;font-weight:800;margin-top:12px}
+</style>
 </head>
 <body>
     <div class="grcc-body-wrapper">
@@ -870,11 +873,11 @@
             <div class="next-race-card" id="nextRaceCard">
                 <div>
                     <div class="next-race-kicker" id="nextRaceKicker"><i class="fas fa-stopwatch"></i> Next Race</div>
-                    <div class="next-race-round" id="nextRaceRound">ROUND 1</div>
-                    <h2 class="next-race-name" id="nextRaceName">GP D'AUSTRALIA</h2>
-                    <div class="next-race-location" id="nextRaceLocation">ALBERT PARK • MELBOURNE, AUSTRALIA</div>
+                    <div class="next-race-round" id="nextRaceRound">ROUND 2</div>
+                    <h2 class="next-race-name" id="nextRaceName">GP DI CINA</h2>
+                    <div class="next-race-location" id="nextRaceLocation">SHANGHAI INTERNATIONAL CIRCUIT • CINA</div>
                     <div class="next-race-meta">
-                        <i class="far fa-calendar-alt"></i><span id="nextRaceDate">23 Ottobre 2026</span>
+                        <i class="far fa-calendar-alt"></i><span id="nextRaceDate">30 Ottobre 2026</span>
                         &nbsp;•&nbsp; <strong>Ore 21:45</strong>
                     </div>
                 </div>
@@ -888,7 +891,7 @@
         </section>
 
 
-        <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 1 — GP D'AUSTRALIA</h2><div class="rwc-meta">📅 <span id="rwcDate">23 Ottobre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Albert Park</span></div></div><div class="rwc-status" id="rwc-status-label">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
+        <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 2 — GP DI CINA</h2><div class="rwc-meta">📅 <span id="rwcDate">30 Ottobre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Shanghai</span></div></div><div class="rwc-status" id="rwc-status-label">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
 <section class="champ-stats-section">
   <h2 class="champ-stats-title">Numeri del <span>Campionato</span></h2>
   <div class="champ-stats-grid">
@@ -2066,13 +2069,26 @@
     </div>
 </section>
 
+
+<div id="australiaResultsModal" class="grcc-results-overlay" role="dialog" aria-modal="true" aria-labelledby="ausResultsTitle" onclick="if(event.target===this)closeAustraliaResults()">
+ <div class="grcc-results-dialog"><button class="grcc-results-close" onclick="closeAustraliaResults()" aria-label="Chiudi">×</button>
+ <span class="grcc-results-tag">ROUND 1 · GARA DISPUTATA</span><h2 id="ausResultsTitle">GP D'AUSTRALIA</h2><p>Albert Park · Melbourne · 23 ottobre 2026</p>
+ <h3>🏆 Podio ufficiale</h3><div class="grcc-results-line"><b>🥇 1° · DAVIARCO1999</b><span>Haas · 25 punti</span></div><div class="grcc-results-line"><b>🥈 2° · SICKMIRKO</b><span>Ferrari · 20 punti</span></div><div class="grcc-results-line"><b>🥉 3° · RAO-783</b><span>Red Bull · 16 punti</span></div>
+ <p class="grcc-results-note">Per le altre posizioni consulta le classifiche della stagione. Il dettaglio completo dell'ordine d'arrivo sarà disponibile quando saranno collegati i risultati ufficiali del round.</p>
+ <button class="grcc-results-action" onclick="closeAustraliaResults();document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Vai alle classifiche</button></div></div>
+<script>
+function showAustraliaResults(){document.getElementById('australiaResultsModal').classList.add('open');document.body.style.overflow='hidden'}
+function closeAustraliaResults(){document.getElementById('australiaResultsModal').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAustraliaResults()});
+</script>
+
 <section class="calendar-section">
     <h2 class="section-title">Calendario <span>Gare 2026/27</span></h2>
     
     <div class="calendar-grid">
 
-        <div class="race-card upcoming">
-            <div class="race-status">Prossima Gara</div>
+        <div class="race-card completed" role="button" tabindex="0" onclick="showAustraliaResults()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showAustraliaResults()}" title="Visualizza risultati GP Australia">
+            <div class="race-status">Risultati ›</div>
             <div class="race-info">
                 <span class="race-round">Round 1</span>
                 <h3 class="race-name">GP d'Australia - Albert Park</h3>
@@ -2080,8 +2096,8 @@
             </div>
         </div>
 
-        <div class="race-card">
-            <div class="race-status hidden"></div>
+        <div class="race-card upcoming">
+            <div class="race-status">Prossima Gara · Sprint</div>
             <div class="race-info">
                 <span class="race-round">Round 2</span>
                 <h3 class="race-name">GP Cina - Shanghai (SPRINT)</h3>
@@ -2465,56 +2481,12 @@
     
     <div class="news-grid" id="highlights-grid">
         <div style="color: #a0aec0; text-align: center; width: 100%; grid-column: 1/-1; padding: 40px;">
-            Caricamento highlights in corso...
+            <div class="grcc-highlight-empty"><h3>🎬 Highlights delle gare</h3><p>I video saranno pubblicati qui quando disponibili. Nel frattempo, segui le dirette sul canale Twitch GRCC.</p><a href="https://www.twitch.tv/grccf1esport" target="_blank" rel="noopener noreferrer">Vai su Twitch</a></div>
         </div>
     </div>
 </section>
 
-<section class="news-section">
-    <h2 class="section-title">Ultime dal <span>Paddock</span></h2>
-    
-    <div class="news-grid">
-        <article class="news-card">
-            <div class="news-img-box">
-                <img src="img/ChatGPT Image 22 lug 2026, 00_39_24.png" alt="Stagione GRCC 2026/27">
-                <span class="news-badge badge-official">Ufficiale</span>
-            </div>
-            <div class="news-content">
-                <span class="news-date"><i class="far fa-calendar-alt"></i> 7 Settembre 2026</span>
-                <h3 class="news-card-title">Stagione 2026/27: si parte da Melbourne</h3>
-                <p class="news-card-desc">Il nuovo campionato GRCC F1 ESPORTS scatterà venerdì 23 ottobre con il GP d'Australia. Appuntamento ufficiale alle ore 21:45.</p>
-                <a href="javascript:void(0)" onclick="openArticle(1)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </article>
-
-        <article class="news-card">
-            <div class="news-img-box">
-                <img src="img/resoconto.png" alt="Test Wild Card GRCC">
-                <span class="news-badge badge-race">Test Piloti</span>
-            </div>
-            <div class="news-content">
-                <span class="news-date"><i class="far fa-calendar-alt"></i> Settembre - Ottobre 2026</span>
-                <h3 class="news-card-title">Test Wild Card verso la nuova stagione</h3>
-                <p class="news-card-desc">Cinque appuntamenti di test accompagneranno la community verso l'inizio del campionato e potranno aprire la strada a nuovi piloti ufficiali.</p>
-                <a href="javascript:void(0)" onclick="openArticle(2)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </article>
-
-        <article class="news-card">
-            <div class="news-img-box">
-                <img src="img/commissari.png" alt="Race Control GRCC">
-                <span class="news-badge badge-stewards">Race Control</span>
-            </div>
-            <div class="news-content">
-                <span class="news-date"><i class="far fa-calendar-alt"></i> 7 Settembre 2026</span>
-                <h3 class="news-card-title">Race Control pronto per il campionato 2026/27</h3>
-                <p class="news-card-desc">Presenze, risultati, reclami, highlights e gestione sportiva saranno centralizzati nel sistema Race Control GRCC.</p>
-                <a href="javascript:void(0)" onclick="openArticle(3)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </article>
-    </div>
-</section>
-
+<section class="news-section"><h2 class="section-title">Ultime dal <span>Paddock</span></h2><div class="news-grid"><article class="news-card"><div class="news-img-box"><img src="img/ChatGPT Image 22 lug 2026, 00_39_24.png" alt="Shanghai accende il weekend Sprint"><span class="news-badge badge-official">CINA · SPRINT</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 29 Ottobre 2026</span><h3 class="news-card-title">Shanghai accende il weekend Sprint</h3><p class="news-card-desc">Il Round 2 arriva in Cina: GP di Shanghai il 30 ottobre alle 21:45, con il formato Sprint.</p><a href="javascript:void(0)" onclick="openArticle(1)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/resoconto.png" alt="Melbourne: DAVIARCO1999 vince il primo GP"><span class="news-badge badge-official">RISULTATI GP</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 24 Ottobre 2026</span><h3 class="news-card-title">Melbourne: DAVIARCO1999 vince il primo GP</h3><p class="news-card-desc">Haas apre la stagione con una vittoria. Sul podio SICKMIRKO (Ferrari) e RAO-783 (Red Bull).</p><a href="javascript:void(0)" onclick="openArticle(2)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/commissari.png" alt="Classifiche e risultati: la stagione è iniziata"><span class="news-badge badge-official">CAMPIONATO</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 29 Ottobre 2026</span><h3 class="news-card-title">Classifiche e risultati: la stagione è iniziata</h3><p class="news-card-desc">Dopo l’Australia, classifiche piloti e costruttori sono consultabili sul sito. Prossima sfida: Shanghai.</p><a href="javascript:void(0)" onclick="openArticle(3)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article></div></section>
     <section class="teams-section">
         <h2 class="section-title">Schieramento <span>Piloti & Scuderie</span></h2>
         
@@ -2970,8 +2942,8 @@ const championshipRaces = [
         country: "Australia",
         circuit: "Albert Park",
         date: "23 Ottobre 2026",
-        status: "next",
-        winner: "Da disputare",
+        status: "completed",
+        winner: "DAVIARCO1999",
         left: 87.0,
         top: 80.0
     },
@@ -2980,7 +2952,7 @@ const championshipRaces = [
         country: "Cina",
         circuit: "Shanghai",
         date: "30 Ottobre 2026",
-        status: "future",
+        status: "next",
         winner: "Da disputare",
         left: 82.0,
         top: 45.0
@@ -3384,28 +3356,20 @@ window.addEventListener("keydown", function(event) {
 </div>
 
 <script>
+
+function getGRCCLogo(team) {
+    const key = String(team || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (key.includes('aston')) return 'assets/aston%20martin.png';
+    if (key.includes('cadillac')) return 'assets/cadillac-formula-1-team-seeklogo.png';
+    if (key.includes('redbull') && !key.includes('racing')) return 'assets/redbull.png';
+    if (key.includes('racingbull')) return 'assets/racingbulls.png';
+    return 'assets/' + key + '.png';
+}
+
 const articlesData = {
-    1: {
-        title: 'Stagione 2026/27: si parte da Melbourne',
-        badge: 'Ufficiale',
-        badgeClass: 'badge-official',
-        date: '7 Settembre 2026',
-        content: '<p>La stagione <strong>GRCC F1 ESPORTS 2026/27</strong> prenderà ufficialmente il via <strong>venerdì 23 ottobre 2026</strong> con il Gran Premio d\'Australia sul circuito di Albert Park.</p><p>L\'appuntamento ufficiale è fissato alle <strong>ore 21:45</strong>. Il calendario comprenderà 24 Round e accompagnerà piloti e scuderie fino ad aprile 2027.</p>'
-    },
-    2: {
-        title: 'Test Wild Card verso la nuova stagione',
-        badge: 'Test Piloti',
-        badgeClass: 'badge-race',
-        date: 'Settembre - Ottobre 2026',
-        content: '<p>Prima del via della stagione, GRCC F1 ESPORTS organizzerà una serie di test dedicati alle <strong>Wild Card</strong> e ai piloti che potranno entrare a far parte della griglia ufficiale.</p><p>Gli appuntamenti previsti sono: <strong>11 settembre Melbourne</strong>, <strong>18 settembre Barcellona</strong>, <strong>25 settembre Singapore</strong>, <strong>2 ottobre Zandvoort</strong> e <strong>9 ottobre Spa</strong>.</p>'
-    },
-    3: {
-        title: 'Race Control pronto per il campionato 2026/27',
-        badge: 'Race Control',
-        badgeClass: 'badge-stewards',
-        date: '7 Settembre 2026',
-        content: '<p>Il sistema <strong>Race Control GRCC</strong> sarà il centro operativo della stagione 2026/27.</p><p>Presenze, risultati, Driver of the Day, reclami, highlights e strumenti della Direzione Gara saranno gestiti in modo centralizzato, rendendo più ordinata e trasparente la gestione del campionato.</p>'
-    }
+1:{title:'Shanghai accende il weekend Sprint',badge:'Cina · Sprint',badgeClass:'badge-race',date:'29 Ottobre 2026',content:'<p>Il <strong>Round 2</strong> del GRCC F1 ESPORTS si disputa a <strong>Shanghai</strong> venerdì <strong>30 ottobre 2026 alle 21:45</strong>. È un weekend Sprint: i primi otto classificati della Sprint ottengono 8, 7, 6, 5, 4, 3, 2 e 1 punto, da sommare ai punti del Gran Premio.</p>'},
+2:{title:'Melbourne: DAVIARCO1999 vince il primo GP',badge:'Risultati GP',badgeClass:'badge-official',date:'24 Ottobre 2026',content:'<p>Il GP d’Australia ad Albert Park apre il campionato 2026/27: <strong>DAVIARCO1999</strong> (Haas) conquista il successo, seguito da <strong>SICKMIRKO</strong> (Ferrari) e <strong>RAO-783</strong> (Red Bull). Per il podio: 25, 20 e 16 punti.</p><p>Clicca sul Round 1 nel calendario per vedere il riepilogo del podio.</p>'},
+3:{title:'Classifiche e risultati: la stagione è iniziata',badge:'Campionato',badgeClass:'badge-stewards',date:'29 Ottobre 2026',content:'<p>Dopo il primo Gran Premio, le classifiche piloti e costruttori sono consultabili sul sito GRCC F1 ESPORTS. Il prossimo appuntamento è il <strong>GP di Cina a Shanghai</strong>, in programma il 30 ottobre alle 21:45, con la Sprint.</p>'}
 };
 
 const modal = document.getElementById("newsModal");
@@ -3457,7 +3421,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const scuderia = row.c[2] ? row.c[2].v : '';
                 const punti = row.c[3] ? row.c[3].v : '0';
 
-                const logoPath = `assets/${scuderia.toLowerCase().replace(/\s+/g, '')}.png`;
+                const logoPath = getGRCCLogo(scuderia);
 
                 const tr = document.createElement("tr");
 
@@ -3501,7 +3465,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const scuderia = row.c[1] ? row.c[1].v : '';
                 const punti = row.c[2] ? row.c[2].v : '0';
 
-                const logoPath = `assets/${scuderia.toLowerCase().replace(/\s+/g, '')}.png`;
+                const logoPath = getGRCCLogo(scuderia);
 
                 const tr = document.createElement("tr");
 
@@ -3523,6 +3487,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(err => console.error("Errore costruttori:", err));
 });
 
+function showHighlightsEmpty(container){if(!container)return;container.innerHTML='<div class="grcc-highlight-empty"><div style="font-size:2.5rem">🎬 🏁</div><h3>Highlights della stagione 2026/27</h3><p>Il GP d’Australia ha inaugurato il campionato! I video ufficiali saranno pubblicati qui non appena disponibili.</p><a href="https://www.twitch.tv/grccf1esport" target="_blank" rel="noopener noreferrer">Guarda il canale Twitch GRCC</a></div>'}
 // ==========================================
 // VERSIONE HIGHLIGHTS GENERICA (CON URL CORRETTO)
 // ==========================================
@@ -3549,7 +3514,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             rows.forEach((row) => {
-                if (!row || !row.c || !row.c[1] || !row.c[1].v) return;
+                if (!row || !row.c || !row.c[1] || !row.c[1].v || /^(titolo|title)$/i.test(String(row.c[1].v).trim()) || !row.c[3] || !row.c[3].v || /^(url|link|video)$/i.test(String(row.c[3].v).trim())) return;
 
                 const round = row.c[0] ? row.c[0].v : '';
                 const titolo = row.c[1] ? row.c[1].v : '';
@@ -3634,8 +3599,9 @@ else if (videoUrl) {
                     container.appendChild(card);
                 }
             });
+            if (container && !container.children.length) showHighlightsEmpty(container);
         })
-        .catch(err => console.error("Errore effettivo highlights:", err));
+        .catch(err => { console.error("Errore effettivo highlights:", err); showHighlightsEmpty(document.getElementById("highlights-grid")); });
 })();
 </script>
 
