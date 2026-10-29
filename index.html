@@ -848,6 +848,50 @@
 <style>
 .race-card.completed{cursor:pointer;border-color:rgba(25,214,107,.5)!important}.race-card.completed .race-status{background:#19d66b}.race-card.upcoming .race-status{font-size:.65rem}.grcc-results-overlay{display:none;position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.83);padding:18px;align-items:center;justify-content:center;backdrop-filter:blur(7px)}.grcc-results-overlay.open{display:flex}.grcc-results-dialog{position:relative;width:min(100%,540px);max-height:90vh;overflow:auto;padding:30px;border:1px solid #ffb703;border-radius:18px;background:#121a27;color:#fff;box-shadow:0 20px 80px #000}.grcc-results-close{position:absolute;right:16px;top:9px;font-size:30px;background:none;border:0;color:#fff;cursor:pointer}.grcc-results-tag{color:#19d66b;font-weight:900;font-size:.75rem}.grcc-results-dialog h2{font-size:2rem;margin:12px 0 4px}.grcc-results-dialog h3{color:#ffb703}.grcc-results-dialog p{color:#aab9cc}.grcc-results-line{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:15px 0;border-bottom:1px solid #2c3748}.grcc-results-line span{color:#ffb703}.grcc-results-note{font-size:.85rem;line-height:1.5}.grcc-results-action{background:#ffb703;color:#10151e;border:0;border-radius:9px;padding:12px 18px;font-weight:900;cursor:pointer;margin-top:12px}.grcc-highlight-empty{padding:30px;text-align:center;border:1px solid #384251;background:linear-gradient(135deg,#172131,#10151f);border-radius:14px;max-width:700px;margin:0 auto;color:#d5dfeb}.grcc-highlight-empty h3{color:#ffb703;margin:12px 0}.grcc-highlight-empty a{display:inline-block;background:#6441a5;color:#fff;padding:11px 17px;border-radius:8px;text-decoration:none;font-weight:800;margin-top:12px}
 </style>
+<style>
+
+/* GRCC 2026/27 - responsive mobile corrections */
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+.grcc-body-wrapper{width:100%;max-width:100%;overflow-x:clip}
+@media(max-width:767px){
+ .grcc-body-wrapper{padding:20px 12px!important;background-size:90% auto}
+ .section-title{font-size:clamp(1.55rem,7vw,2.15rem)!important;line-height:1.2;overflow-wrap:anywhere}
+ .hero-section,.about-section,.commentator-section,.hof-card,.rwc-card{max-width:100%;min-width:0}
+ .hall-of-fame-section,.news-section,.highlights-section,.calendar-section,.standings-section{padding-left:0!important;padding-right:0!important;max-width:100%!important}
+ .hof-card{padding:20px 14px!important}
+ .hof-awards{grid-template-columns:minmax(0,1fr)!important}
+ .hof-award-item{min-width:0;padding:15px 12px!important;gap:12px!important}
+ .hof-icon{flex:0 0 34px}
+ .hof-details{min-width:0;flex:1}
+ .hof-label,.hof-winner,.hof-sub{overflow-wrap:anywhere;word-break:normal}
+ .hof-winner{font-size:1.05rem!important}
+ .hof-runners-up{grid-template-columns:minmax(0,1fr)!important;padding:15px!important}
+ .news-grid,.calendar-grid{grid-template-columns:minmax(0,1fr)!important;gap:18px!important}
+ .news-card,.race-card{min-width:0;max-width:100%}
+ .news-img-box img{max-width:100%;height:auto}
+ .standings-tabs{gap:8px!important;flex-wrap:wrap}
+ .tab-btn{padding:11px 10px!important;font-size:.85rem!important;flex:1 1 130px;min-width:0}
+ .table-container{width:100%;max-width:100%;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+ .standings-table{width:100%!important;min-width:0!important;table-layout:fixed!important}
+ .standings-table th,.standings-table td{padding:11px 7px!important;font-size:.78rem!important;overflow-wrap:anywhere;vertical-align:middle}
+ .standings-table th:first-child,.standings-table td:first-child{width:12%!important}
+ .standings-table th:last-child,.standings-table td:last-child{width:16%!important;text-align:center}
+ .standings-table th:nth-child(2),.standings-table td:nth-child(2){width:36%!important}
+ .standings-table th:nth-child(3),.standings-table td:nth-child(3){width:36%!important}
+ .table-team-logo,.team-logo-official{width:18px!important;max-width:18px!important;height:18px!important;object-fit:contain;margin-right:3px!important}
+ .standings-table td:nth-child(2){font-weight:700;word-break:break-word}
+ .standings-table td:nth-child(3){word-break:break-word}
+ .highlights-section{padding-top:36px!important;padding-bottom:36px!important}
+ .highlights-section .news-grid>div{padding:15px!important}
+ .hof-podium-gallery-grid{grid-template-columns:minmax(0,1fr)!important}
+ .race-map-modal-content{max-height:90dvh;overflow-y:auto}
+}
+@media(max-width:380px){
+ .standings-table th,.standings-table td{font-size:.7rem!important;padding:9px 4px!important}
+ .table-team-logo,.team-logo-official{width:15px!important;max-width:15px!important;height:15px!important}
+}
+</style>
 </head>
 <body>
     <div class="grcc-body-wrapper">
