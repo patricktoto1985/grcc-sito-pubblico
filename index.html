@@ -2126,6 +2126,68 @@ function closeAustraliaResults(){document.getElementById('australiaResultsModal'
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAustraliaResults()});
 </script>
 
+<!-- POPUP RISULTATI CINA -->
+<div id="cinaResultsModal" class="grcc-results-overlay"
+     role="dialog" aria-modal="true"
+     aria-labelledby="cinaResultsTitle"
+     onclick="if(event.target===this)closeCinaResults()">
+
+  <div class="grcc-results-dialog">
+    <button class="grcc-results-close"
+            onclick="closeCinaResults()"
+            aria-label="Chiudi">×</button>
+
+    <span class="grcc-results-tag">ROUND 2 · GARA DISPUTATA</span>
+    <h2 id="cinaResultsTitle">GP DI CINA</h2>
+    <p>Shanghai (SPRINT) · 30 ottobre 2026</p>
+
+    <h3>🏆 Podio ufficiale</h3>
+
+    <div class="grcc-results-line">
+      <b>🥇 1° · SICKMIRKO</b>
+      <span>Ferrari · 25 punti</span>
+    </div>
+
+    <div class="grcc-results-line">
+      <b>🥈 2° · GIUMEND29</b>
+      <span>Aston Martin · 20 punti</span>
+    </div>
+
+    <div class="grcc-results-line">
+      <b>🥉 3° · RAO-783</b>
+      <span>Red Bull · 16 punti</span>
+    </div>
+
+    <p class="grcc-results-note">
+      Risultati ufficiali del GP di Cina.
+      I punti della Sprint sono conteggiati
+      separatamente nella classifica generale.
+    </p>
+
+    <button class="grcc-results-action"
+            onclick="closeCinaResults();document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">
+      Vai alle classifiche
+    </button>
+  </div>
+</div>
+
+<script>
+function showCinaResults() {
+  document.getElementById('cinaResultsModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCinaResults() {
+  document.getElementById('cinaResultsModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCinaResults();
+});
+</script>
+
+
 <section class="calendar-section">
     <h2 class="section-title">Calendario <span>Gare 2026/27</span></h2>
     
@@ -2141,7 +2203,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAustraliaResult
         </div>
 
         
-<div class="race-card completed" onclick="window.location.href='gp.html?round=2&from=calendar'" style="cursor:pointer;">
+
+<div class="race-card completed" role="button" tabindex="0" onclick="showCinaResults()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showCinaResults()}">
     <div class="race-status">Risultati ›</div>
     <div class="race-info">
         <span class="race-round">Round 2</span>
