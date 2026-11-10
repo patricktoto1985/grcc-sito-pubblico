@@ -3682,6 +3682,8 @@ document.addEventListener("DOMContentLoaded", function() {
             rows.forEach((row) => {
                 const pos = row.c[0] ? row.c[0].v : '';
                 const pilota = row.c[1] ? row.c[1].v : '';
+                // Esclusi dalla classifica attiva: conservati nel foglio e nei risultati storici.
+                if (['MKI-110', 'TICXY13'].includes(String(pilota).trim().toUpperCase())) return;
                 const scuderia = row.c[2] ? row.c[2].v : '';
                 const punti = row.c[3] ? row.c[3].v : '0';
 
