@@ -2342,6 +2342,24 @@ document.addEventListener('keydown', e => {
 </script>
 
 
+
+<!-- GRCC: risultati GP Giappone -->
+<div id="giapponeResultsModal" class="grcc-results-overlay" role="dialog" aria-modal="true" aria-labelledby="giapponeResultsTitle" onclick="if(event.target===this)closeGiapponeResults()">
+ <div class="grcc-results-dialog"><button class="grcc-results-close" onclick="closeGiapponeResults()" aria-label="Chiudi">×</button>
+ <span class="grcc-results-tag">ROUND 3 · GARA DISPUTATA</span><h2 id="giapponeResultsTitle">GP DEL GIAPPONE</h2><p>Suzuka · 6 novembre 2026</p>
+ <h3>🏆 Podio ufficiale</h3>
+ <div class="grcc-results-line"><b>🥇 1° · CECCO67_SCAI</b><span>Vincitore</span></div>
+ <div class="grcc-results-line"><b>🥈 2° · SICKMIRKO</b><span>Secondo posto</span></div>
+ <div class="grcc-results-line"><b>🥉 3° · DAVIARCO1999</b><span>Terzo posto</span></div>
+ <p class="grcc-results-note">Podio del GP del Giappone. Consulta le classifiche per i punti complessivi.</p>
+ <button class="grcc-results-action" onclick="closeGiapponeResults();document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Vai alle classifiche</button>
+ </div></div>
+<script>
+function showGiapponeResults(){document.getElementById('giapponeResultsModal').classList.add('open');document.body.style.overflow='hidden'}
+function closeGiapponeResults(){document.getElementById('giapponeResultsModal').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGiapponeResults()});
+</script>
+
 <section class="calendar-section">
     <h2 class="section-title">Calendario <span>Gare 2026/27</span></h2>
     
@@ -2381,7 +2399,7 @@ document.addEventListener('keydown', e => {
             <div class="race-status hidden"></div>
             <div class="race-info">
                 <span class="race-round">Round 4</span>
-                <h3 class="race-name">GP Barhain - Barhain</h3>
+                <h3 class="race-name">GP Bahrain - Sakhir</h3>
                 <p class="race-date"><i class="far fa-calendar-alt"></i> 13 Novembre 2026 - Ore 21:45</p>
             </div>
         </div>
@@ -4218,6 +4236,46 @@ document.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('DOMContentLoaded',syncCalendar);
   // Aggiorna automaticamente anche quando il sito resta aperto.
   setInterval(syncCalendar,60*1000);
+})();
+</script>
+
+<script>
+/* GRCC calendario: unica logica per stato e popup, aggiornata automaticamente. */
+(function(){
+  const months={gennaio:0,febbraio:1,marzo:2,aprile:3,maggio:4,giugno:5,luglio:6,agosto:7,settembre:8,ottobre:9,novembre:10,dicembre:11};
+  const popupByRound={1:'showAustraliaResults',2:'showCinaResults',3:'showGiapponeResults'};
+  function timestamp(card){
+    const date=card.querySelector('.race-date')?.textContent||'';
+    const m=date.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/i);
+    if(!m||months[m[2].toLowerCase()]===undefined)return NaN;
+    return new Date(+m[3],months[m[2].toLowerCase()],+m[1],21,45).getTime();
+  }
+  function refresh(){
+    const cards=[...document.querySelectorAll('.calendar-section .calendar-grid .race-card')];
+    const now=Date.now(),endDelay=3*60*60*1000;
+    const upcoming=cards.find(card=>Number.isFinite(timestamp(card))&&now<timestamp(card)+endDelay);
+    cards.forEach((card,index)=>{
+      const round=Number(card.querySelector('.race-round')?.textContent.match(/\d+/)?.[0])||index+1;
+      const past=Number.isFinite(timestamp(card))&&now>=timestamp(card)+endDelay;
+      const isNext=card===upcoming;
+      card.classList.toggle('completed',past);
+      card.classList.toggle('upcoming',isNext);
+      const status=card.querySelector('.race-status');
+      if(status){status.classList.toggle('hidden',!past&&!isNext);status.textContent=past?(popupByRound[round]?'Risultati ›':'Gara disputata'):(isNext?'Prossima Gara':'');}
+      const handler=past?popupByRound[round]:null;
+      if(handler&&typeof window[handler]==='function'){
+        card.setAttribute('role','button');card.setAttribute('tabindex','0');
+        card.onclick=()=>window[handler]();
+        card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();window[handler]();}};
+        card.style.cursor='pointer';
+      }else{
+        card.removeAttribute('role');card.removeAttribute('tabindex');
+        card.onclick=null;card.onkeydown=null;card.style.cursor='';
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded',refresh);
+  setInterval(refresh,60000);
 })();
 </script>
 </body>
