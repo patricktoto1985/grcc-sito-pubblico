@@ -3225,8 +3225,8 @@ const championshipRaces = [
         country: "Giappone",
         circuit: "Suzuka",
         date: "6 Novembre 2026",
-        status: "next",
-        winner: "Da disputare",
+        status: "completed",
+        winner: "CECCO67_SCAI",
         left: 87.0,
         top: 42.5
     },
@@ -3235,7 +3235,7 @@ const championshipRaces = [
         country: "Bahrain",
         circuit: "Sakhir",
         date: "13 Novembre 2026",
-        status: "future",
+        status: "next",
         winner: "Da disputare",
         left: 60.0,
         top: 52.5
@@ -4187,6 +4187,38 @@ document.addEventListener('DOMContentLoaded', function(){
 
   aggiornaContatoriGriglia();
 });
+</script>
+
+<script>
+/* GRCC: calendario e popup sempre sincronizzati con la data italiana.
+   I vincitori vengono mostrati solo quando sono stati inseriti nei dati. */
+(function(){
+  const months = {gennaio:0,febbraio:1,marzo:2,aprile:3,maggio:4,giugno:5,luglio:6,agosto:7,settembre:8,ottobre:9,novembre:10,dicembre:11};
+  function raceTimestamp(race){
+    const m = String(race.date).match(/(\d{1,2})\s+(\S+)\s+(\d{4})/);
+    if (!m || months[m[2].toLowerCase()] === undefined) return NaN;
+    // Orario del GP 21:45, fuso orario italiano; il cambio ora legale
+    // viene gestito automaticamente dal browser se impostato su Europe/Rome.
+    return new Date(+m[3],months[m[2].toLowerCase()],+m[1],21,45).getTime();
+  }
+  function syncCalendar(){
+    if (typeof championshipRaces === 'undefined') return;
+    const now = Date.now();
+    const ordered = championshipRaces.slice().sort((a,b)=>raceTimestamp(a)-raceTimestamp(b));
+    const upcoming = ordered.find(r => now < raceTimestamp(r)+3*60*60*1000);
+    championshipRaces.forEach(r=>{
+      const ts=raceTimestamp(r);
+      if(!Number.isFinite(ts)) return;
+      r.status = upcoming === r ? 'next' : (now >= ts+3*60*60*1000 ? 'completed' : 'future');
+    });
+    if (typeof createChampionshipMapMarkers === 'function') createChampionshipMapMarkers();
+    const label = document.getElementById('rwc-status-label');
+    if(label) label.textContent = upcoming ? 'Prossima gara' : 'Stagione conclusa';
+  }
+  document.addEventListener('DOMContentLoaded',syncCalendar);
+  // Aggiorna automaticamente anche quando il sito resta aperto.
+  setInterval(syncCalendar,60*1000);
+})();
 </script>
 </body>
 </html>
