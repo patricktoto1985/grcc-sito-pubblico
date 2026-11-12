@@ -1048,7 +1048,10 @@ html,body{max-width:100%;overflow-x:hidden}
         </div>
 
 
-        <header class="hero-section">
+        <header class="hero-section grcc-kimi-hero">
+            <div class="grcc-kimi-video" aria-hidden="true">
+                <iframe title="Video celebrativo Kimi Antonelli" src="https://www.youtube-nocookie.com/embed/603c9tS3o5I?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=603c9tS3o5I&amp;controls=0&amp;playsinline=1&amp;rel=0" allow="autoplay; encrypted-media; picture-in-picture" loading="eager" tabindex="-1" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
             <span class="hero-tag">Official Community Site</span>
             <div class="hero-title-row">
                 <img src="img/logo.png" alt="Logo GRCC F1 ESPORTS" class="hero-logo">
@@ -1259,6 +1262,15 @@ html,body{max-width:100%;overflow-x:hidden}
                 justify-content: center;
             }
         }
+
+        /* Video celebrativo Kimi Antonelli nella testata del sito */
+        .hero-section.grcc-kimi-hero { position: relative; overflow: hidden; isolation: isolate; min-height: 280px; display:flex; flex-direction:column; justify-content:center; background: #101724; }
+        .grcc-kimi-hero .grcc-kimi-video { position:absolute; inset:0; z-index:-2; overflow:hidden; pointer-events:none; }
+        .grcc-kimi-hero .grcc-kimi-video iframe { position:absolute; top:50%; left:50%; width: max(100%, 177.78vh); height:max(100%, 56.25vw); transform:translate(-50%,-50%); border:0; pointer-events:none; }
+        .grcc-kimi-hero::before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(5,9,17,.82),rgba(5,9,17,.48),rgba(5,9,17,.82)); z-index:-1; }
+        .grcc-kimi-hero .hero-title { text-shadow:0 3px 14px #000; }
+        @media (max-width:700px) { .hero-section.grcc-kimi-hero { min-height:240px; } .grcc-kimi-hero .grcc-kimi-video iframe { width:max(100%, 177.78vh); height:max(100%, 56.25vw); } }
+        @media (prefers-reduced-motion: reduce) { .grcc-kimi-hero .grcc-kimi-video { display:none; } }
     </style>
 
     <section class="commentator-section">
