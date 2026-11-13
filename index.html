@@ -3174,6 +3174,18 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGiapponeResults
                     </div>
                 </div>
 
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="email">Email per essere ricontattato</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="nome@esempio.it" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Telefono per essere ricontattato</label>
+                        <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Es. +39 333 1234567" autocomplete="tel" inputmode="tel">
+                    </div>
+                </div>
+                <p style="margin:0; font-size:.85rem; color:#cbd5e1">Inserisci almeno un recapito (email o telefono). Sarà utilizzato dagli amministratori GRCC esclusivamente per rispondere alla tua candidatura.</p>
+
                 <div class="form-group">
                     <label for="scuderia">Scuderia Preferita</label>
                     <select id="scuderia" name="scuderia" class="form-control" required>
@@ -4115,8 +4127,23 @@ document.addEventListener('DOMContentLoaded', () => {
       piattaforma: form.querySelector('[name="piattaforma"]')?.value || '',
       difficolta: form.querySelector('[name="difficolta"]')?.value || '',
       scuderia: form.querySelector('[name="scuderia"]')?.value || '',
-      esperienze: form.querySelector('[name="esperienze"]')?.value.trim() || ''
+      esperienze: form.querySelector('[name="esperienze"]')?.value.trim() || '',
+      email: form.querySelector('[name="email"]')?.value.trim() || '',
+      telefono: form.querySelector('[name="telefono"]')?.value.trim() || ''
     };
+
+    if (!payload.email && !payload.telefono) {
+      alert('Inserisci almeno un recapito: email oppure numero di telefono.');
+      invioInCorso = false;
+      if (button) { button.disabled = false; button.innerHTML = original; }
+      return;
+    }
+    if (payload.telefono && !/^[+0-9().\s-]{6,25}$/.test(payload.telefono)) {
+      alert('Controlla il numero di telefono inserito.');
+      invioInCorso = false;
+      if (button) { button.disabled = false; button.innerHTML = original; }
+      return;
+    }
 
     try {
       await fetch('https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec', {
