@@ -1102,7 +1102,7 @@ html,body{max-width:100%;overflow-x:hidden}
         </section>
 
 
-        <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 2 — GP DI CINA</h2><div class="rwc-meta">📅 <span id="rwcDate">30 Ottobre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Shanghai</span></div></div><div class="rwc-status" id="rwc-status-label">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
+        <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 5 — GP ARABIA SAUDITA</h2><div class="rwc-meta">📅 <span id="rwcDate">20 Novembre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Jeddah</span></div></div><div class="rwc-status" id="rwc-status-label">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
 <section class="champ-stats-section">
   <h2 class="champ-stats-title">Numeri del <span>Campionato</span></h2>
   <div class="champ-stats-grid">
@@ -2382,6 +2382,24 @@ function closeGiapponeResults(){document.getElementById('giapponeResultsModal').
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGiapponeResults()});
 </script>
 
+
+<!-- GRCC: GP BAHRAIN ROUND 4 -->
+<div id="bahrainResultsModal" class="grcc-results-overlay" role="dialog" aria-modal="true" aria-labelledby="bahrainResultsTitle" onclick="if(event.target===this)closeBahrainResults()">
+<div class="grcc-results-dialog"><button class="grcc-results-close" onclick="closeBahrainResults()" aria-label="Chiudi">×</button>
+<span class="grcc-results-tag">ROUND 4 · RISULTATI UFFICIALI</span><h2 id="bahrainResultsTitle">GP DEL BAHRAIN</h2><p>Sakhir · 13 novembre 2026</p>
+<img src="img/bahrain-podio.png" alt="Podio Bahrain: SICKMIRKO, DAVIARCO1999, CECCO67_SCAI" style="width:100%;max-height:420px;object-fit:contain;border-radius:12px;margin:12px auto;display:block" loading="lazy">
+<h3>🏆 Podio ufficiale</h3>
+<div class="grcc-results-line"><b>🥇 1° · SICKMIRKO</b><span>Ferrari · 25 punti</span></div>
+<div class="grcc-results-line"><b>🥈 2° · DAVIARCO1999</b><span>Haas · 18 punti</span></div>
+<div class="grcc-results-line"><b>🥉 3° · CECCO67_SCAI</b><span>Audi · 15 punti</span></div>
+<p class="grcc-results-note">🎯 Pole position: <b>SICKMIRKO</b> · ⚡ Giro veloce: <b>RAO-783</b> · Ritiro: <b>BENE20DOMENICO</b>. Punteggi GP standard, senza bonus.</p>
+<h3>Ordine d'arrivo</h3>
+<div class="grcc-bahrain-list">4° GRCCMendolia29 · 12 pt<br>5° SALVOTD91 · 10 pt<br>6° LRT_KURAMA · 8 pt<br>7° RAO-783 · 6 pt<br>8° KEIDIKID2 · 4 pt<br>9° NXS_ODI · 2 pt<br>10° DAGGER74SUN · 1 pt<br>11° CONDE785 · 0 pt<br>12° MIKYPOWER · 0 pt<br>13° BRA_FOSY89 · 0 pt<br>14° ICEANT16 · 0 pt<br>15° BENE20DOMENICO · Ritirato</div>
+<button class="grcc-results-action" onclick="closeBahrainResults();document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Vai alle classifiche</button>
+</div></div>
+<script>function showBahrainResults(){document.getElementById('bahrainResultsModal').classList.add('open');document.body.style.overflow='hidden'}function closeBahrainResults(){document.getElementById('bahrainResultsModal').classList.remove('open');document.body.style.overflow=''}document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBahrainResults()});</script>
+<style>.grcc-bahrain-list{line-height:1.9;color:#e2e8f0;padding:12px 18px;border:1px solid rgba(255,255,255,.12);border-radius:12px;margin-bottom:18px}</style>
+
 <section class="calendar-section">
     <h2 class="section-title">Calendario <span>Gare 2026/27</span></h2>
     
@@ -2789,7 +2807,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGiapponeResults
     </div>
 </section>
 
-<section class="news-section"><h2 class="section-title">Ultime dal <span>Paddock</span></h2><div class="news-grid"><article class="news-card"><div class="news-img-box"><img src="img/ChatGPT Image 22 lug 2026, 00_39_24.png" alt="Bahrain, stasera si corre a Sakhir!"><span class="news-badge badge-official">BAHRAIN · ROUND 4</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 13 Novembre 2026</span><h3 class="news-card-title">Bahrain, stasera si corre a Sakhir!</h3><p class="news-card-desc">Venerdì 13 novembre alle 21:45 il GRCC F1 ESPORTS torna in pista: quarta tappa del campionato, sfida aperta sotto i riflettori.</p><a href="javascript:void(0)" onclick="openArticle(1)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/resoconto.png" alt="CECCO67_SCAI conquista Suzuka"><span class="news-badge badge-official">RISULTATI · GIAPPONE</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 7 Novembre 2026</span><h3 class="news-card-title">CECCO67_SCAI conquista Suzuka</h3><p class="news-card-desc">Nel GP del Giappone CECCO67_SCAI vince davanti a SICKMIRKO e DAVIARCO1999. Un podio che infiamma la lotta al vertice.</p><a href="javascript:void(0)" onclick="openArticle(2)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/commissari.png" alt="Pubblicate le decisioni del GP Giappone"><span class="news-badge badge-official">DIREZIONE GARA</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 11 Novembre 2026</span><h3 class="news-card-title">Pubblicate le decisioni del GP Giappone</h3><p class="news-card-desc">La Direzione Gara ha esaminato i reclami: rimossi 10 secondi a RAO-783; 5 secondi a PEPPEFLE_IRT da scontare in Bahrain; altri due casi definiti.</p><a href="javascript:void(0)" onclick="openArticle(3)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/resoconto.png" alt="Fanta GRCC: entra in gioco!"><span class="news-badge badge-official">FANTA GRCC</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 12 Novembre 2026</span><h3 class="news-card-title">Fanta GRCC: entra in gioco!</h3><p class="news-card-desc">Il fantacampionato GRCC è online: crea la tua squadra, partecipa ai pronostici e segui la classifica su fanta-grcc.vercel.app.</p><a href="javascript:void(0)" onclick="openArticle(4)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article></div></section>
+<section class="grcc-bahrain-gallery" style="max-width:1200px;margin:30px auto 60px;padding:0 20px"><h2 class="section-title">Podio Bahrain <span>Round 4</span></h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><figure><img loading="lazy" src="img/bahrain-primo.png" alt="SICKMIRKO primo classificato Bahrain" style="width:100%;border-radius:14px"><figcaption style="text-align:center;color:#fff;font-weight:800">🥇 SICKMIRKO · Ferrari</figcaption></figure><figure><img loading="lazy" src="img/bahrain-secondo.png" alt="DAVIARCO1999 secondo classificato Bahrain" style="width:100%;border-radius:14px"><figcaption style="text-align:center;color:#fff;font-weight:800">🥈 DAVIARCO1999 · Haas</figcaption></figure><figure><img loading="lazy" src="img/bahrain-terzo.png" alt="CECCO67_SCAI terzo classificato Bahrain" style="width:100%;border-radius:14px"><figcaption style="text-align:center;color:#fff;font-weight:800">🥉 CECCO67_SCAI · Audi</figcaption></figure></div></section>
+<section class="news-section"><h2 class="section-title">Ultime dal <span>Paddock</span></h2><div class="news-grid"><article class="news-card"><div class="news-img-box"><img src="img/bahrain-podio.png" alt="SICKMIRKO trionfa in Bahrain!"><span class="news-badge badge-official">BAHRAIN · ROUND 4</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 14 Novembre 2026</span><h3 class="news-card-title">SICKMIRKO trionfa in Bahrain!</h3><p class="news-card-desc">Pole e vittoria per SICKMIRKO a Sakhir. DAVIARCO1999 secondo, CECCO67_SCAI terzo; giro veloce di RAO-783.</p><a href="javascript:void(0)" onclick="openArticle(1)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/resoconto.png" alt="CECCO67_SCAI conquista Suzuka"><span class="news-badge badge-official">RISULTATI · GIAPPONE</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 7 Novembre 2026</span><h3 class="news-card-title">CECCO67_SCAI conquista Suzuka</h3><p class="news-card-desc">Nel GP del Giappone CECCO67_SCAI vince davanti a SICKMIRKO e DAVIARCO1999. Un podio che infiamma la lotta al vertice.</p><a href="javascript:void(0)" onclick="openArticle(2)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/commissari.png" alt="Pubblicate le decisioni del GP Giappone"><span class="news-badge badge-official">DIREZIONE GARA</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 11 Novembre 2026</span><h3 class="news-card-title">Pubblicate le decisioni del GP Giappone</h3><p class="news-card-desc">La Direzione Gara ha esaminato i reclami: rimossi 10 secondi a RAO-783; 5 secondi a PEPPEFLE_IRT da scontare in Bahrain; altri due casi definiti.</p><a href="javascript:void(0)" onclick="openArticle(3)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article><article class="news-card"><div class="news-img-box"><img src="img/resoconto.png" alt="Fanta GRCC: entra in gioco!"><span class="news-badge badge-official">FANTA GRCC</span></div><div class="news-content"><span class="news-date"><i class="far fa-calendar-alt"></i> 12 Novembre 2026</span><h3 class="news-card-title">Fanta GRCC: entra in gioco!</h3><p class="news-card-desc">Il fantacampionato GRCC è online: crea la tua squadra, partecipa ai pronostici e segui la classifica su fanta-grcc.vercel.app.</p><a href="javascript:void(0)" onclick="openArticle(4)" class="news-read-more">Leggi di più <i class="fas fa-arrow-right"></i></a></div></article></div></section>
     <section class="teams-section">
         <h2 class="section-title">Schieramento <span>Piloti & Scuderie</span></h2>
         
@@ -3287,8 +3306,8 @@ const championshipRaces = [
         country: "Bahrain",
         circuit: "Sakhir",
         date: "13 Novembre 2026",
-        status: "next",
-        winner: "Da disputare",
+        status: "completed",
+        winner: "SICKMIRKO",
         left: 60.0,
         top: 52.5
     },
@@ -3682,7 +3701,7 @@ function getGRCCLogo(team) {
 }
 
 const articlesData = {
-1:{title:'Bahrain, stasera si corre a Sakhir!',badge:'Bahrain · Round 4',badgeClass:'badge-race',date:'13 Novembre 2026',content:'<p>Il <strong>GRCC F1 ESPORTS</strong> torna in pista venerdì <strong>13 novembre 2026 alle 21:45</strong> sul circuito di Sakhir per il quarto round stagionale.</p><p>Una nuova occasione per i protagonisti del campionato di conquistare punti importanti. Preparati a seguire la diretta sui canali ufficiali GRCC.</p>'},
+1:{title:'SICKMIRKO trionfa in Bahrain!',badge:'Risultati · Bahrain',badgeClass:'badge-official',date:'14 Novembre 2026',content:'<p><strong>SICKMIRKO</strong> domina il Round 4 a Sakhir: pole position e vittoria con Ferrari, conquistando 25 punti.</p><p>Secondo posto per <strong>DAVIARCO1999</strong> (Haas, 18 punti), terzo <strong>CECCO67_SCAI</strong> (Audi, 15 punti). Il giro più veloce è di <strong>RAO-783</strong>; <strong>BENE20DOMENICO</strong> si ritira.</p>'},
 2:{title:'CECCO67_SCAI conquista Suzuka',badge:'Risultati · Giappone',badgeClass:'badge-official',date:'7 Novembre 2026',content:'<p>Il <strong>GP del Giappone</strong> ha visto trionfare <strong>CECCO67_SCAI</strong>, seguito da <strong>SICKMIRKO</strong> e <strong>DAVIARCO1999</strong>.</p><p>Il podio di Suzuka aggiunge un nuovo capitolo alla stagione GRCC F1 ESPORTS. Le classifiche aggiornate sono consultabili nella sezione dedicata del sito.</p>'},
 3:{title:'Pubblicate le decisioni del GP Giappone',badge:'Direzione Gara',badgeClass:'badge-stewards',date:'11 Novembre 2026',content:'<p>La <strong>Direzione Gara</strong> ha pubblicato le decisioni sui reclami del GP Giappone.</p><p><strong>RAO-783:</strong> rimossa la penalità di 10 secondi assegnata dal gioco in regime di Virtual Safety Car. Nessuna sanzione a SALVOTD91.</p><p><strong>PEPPEFLE_IRT:</strong> 5 secondi di penalità da applicare al termine del GP Bahrain per il contatto con NXS_ODI.</p><p><strong>ICEANT16:</strong> reclamo per impeding respinto, nessuna penalità.</p><p><strong>TICXY13:</strong> reclamo archiviato; la Direzione Gara conferma l’espulsione del pilota dal campionato GRCC F1.</p>'},
 4:{title:'Fanta GRCC: entra in gioco!',badge:'Fanta GRCC',badgeClass:'badge-official',date:'12 Novembre 2026',content:'<p>È online <strong>Fanta GRCC</strong>, il fantacampionato dedicato alla stagione GRCC F1 ESPORTS.</p><p>Componi la tua squadra, prova a indovinare i risultati con i pronostici e segui la classifica dei partecipanti.</p><p><a href="https://fanta-grcc.vercel.app/" target="_blank" rel="noopener noreferrer">Accedi a Fanta GRCC</a></p>'}
@@ -3711,99 +3730,87 @@ window.onclick = function(event) { if (event.target == modal) { modal.style.disp
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
-    const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
-    
-    // 1. SCRIPT AUTOMATICO CLASSIFICA PILOTI
-    const sheetNamePiloti = 'Foglio1';
-    const urlPiloti = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNamePiloti}`;
-
-    fetch(urlPiloti)
-        .then(res => res.text())
-        .then(data => {
-            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
-            const json = JSON.parse(temp);
-            const rows = json.table.rows;
-
-            const tableBody = document.getElementById("piloti-table-body");
-            if (tableBody) {
-                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
-            }
-
-            rows.forEach((row) => {
-                const pos = row.c[0] ? row.c[0].v : '';
-                const pilota = row.c[1] ? row.c[1].v : '';
-                // Esclusi dalla classifica attiva: conservati nel foglio e nei risultati storici.
-                if (['MKI-110', 'TICXY13'].includes(String(pilota).trim().toUpperCase())) return;
-                const scuderia = row.c[2] ? row.c[2].v : '';
-                const punti = row.c[3] ? row.c[3].v : '0';
-
-                const logoPath = getGRCCLogo(scuderia);
-
-                const tr = document.createElement("tr");
-
-                if (pos == 1) tr.className = "pos-1";
-                else if (pos == 2) tr.className = "pos-2";
-                else if (pos == 3) tr.className = "pos-3";
-
-                tr.innerHTML = `
-                    <td><span class="podio-badge">${pos}</span></td>
-                    <td><a href="pilota.html?id=${encodeURIComponent(pilota)}" style="color:#fff;text-decoration:none;font-weight:800">${pilota}</a></td>
-                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> ${scuderia}</td>
-                    <td class="points-cell">${punti}</td>
-                `;
-
-                if (tableBody) {
-                    tableBody.appendChild(tr);
-                }
-            });
-        })
-        .catch(err => console.error("Errore foglio piloti:", err));
-
-
-    // 2. SCRIPT AUTOMATICO CLASSIFICA COSTRUTTORI
-    const sheetNameCostruttori = 'Costruttori'; 
-    const urlCostruttori = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameCostruttori}`;
-
-    fetch(urlCostruttori)
-        .then(res => res.text())
-        .then(data => {
-            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
-            const json = JSON.parse(temp);
-            const rows = json.table.rows;
-
-            const tableBody = document.getElementById("costruttori-table-body");
-            if (tableBody) {
-                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
-            }
-
-            rows.forEach((row) => {
-                const pos = row.c[0] ? row.c[0].v : '';
-                const scuderia = row.c[1] ? row.c[1].v : '';
-                const punti = row.c[2] ? row.c[2].v : '0';
-
-                const logoPath = getGRCCLogo(scuderia);
-
-                const tr = document.createElement("tr");
-
-                if (pos == 1) tr.className = "pos-1";
-                else if (pos == 2) tr.className = "pos-2";
-                else if (pos == 3) tr.className = "pos-3";
-
-                tr.innerHTML = `
-                    <td><span class="podio-badge">${pos}</span></td>
-                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> <strong>${scuderia}</strong></td>
-                    <td class="points-cell">${punti}</td>
-                `;
-
-                if (tableBody) {
-                    tableBody.appendChild(tr);
-                }
-            });
-        })
-        .catch(err => console.error("Errore costruttori:", err));
+// GRCC: classifiche calcolate dagli stessi risultati GP e Sprint di Race Control.
+// Non sommare Foglio1/Costruttori: quei fogli contengono solo i GP.
+document.addEventListener('DOMContentLoaded', async () => {
+  const gpBody=document.getElementById('piloti-table-body');
+  const teamBody=document.getElementById('costruttori-table-body');
+  const endpoint='https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec';
+  const aliases={'CECCO':'CECCO67_SCAI','GRCCMENDOLIA29':'GIUMEND29','MIKYPOW3R_25':'MIKYPOWER','GRCC VITTORIO_F1_':'GRCC F1 VITTORIO'};
+  const roster={
+    'SICKMIRKO':'Ferrari','MIKYPOWER':'Ferrari','SALVOTD91':'Mercedes','MKI-110':'Mercedes',
+    'RAO-783':'Red Bull','BENE20DOMENICO':'Red Bull','LRT_KURAMA':'McLaren','FRA319153':'McLaren',
+    'DAGGER74SUN':'Aston Martin','GIUMEND29':'Aston Martin','CECCO67_SCAI':'Audi','DANIELE251191':'Audi',
+    'NXS_ODI':'Cadillac','KEIDIKID2':'Cadillac','GRCC F1 VITTORIO':'Racing Bulls','LILLUPAZZU':'Racing Bulls',
+    'CONDE785':'Alpine','PEPPEFLE_IRT':'Alpine','ICEANT16':'Williams','TICXY13':'Williams',
+    'DAVIARCO1999':'Haas','BRA_FOSY89':'Haas'
+  };
+  const excluded=new Set(['MKI-110','TICXY13']);
+  const pilots=new Map();
+  async function request(action,round){
+    for(let attempt=0;attempt<3;attempt++){
+      const controller=new AbortController();
+      const timer=setTimeout(()=>controller.abort(),18000);
+      try{
+        const url=`${endpoint}?action=${action}&round=${round}&_=${Date.now()}_${attempt}`;
+        const res=await fetch(url,{cache:'no-store',signal:controller.signal});
+        if(!res.ok)throw Error('HTTP '+res.status);
+        const json=await res.json();
+        if(json.success===false||!Array.isArray(json.risultati))throw Error(json.message||'Formato non valido');
+        return json.risultati;
+      }catch(err){if(attempt===2)throw err;await new Promise(resolve=>setTimeout(resolve,700*(attempt+1)));}
+      finally{clearTimeout(timer);}
+    }
+  }
+  function add(rows,round,isSprint){
+    rows.forEach(r=>{
+      const raw=String(r.pilota||'').trim();if(!raw)return;
+      const name=aliases[raw.toUpperCase()]||raw;
+      const key=name.toUpperCase();
+      const team=roster[key]||String(r.team||'').trim();
+      const state=String(r.stato||'CLASSIFICATO').toUpperCase();
+      const invalid=!isSprint&&(round===1&&key==='TICXY13'||['DNF','DNS','DSQ','RIT','RITIRATO'].includes(state));
+      const points=invalid?0:(Number(r.punti)||0);
+      const old=pilots.get(key)||{name,team,points:0};
+      old.points+=points;if(team)old.team=team;
+      pilots.set(key,old);
+    });
+  }
+  try{
+    let failures=[];
+    for(let start=1;start<=24;start+=6){
+      const rounds=Array.from({length:Math.min(6,25-start)},(_,i)=>start+i);
+      const responses=await Promise.allSettled(rounds.map(round=>request('results_round',round)));
+      responses.forEach((response,i)=>response.status==='fulfilled'?add(response.value,rounds[i],false):failures.push('GP '+rounds[i]));
+    }
+    const sprintRounds=[2,6,7,11,14,18];
+    const sprintResponses=await Promise.allSettled(sprintRounds.map(round=>request('results_sprint',round)));
+    sprintResponses.forEach((response,i)=>response.status==='fulfilled'?add(response.value,sprintRounds[i],true):failures.push('Sprint '+sprintRounds[i]));
+    if(failures.length)throw Error('Sincronizzazione incompleta: '+failures.join(', '));
+    const ordered=[...pilots.values()].filter(p=>!excluded.has(p.name.toUpperCase())).sort((a,b)=>b.points-a.points||a.name.localeCompare(b.name,'it'));
+    if(!ordered.length)throw Error('Nessun risultato disponibile');
+    const teams=new Map();
+    ordered.forEach(p=>teams.set(p.team,(teams.get(p.team)||0)+p.points));
+    const orderedTeams=[...teams.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'it'));
+    function cell(tr,value,cls){const td=document.createElement('td');td.textContent=value;if(cls)td.className=cls;tr.appendChild(td);return td;}
+    if(gpBody){gpBody.replaceChildren();ordered.forEach((p,i)=>{
+      const tr=document.createElement('tr');if(i<3)tr.className='pos-'+(i+1);
+      cell(tr,i+1);const nameCell=cell(tr,'');const link=document.createElement('a');link.href='pilota.html?id='+encodeURIComponent(p.name);link.textContent=p.name;link.style.cssText='color:#fff;text-decoration:none;font-weight:800';nameCell.appendChild(link);
+      const teamCell=cell(tr,'');const logo=document.createElement('img');logo.src=getGRCCLogo(p.team);logo.className='table-team-logo';logo.alt=p.team;teamCell.appendChild(logo);teamCell.appendChild(document.createTextNode(' '+p.team));
+      cell(tr,p.points,'points-cell');gpBody.appendChild(tr);
+    });}
+    if(teamBody){teamBody.replaceChildren();orderedTeams.forEach(([team,points],i)=>{
+      const tr=document.createElement('tr');if(i<3)tr.className='pos-'+(i+1);
+      cell(tr,i+1);const teamCell=cell(tr,'');const logo=document.createElement('img');logo.src=getGRCCLogo(team);logo.className='table-team-logo';logo.alt=team;teamCell.appendChild(logo);const strong=document.createElement('strong');strong.textContent=' '+team;teamCell.appendChild(strong);
+      cell(tr,points,'points-cell');teamBody.appendChild(tr);
+    });}
+  }catch(err){
+    console.error('Classifiche GRCC:',err);
+    const msg='⚠️ Classifiche non verificabili: '+err.message+'. Ricarica la pagina.';
+    [gpBody,teamBody].forEach(body=>{if(body){body.replaceChildren();const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=4;td.textContent=msg;tr.appendChild(td);body.appendChild(tr);}});
+  }
 });
+</script>
 
 function showHighlightsEmpty(container){if(!container)return;container.innerHTML='<div class="grcc-highlight-empty"><div style="font-size:2.5rem">🎬 🏁</div><h3>Highlights della stagione 2026/27</h3><p>Il GP d’Australia ha inaugurato il campionato! I video ufficiali saranno pubblicati qui non appena disponibili.</p><a href="https://www.twitch.tv/grccf1esport" target="_blank" rel="noopener noreferrer">Guarda il canale Twitch GRCC</a></div>'}
 // ==========================================
@@ -4292,7 +4299,7 @@ document.addEventListener('DOMContentLoaded', function(){
 /* GRCC calendario: unica logica per stato e popup, aggiornata automaticamente. */
 (function(){
   const months={gennaio:0,febbraio:1,marzo:2,aprile:3,maggio:4,giugno:5,luglio:6,agosto:7,settembre:8,ottobre:9,novembre:10,dicembre:11};
-  const popupByRound={1:'showAustraliaResults',2:'showCinaResults',3:'showGiapponeResults'};
+  const popupByRound={1:'showAustraliaResults',2:'showCinaResults',3:'showGiapponeResults',4:'showBahrainResults'};
   function timestamp(card){
     const date=card.querySelector('.race-date')?.textContent||'';
     const m=date.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/i);
