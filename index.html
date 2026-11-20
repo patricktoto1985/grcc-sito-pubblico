@@ -3731,98 +3731,119 @@ window.onclick = function(event) { if (event.target == modal) { modal.style.disp
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
-    const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
-    
-    // 1. SCRIPT AUTOMATICO CLASSIFICA PILOTI
-    const sheetNamePiloti = 'Foglio1';
-    const urlPiloti = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNamePiloti}`;
+// Classifiche GRCC: unica fonte ufficiale, gli stessi risultati GP/Sprint di Race Control.
+// I punti vengono letti dal backend, NON ricalcolati con un punteggio F1 standard.
+document.addEventListener('DOMContentLoaded', async function () {
+    const endpoint = 'https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec';
+    const gpBody = document.getElementById('piloti-table-body');
+    const teamBody = document.getElementById('costruttori-table-body');
+    if (!gpBody || !teamBody) return;
 
-    fetch(urlPiloti)
-        .then(res => res.text())
-        .then(data => {
-            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
-            const json = JSON.parse(temp);
-            const rows = json.table.rows;
-
-            const tableBody = document.getElementById("piloti-table-body");
-            if (tableBody) {
-                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
-            }
-
-            rows.forEach((row) => {
-                const pos = row.c[0] ? row.c[0].v : '';
-                const pilota = row.c[1] ? row.c[1].v : '';
-                // Esclusi dalla classifica attiva: conservati nel foglio e nei risultati storici.
-                if (['MKI-110', 'TICXY13'].includes(String(pilota).trim().toUpperCase())) return;
-                const scuderia = row.c[2] ? row.c[2].v : '';
-                const punti = row.c[3] ? row.c[3].v : '0';
-
-                const logoPath = getGRCCLogo(scuderia);
-
-                const tr = document.createElement("tr");
-
-                if (pos == 1) tr.className = "pos-1";
-                else if (pos == 2) tr.className = "pos-2";
-                else if (pos == 3) tr.className = "pos-3";
-
-                tr.innerHTML = `
-                    <td><span class="podio-badge">${pos}</span></td>
-                    <td><a href="pilota.html?id=${encodeURIComponent(pilota)}" style="color:#fff;text-decoration:none;font-weight:800">${pilota}</a></td>
-                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> ${scuderia}</td>
-                    <td class="points-cell">${punti}</td>
-                `;
-
-                if (tableBody) {
-                    tableBody.appendChild(tr);
-                }
-            });
-        })
-        .catch(err => console.error("Errore foglio piloti:", err));
-
-
-    // 2. SCRIPT AUTOMATICO CLASSIFICA COSTRUTTORI
-    const sheetNameCostruttori = 'Costruttori'; 
-    const urlCostruttori = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameCostruttori}`;
-
-    fetch(urlCostruttori)
-        .then(res => res.text())
-        .then(data => {
-            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
-            const json = JSON.parse(temp);
-            const rows = json.table.rows;
-
-            const tableBody = document.getElementById("costruttori-table-body");
-            if (tableBody) {
-                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
-            }
-
-            rows.forEach((row) => {
-                const pos = row.c[0] ? row.c[0].v : '';
-                const scuderia = row.c[1] ? row.c[1].v : '';
-                const punti = row.c[2] ? row.c[2].v : '0';
-
-                const logoPath = getGRCCLogo(scuderia);
-
-                const tr = document.createElement("tr");
-
-                if (pos == 1) tr.className = "pos-1";
-                else if (pos == 2) tr.className = "pos-2";
-                else if (pos == 3) tr.className = "pos-3";
-
-                tr.innerHTML = `
-                    <td><span class="podio-badge">${pos}</span></td>
-                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> <strong>${scuderia}</strong></td>
-                    <td class="points-cell">${punti}</td>
-                `;
-
-                if (tableBody) {
-                    tableBody.appendChild(tr);
-                }
-            });
-        })
-        .catch(err => console.error("Errore costruttori:", err));
+    const roster = {
+        'SICKMIRKO':'Ferrari','MIKYPOWER':'Ferrari','SALVOTD91':'Mercedes',
+        'RAO-783':'Red Bull','BENE20DOMENICO':'Red Bull','LRT_KURAMA':'McLaren',
+        'FRA319153':'McLaren','DAGGER74SUN':'Aston Martin','GIUMEND29':'Aston Martin',
+        'CECCO67_SCAI':'Audi','DANIELE251191':'Audi','NXS_ODI':'Cadillac',
+        'KEIDIKID2':'Cadillac','GRCC F1 VITTORIO':'Racing Bulls',
+        'LILLUPAZZU':'Racing Bulls','CONDE785':'Alpine','PEPPEFLE_IRT':'Alpine',
+        'ICEANT16':'Williams','DAVIARCO1999':'Haas','BRA_FOSY89':'Haas'
+    };
+    const aliases = {'CECCO':'CECCO67_SCAI','GRCCMENDOLIA29':'GIUMEND29',
+        'GRCC-ICEANT16':'ICEANT16','BRA-FOSY89':'BRA_FOSY89',
+        'MIKYPOWER_25':'MIKYPOWER','NXS-ODI':'NXS_ODI',
+        'GRCC_F1_VITTORIO':'GRCC F1 VITTORIO'};
+    const excluded = new Set(['MKI-110','TICXY13']);
+    const normalize = value => {
+        const name = String(value || '').trim().toUpperCase();
+        return aliases[name] || name;
+    };
+    const teamNames = {'FERRARI':'Ferrari','HAAS':'Haas','ASTON MARTIN':'Aston Martin',
+        'AUDI':'Audi','AUDI REVOLUT':'Audi','RED BULL':'Red Bull',
+        'MCLAREN':'McLaren','MERCEDES':'Mercedes','ALPINE':'Alpine',
+        'RACING BULLS':'Racing Bulls','CADILLAC':'Cadillac','WILLIAMS':'Williams'};
+    const canonicalTeam = value => teamNames[String(value || '').trim().toUpperCase()] || String(value || '').trim();
+    const request = async (action, round) => {
+        const url = `${endpoint}?action=${encodeURIComponent(action)}&round=${round}`;
+        for (let attempt = 0; attempt < 2; attempt++) {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 16000);
+            try {
+                const response = await fetch(url, {signal:controller.signal, cache:'no-store'});
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const json = await response.json();
+                if (!json || json.success !== true || !Array.isArray(json.risultati))
+                    throw new Error('Risposta risultati non valida');
+                return json.risultati;
+            } catch (error) {
+                if (attempt === 1) throw error;
+            } finally { clearTimeout(timeout); }
+        }
+    };
+    const jobs = [];
+    for (let round = 1; round <= 24; round++) {
+        jobs.push({action:'results_round', round});
+        jobs.push({action:'results_sprint', round});
+    }
+    const results = [];
+    const failed = [];
+    // Limitazione delle richieste simultanee al servizio Apps Script.
+    let cursor = 0;
+    async function worker() {
+        while (cursor < jobs.length) {
+            const job = jobs[cursor++];
+            try { results.push(...await request(job.action,job.round)); }
+            catch (error) { failed.push(`${job.action} ${job.round}: ${error.message}`); }
+        }
+    }
+    await Promise.all(Array.from({length:6}, () => worker()));
+    // Non mostrare classifiche parziali o errate quando il backend non risponde.
+    if (failed.length || !results.length) {
+        console.error('GRCC: impossibile sincronizzare tutte le classifiche', failed);
+        const message = 'Classifiche temporaneamente non disponibili. Riprova più tardi.';
+        gpBody.innerHTML = `<tr><td colspan="4">${message}</td></tr>`;
+        teamBody.innerHTML = `<tr><td colspan="3">${message}</td></tr>`;
+        return;
+    }
+    const drivers = new Map();
+    for (const result of results) {
+        const name = normalize(result.pilota);
+        if (!name || excluded.has(name)) continue;
+        const team = canonicalTeam(result.team || roster[name] || '');
+        const points = Number(result.punti);
+        if (!Number.isFinite(points)) continue;
+        if (!drivers.has(name)) drivers.set(name, {name, team, points:0});
+        const driver = drivers.get(name);
+        driver.points += points;
+        if (team) driver.team = team;
+    }
+    const ranking = [...drivers.values()].sort((a,b) => b.points-a.points || a.name.localeCompare(b.name));
+    const teams = new Map();
+    ranking.forEach(driver => {
+        if (!driver.team) return;
+        teams.set(driver.team, (teams.get(driver.team) || 0) + driver.points);
+    });
+    const teamRanking = [...teams.entries()].sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0]));
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    gpBody.replaceChildren();
+    ranking.forEach((driver,index) => {
+        const pos = index+1, tr = document.createElement('tr');
+        if (pos <= 3) tr.className = 'pos-'+pos;
+        const logo = escapeHtml(getGRCCLogo(driver.team));
+        tr.innerHTML = `<td><span class="podio-badge">${pos}</span></td>
+            <td><a href="pilota.html?id=${encodeURIComponent(driver.name)}" style="color:#fff;text-decoration:none;font-weight:800">${escapeHtml(driver.name)}</a></td>
+            <td><img src="${logo}" class="table-team-logo" alt="${escapeHtml(driver.team)}"> ${escapeHtml(driver.team)}</td>
+            <td class="points-cell">${driver.points}</td>`;
+        gpBody.appendChild(tr);
+    });
+    teamBody.replaceChildren();
+    teamRanking.forEach(([team,points],index) => {
+        const pos=index+1, tr=document.createElement('tr');
+        if (pos <= 3) tr.className='pos-'+pos;
+        tr.innerHTML = `<td><span class="podio-badge">${pos}</span></td>
+            <td><img src="${escapeHtml(getGRCCLogo(team))}" class="table-team-logo" alt="${escapeHtml(team)}"> <strong>${escapeHtml(team)}</strong></td>
+            <td class="points-cell">${points}</td>`;
+        teamBody.appendChild(tr);
+    });
 });
 
 function showHighlightsEmpty(container){if(!container)return;container.innerHTML='<div class="grcc-highlight-empty"><div style="font-size:2.5rem">🎬 🏁</div><h3>Highlights della stagione 2026/27</h3><p>Il GP d’Australia ha inaugurato il campionato! I video ufficiali saranno pubblicati qui non appena disponibili.</p><a href="https://www.twitch.tv/grccf1esport" target="_blank" rel="noopener noreferrer">Guarda il canale Twitch GRCC</a></div>'}

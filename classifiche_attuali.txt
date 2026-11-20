@@ -1,0 +1,185 @@
+    modal.style.display = "flex";
+}
+
+closeBtn.onclick = function() { modal.style.display = "none"; }
+window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
+    const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
+    
+    // 1. SCRIPT AUTOMATICO CLASSIFICA PILOTI
+    const sheetNamePiloti = 'Foglio1';
+    const urlPiloti = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNamePiloti}`;
+
+    fetch(urlPiloti)
+        .then(res => res.text())
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
+
+            const tableBody = document.getElementById("piloti-table-body");
+            if (tableBody) {
+                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
+            }
+
+            rows.forEach((row) => {
+                const pos = row.c[0] ? row.c[0].v : '';
+                const pilota = row.c[1] ? row.c[1].v : '';
+                // Esclusi dalla classifica attiva: conservati nel foglio e nei risultati storici.
+                if (['MKI-110', 'TICXY13'].includes(String(pilota).trim().toUpperCase())) return;
+                const scuderia = row.c[2] ? row.c[2].v : '';
+                const punti = row.c[3] ? row.c[3].v : '0';
+
+                const logoPath = getGRCCLogo(scuderia);
+
+                const tr = document.createElement("tr");
+
+                if (pos == 1) tr.className = "pos-1";
+                else if (pos == 2) tr.className = "pos-2";
+                else if (pos == 3) tr.className = "pos-3";
+
+                tr.innerHTML = `
+                    <td><span class="podio-badge">${pos}</span></td>
+                    <td><a href="pilota.html?id=${encodeURIComponent(pilota)}" style="color:#fff;text-decoration:none;font-weight:800">${pilota}</a></td>
+                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> ${scuderia}</td>
+                    <td class="points-cell">${punti}</td>
+                `;
+
+                if (tableBody) {
+                    tableBody.appendChild(tr);
+                }
+            });
+        })
+        .catch(err => console.error("Errore foglio piloti:", err));
+
+
+    // 2. SCRIPT AUTOMATICO CLASSIFICA COSTRUTTORI
+    const sheetNameCostruttori = 'Costruttori'; 
+    const urlCostruttori = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameCostruttori}`;
+
+    fetch(urlCostruttori)
+        .then(res => res.text())
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
+
+            const tableBody = document.getElementById("costruttori-table-body");
+            if (tableBody) {
+                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
+            }
+
+            rows.forEach((row) => {
+                const pos = row.c[0] ? row.c[0].v : '';
+                const scuderia = row.c[1] ? row.c[1].v : '';
+                const punti = row.c[2] ? row.c[2].v : '0';
+
+                const logoPath = getGRCCLogo(scuderia);
+
+                const tr = document.createElement("tr");
+
+                if (pos == 1) tr.className = "pos-1";
+                else if (pos == 2) tr.className = "pos-2";
+                else if (pos == 3) tr.className = "pos-3";
+
+                tr.innerHTML = `
+                    <td><span class="podio-badge">${pos}</span></td>
+                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> <strong>${scuderia}</strong></td>
+                    <td class="points-cell">${punti}</td>
+                `;
+
+                if (tableBody) {
+                    tableBody.appendChild(tr);
+                }
+            });
+        })
+        .catch(err => console.error("Errore costruttori:", err));
+});
+
+function showHighlightsEmpty(container){if(!container)return;container.innerHTML='<div class="grcc-highlight-empty"><div style="font-size:2.5rem">🎬 🏁</div><h3>Highlights della stagione 2026/27</h3><p>Il GP d’Australia ha inaugurato il campionato! I video ufficiali saranno pubblicati qui non appena disponibili.</p><a href="https://www.twitch.tv/grccf1esport" target="_blank" rel="noopener noreferrer">Guarda il canale Twitch GRCC</a></div>'}
+// ==========================================
+// VERSIONE HIGHLIGHTS GENERICA (CON URL CORRETTO)
+// ==========================================
+(function() {
+    const sheetIdHighlights = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
+    const sheetNameHighlights = 'Highlights';
+    
+    // URL ricostruito precisamente con tutti i parametri di esportazione Google JSON
+    const urlHighlights = 'https://docs.google.com/spreadsheets/d/' + sheetIdHighlights + '/gviz/tq?tqx=out:json&sheet=' + sheetNameHighlights;
+
+    fetch(urlHighlights)
+        .then(res => {
+            if (!res.ok) throw new Error("Errore di connessione al file Google");
+            return res.text();
+        })
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
+
+            const container = document.getElementById("highlights-grid");
+            if (container) {
+                container.innerHTML = ""; 
+            }
+
+            rows.forEach((row) => {
+                if (!row || !row.c || !row.c[1] || !row.c[1].v || /^(titolo|title)$/i.test(String(row.c[1].v).trim()) || !row.c[3] || !row.c[3].v || /^(url|link|video)$/i.test(String(row.c[3].v).trim())) return;
+
+                const round = row.c[0] ? row.c[0].v : '';
+                const titolo = row.c[1] ? row.c[1].v : '';
+                const dataGara = row.c[2] ? row.c[2].v : '';
+                const videoUrl = row.c[3] ? row.c[3].v : '';
+                const descrizione = row.c[4] ? row.c[4].v : '';
+
+                let videoPlayerHTML = '';
+
+                if (videoUrl.includes('twitch.tv')) {
+
+    let cleanUrl = videoUrl.split('?')[0].trim();
+
+    if (cleanUrl.endsWith('/')) {
+        cleanUrl = cleanUrl.slice(0, -1);
+    }
+
+    // VIDEO TWITCH
+    if (cleanUrl.includes('/videos/')) {
+
+        const videoId = cleanUrl.split('/videos/').pop();
+
+        videoPlayerHTML = `
+            <iframe
+                src="https://player.twitch.tv/?video=${videoId}&parent=patricktoto1985.github.io&autoplay=false"
+                width="100%"
+                height="200"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>`;
+
+    }
+
+    // CLIP TWITCH
+    else if (cleanUrl.includes('/clip/')) {
+
+        const clipId = cleanUrl.substring(cleanUrl.lastIndexOf('/') + 1);
+
+        videoPlayerHTML = `
+            <iframe
+                src="https://clips.twitch.tv/embed?clip=${clipId}&parent=patricktoto1985.github.io&autoplay=false"
+                width="100%"
+                height="200"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>`;
+
+    }
+
+}
+else if (videoUrl) {
+
+    videoPlayerHTML = `
+        <video controls style="width:100%;height:200px;border-radius:8px 8px 0 0;background:#000;">
+            <source src="${videoUrl}" type="video/mp4">
