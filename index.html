@@ -1103,6 +1103,7 @@ html,body{max-width:100%;overflow-x:hidden}
 
 
         <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 5 — GP ARABIA SAUDITA</h2><div class="rwc-meta">📅 <span id="rwcDate">20 Novembre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Jeddah</span></div></div><div class="rwc-status" id="rwc-status-label">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
+        <section class="rwc-section" id="race-weekend-center"><div class="rwc-card"><div class="rwc-top"><div><div class="rwc-kicker"><i class="fas fa-flag-checkered"></i> Race Weekend Center</div><h2 class="rwc-title" id="rwcTitle">ROUND 5 — GP ARABIA SAUDITA</h2><div class="rwc-meta">📅 <span id="rwcDate">20 Novembre 2026</span> · 21:45 &nbsp; 🏁 <span id="rwcCircuit">Jeddah</span></div></div><div class="rwc-status" id="rwc-status-label">Prossima gara</div></div><div class="rwc-results"><div class="rwc-result"><small>🥇 Vincitore</small><strong>Da disputare</strong></div><div class="rwc-result"><small>🥈 Secondo</small><strong>—</strong></div><div class="rwc-result"><small>🥉 Terzo</small><strong>—</strong></div><div class="rwc-result"><small>⚡ Giro veloce</small><strong>—</strong></div><div class="rwc-result"><small>🏆 Driver of the Day</small><strong>—</strong></div></div><div class="rwc-actions"><button class="rwc-btn primary" onclick="document.querySelector('.calendar-section')?.scrollIntoView({behavior:'smooth'})">Info GP</button><button class="rwc-btn" onclick="document.querySelector('.standings-section')?.scrollIntoView({behavior:'smooth'})">Classifica</button><button class="rwc-btn" onclick="document.querySelector('.highlights-section')?.scrollIntoView({behavior:'smooth'})">Highlights</button><button class="rwc-btn" onclick="document.querySelector('.live-stream-section')?.scrollIntoView({behavior:'smooth'})">Live</button></div></div></section>
 <section class="champ-stats-section">
   <h2 class="champ-stats-title">Numeri del <span>Campionato</span></h2>
   <div class="champ-stats-grid">
@@ -3730,87 +3731,99 @@ window.onclick = function(event) { if (event.target == modal) { modal.style.disp
 </script>
 
 <script>
-// GRCC: classifiche calcolate dagli stessi risultati GP e Sprint di Race Control.
-// Non sommare Foglio1/Costruttori: quei fogli contengono solo i GP.
-document.addEventListener('DOMContentLoaded', async () => {
-  const gpBody=document.getElementById('piloti-table-body');
-  const teamBody=document.getElementById('costruttori-table-body');
-  const endpoint='https://script.google.com/macros/s/AKfycbz30o3f7QkmijHWpQgwInJMIcIujmO_F070OwXhqbKnQidHdJC4iLa-rQZy0WzsN9buuA/exec';
-  const aliases={'CECCO':'CECCO67_SCAI','GRCCMENDOLIA29':'GIUMEND29','MIKYPOW3R_25':'MIKYPOWER','GRCC VITTORIO_F1_':'GRCC F1 VITTORIO'};
-  const roster={
-    'SICKMIRKO':'Ferrari','MIKYPOWER':'Ferrari','SALVOTD91':'Mercedes','MKI-110':'Mercedes',
-    'RAO-783':'Red Bull','BENE20DOMENICO':'Red Bull','LRT_KURAMA':'McLaren','FRA319153':'McLaren',
-    'DAGGER74SUN':'Aston Martin','GIUMEND29':'Aston Martin','CECCO67_SCAI':'Audi','DANIELE251191':'Audi',
-    'NXS_ODI':'Cadillac','KEIDIKID2':'Cadillac','GRCC F1 VITTORIO':'Racing Bulls','LILLUPAZZU':'Racing Bulls',
-    'CONDE785':'Alpine','PEPPEFLE_IRT':'Alpine','ICEANT16':'Williams','TICXY13':'Williams',
-    'DAVIARCO1999':'Haas','BRA_FOSY89':'Haas'
-  };
-  const excluded=new Set(['MKI-110','TICXY13']);
-  const pilots=new Map();
-  async function request(action,round){
-    for(let attempt=0;attempt<3;attempt++){
-      const controller=new AbortController();
-      const timer=setTimeout(()=>controller.abort(),18000);
-      try{
-        const url=`${endpoint}?action=${action}&round=${round}&_=${Date.now()}_${attempt}`;
-        const res=await fetch(url,{cache:'no-store',signal:controller.signal});
-        if(!res.ok)throw Error('HTTP '+res.status);
-        const json=await res.json();
-        if(json.success===false||!Array.isArray(json.risultati))throw Error(json.message||'Formato non valido');
-        return json.risultati;
-      }catch(err){if(attempt===2)throw err;await new Promise(resolve=>setTimeout(resolve,700*(attempt+1)));}
-      finally{clearTimeout(timer);}
-    }
-  }
-  function add(rows,round,isSprint){
-    rows.forEach(r=>{
-      const raw=String(r.pilota||'').trim();if(!raw)return;
-      const name=aliases[raw.toUpperCase()]||raw;
-      const key=name.toUpperCase();
-      const team=roster[key]||String(r.team||'').trim();
-      const state=String(r.stato||'CLASSIFICATO').toUpperCase();
-      const invalid=!isSprint&&(round===1&&key==='TICXY13'||['DNF','DNS','DSQ','RIT','RITIRATO'].includes(state));
-      const points=invalid?0:(Number(r.punti)||0);
-      const old=pilots.get(key)||{name,team,points:0};
-      old.points+=points;if(team)old.team=team;
-      pilots.set(key,old);
-    });
-  }
-  try{
-    let failures=[];
-    for(let start=1;start<=24;start+=6){
-      const rounds=Array.from({length:Math.min(6,25-start)},(_,i)=>start+i);
-      const responses=await Promise.allSettled(rounds.map(round=>request('results_round',round)));
-      responses.forEach((response,i)=>response.status==='fulfilled'?add(response.value,rounds[i],false):failures.push('GP '+rounds[i]));
-    }
-    const sprintRounds=[2,6,7,11,14,18];
-    const sprintResponses=await Promise.allSettled(sprintRounds.map(round=>request('results_sprint',round)));
-    sprintResponses.forEach((response,i)=>response.status==='fulfilled'?add(response.value,sprintRounds[i],true):failures.push('Sprint '+sprintRounds[i]));
-    if(failures.length)throw Error('Sincronizzazione incompleta: '+failures.join(', '));
-    const ordered=[...pilots.values()].filter(p=>!excluded.has(p.name.toUpperCase())).sort((a,b)=>b.points-a.points||a.name.localeCompare(b.name,'it'));
-    if(!ordered.length)throw Error('Nessun risultato disponibile');
-    const teams=new Map();
-    ordered.forEach(p=>teams.set(p.team,(teams.get(p.team)||0)+p.points));
-    const orderedTeams=[...teams.entries()].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'it'));
-    function cell(tr,value,cls){const td=document.createElement('td');td.textContent=value;if(cls)td.className=cls;tr.appendChild(td);return td;}
-    if(gpBody){gpBody.replaceChildren();ordered.forEach((p,i)=>{
-      const tr=document.createElement('tr');if(i<3)tr.className='pos-'+(i+1);
-      cell(tr,i+1);const nameCell=cell(tr,'');const link=document.createElement('a');link.href='pilota.html?id='+encodeURIComponent(p.name);link.textContent=p.name;link.style.cssText='color:#fff;text-decoration:none;font-weight:800';nameCell.appendChild(link);
-      const teamCell=cell(tr,'');const logo=document.createElement('img');logo.src=getGRCCLogo(p.team);logo.className='table-team-logo';logo.alt=p.team;teamCell.appendChild(logo);teamCell.appendChild(document.createTextNode(' '+p.team));
-      cell(tr,p.points,'points-cell');gpBody.appendChild(tr);
-    });}
-    if(teamBody){teamBody.replaceChildren();orderedTeams.forEach(([team,points],i)=>{
-      const tr=document.createElement('tr');if(i<3)tr.className='pos-'+(i+1);
-      cell(tr,i+1);const teamCell=cell(tr,'');const logo=document.createElement('img');logo.src=getGRCCLogo(team);logo.className='table-team-logo';logo.alt=team;teamCell.appendChild(logo);const strong=document.createElement('strong');strong.textContent=' '+team;teamCell.appendChild(strong);
-      cell(tr,points,'points-cell');teamBody.appendChild(tr);
-    });}
-  }catch(err){
-    console.error('Classifiche GRCC:',err);
-    const msg='⚠️ Classifiche non verificabili: '+err.message+'. Ricarica la pagina.';
-    [gpBody,teamBody].forEach(body=>{if(body){body.replaceChildren();const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=4;td.textContent=msg;tr.appendChild(td);body.appendChild(tr);}});
-  }
+document.addEventListener("DOMContentLoaded", function() {
+    // Sostituisci questa stringa con l'ID reale del tuo foglio Google condiviso
+    const sheetId = '1oZJvdapQMAWUMNP7tujD2r2IubN3DjC5vjufjSYELUc';
+    
+    // 1. SCRIPT AUTOMATICO CLASSIFICA PILOTI
+    const sheetNamePiloti = 'Foglio1';
+    const urlPiloti = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNamePiloti}`;
+
+    fetch(urlPiloti)
+        .then(res => res.text())
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
+
+            const tableBody = document.getElementById("piloti-table-body");
+            if (tableBody) {
+                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
+            }
+
+            rows.forEach((row) => {
+                const pos = row.c[0] ? row.c[0].v : '';
+                const pilota = row.c[1] ? row.c[1].v : '';
+                // Esclusi dalla classifica attiva: conservati nel foglio e nei risultati storici.
+                if (['MKI-110', 'TICXY13'].includes(String(pilota).trim().toUpperCase())) return;
+                const scuderia = row.c[2] ? row.c[2].v : '';
+                const punti = row.c[3] ? row.c[3].v : '0';
+
+                const logoPath = getGRCCLogo(scuderia);
+
+                const tr = document.createElement("tr");
+
+                if (pos == 1) tr.className = "pos-1";
+                else if (pos == 2) tr.className = "pos-2";
+                else if (pos == 3) tr.className = "pos-3";
+
+                tr.innerHTML = `
+                    <td><span class="podio-badge">${pos}</span></td>
+                    <td><a href="pilota.html?id=${encodeURIComponent(pilota)}" style="color:#fff;text-decoration:none;font-weight:800">${pilota}</a></td>
+                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> ${scuderia}</td>
+                    <td class="points-cell">${punti}</td>
+                `;
+
+                if (tableBody) {
+                    tableBody.appendChild(tr);
+                }
+            });
+        })
+        .catch(err => console.error("Errore foglio piloti:", err));
+
+
+    // 2. SCRIPT AUTOMATICO CLASSIFICA COSTRUTTORI
+    const sheetNameCostruttori = 'Costruttori'; 
+    const urlCostruttori = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetNameCostruttori}`;
+
+    fetch(urlCostruttori)
+        .then(res => res.text())
+        .then(data => {
+            const temp = data.substring(data.indexOf('{'), data.lastIndexOf('}') + 1);
+            const json = JSON.parse(temp);
+            const rows = json.table.rows;
+
+            const tableBody = document.getElementById("costruttori-table-body");
+            if (tableBody) {
+                tableBody.innerHTML = ""; // Svuota la scritta "Caricamento..."
+            }
+
+            rows.forEach((row) => {
+                const pos = row.c[0] ? row.c[0].v : '';
+                const scuderia = row.c[1] ? row.c[1].v : '';
+                const punti = row.c[2] ? row.c[2].v : '0';
+
+                const logoPath = getGRCCLogo(scuderia);
+
+                const tr = document.createElement("tr");
+
+                if (pos == 1) tr.className = "pos-1";
+                else if (pos == 2) tr.className = "pos-2";
+                else if (pos == 3) tr.className = "pos-3";
+
+                tr.innerHTML = `
+                    <td><span class="podio-badge">${pos}</span></td>
+                    <td><img src="${logoPath}" class="table-team-logo" alt="${scuderia}"> <strong>${scuderia}</strong></td>
+                    <td class="points-cell">${punti}</td>
+                `;
+
+                if (tableBody) {
+                    tableBody.appendChild(tr);
+                }
+            });
+        })
+        .catch(err => console.error("Errore costruttori:", err));
 });
-</script>
 
 function showHighlightsEmpty(container){if(!container)return;container.innerHTML='<div class="grcc-highlight-empty"><div style="font-size:2.5rem">🎬 🏁</div><h3>Highlights della stagione 2026/27</h3><p>Il GP d’Australia ha inaugurato il campionato! I video ufficiali saranno pubblicati qui non appena disponibili.</p><a href="https://www.twitch.tv/grccf1esport" target="_blank" rel="noopener noreferrer">Guarda il canale Twitch GRCC</a></div>'}
 // ==========================================
