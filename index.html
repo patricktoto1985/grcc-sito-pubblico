@@ -2401,6 +2401,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGiapponeResults
 <script>function showBahrainResults(){document.getElementById('bahrainResultsModal').classList.add('open');document.body.style.overflow='hidden'}function closeBahrainResults(){document.getElementById('bahrainResultsModal').classList.remove('open');document.body.style.overflow=''}document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBahrainResults()});</script>
 <style>.grcc-bahrain-list{line-height:1.9;color:#e2e8f0;padding:12px 18px;border:1px solid rgba(255,255,255,.12);border-radius:12px;margin-bottom:18px}</style>
 
+<div id="jeddahResultsModal" class="grcc-results-overlay" role="dialog" aria-modal="true" aria-labelledby="jeddahResultsTitle" onclick="if(event.target===this)closeJeddahResults()">
+<div class="grcc-results-dialog"><button class="grcc-results-close" onclick="closeJeddahResults()" aria-label="Chiudi">×</button>
+<span class="grcc-results-tag">ROUND 5 · RISULTATI UFFICIALI</span><h2 id="jeddahResultsTitle">GP ARABIA SAUDITA</h2><p>Jeddah · 20 novembre 2026</p>
+<p class="grcc-results-note">Pole position: <b>GIUMEND29</b> · Giro veloce: <b>CONDE785</b></p>
+</div></div>
+<script>function showJeddahResults(){document.getElementById('jeddahResultsModal').classList.add('open');document.body.style.overflow='hidden'}function closeJeddahResults(){const m=document.getElementById('jeddahResultsModal');if(m.classList.contains('open')){m.classList.remove('open');document.body.style.overflow=''}}document.addEventListener('keydown',e=>{if(e.key==='Escape')closeJeddahResults()});</script>
+
 <section class="calendar-section">
     <h2 class="section-title">Calendario <span>Gare 2026/27</span></h2>
     
@@ -4339,7 +4346,7 @@ document.addEventListener('DOMContentLoaded', function(){
 /* GRCC calendario: unica logica per stato e popup, aggiornata automaticamente. */
 (function(){
   const months={gennaio:0,febbraio:1,marzo:2,aprile:3,maggio:4,giugno:5,luglio:6,agosto:7,settembre:8,ottobre:9,novembre:10,dicembre:11};
-  const popupByRound={1:'showAustraliaResults',2:'showCinaResults',3:'showGiapponeResults',4:'showBahrainResults'};
+  const popupByRound={1:'showAustraliaResults',2:'showCinaResults',3:'showGiapponeResults',4:'showBahrainResults',5:'showJeddahResults'};
   function timestamp(card){
     const date=card.querySelector('.race-date')?.textContent||'';
     const m=date.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/i);
